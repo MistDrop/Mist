@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -23,11 +23,11 @@ import { Router } from "express";
 
 import {
   countTransactionsByAddress, getTransactionsByAddress, transactionToJson
-} from "../../../krist/transactions";
+} from "../../../mist/transactions";
 import {
   countByName, countMetadata, searchByName, searchMetadata
-} from "../../../krist/transactions/lookup";
-import { getName } from "../../../krist/names";
+} from "../../../mist/transactions/lookup";
+import { getName } from "../../../mist/names";
 
 import {
   TRANSACTION_FIELDS, validateLimit, validateOffset, validateOrder,
@@ -144,7 +144,7 @@ export default (): Router => {
    * @apiGroup LookupGroup
    * @apiVersion 2.8.0
    *
-   * @apiDescription Search the Krist network for transactions that match the
+   * @apiDescription Search the Mist network for transactions that match the
    * given query. The search is more in-depth (and thus slower) than `/search`.
    *
    * - Transactions are searched by address involved (from, to)
@@ -166,12 +166,12 @@ export default (): Router => {
    * @apiSuccess {Number|Boolean} matches.transactions.addressInvolved The
    *   number of transactions that involve the query address (either in the
    *   `from` field or the `to` field), or `false` if the query isn't a valid
-   *   Krist address.
+   *   Mist address.
    * @apiSuccess {Number|Boolean} matches.transactions.nameInvolved The number
    *   of transactions that involve the query name (either as a direct
    *   transfer/update, or as a transaction sent to a name; the `name` and
    *   `sent_name` fields respectively), or `false` if the query isn't a valid
-   *   Krist name.
+   *   Mist name.
    * @apiSuccess {Number|Boolean} matches.transactions.metadata The number of
    *   transactions with metadata containing the query string.
    *
@@ -179,7 +179,7 @@ export default (): Router => {
    * {
    *   "ok": true,
    *   "query": {
-   *     "originalQuery": "sc.kst",
+   *     "originalQuery": "sc.mst",
    *     "matchAddress": false,
    *     "matchName": true,
    *     "matchBlock": false,
@@ -216,7 +216,7 @@ export default (): Router => {
    * @apiGroup LookupGroup
    * @apiVersion 2.8.11
    *
-   * @apiDescription Search the Krist network for transactions that match the
+   * @apiDescription Search the Mist network for transactions that match the
    * given query and return the results. The type can be either `address`,
    * `name` or `metadata`.
    *

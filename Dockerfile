@@ -1,5 +1,5 @@
 FROM node:16-alpine
-WORKDIR /usr/src/krist
+WORKDIR /usr/src/mist
 
 # Install packages
 COPY package*.json ./
@@ -12,7 +12,7 @@ COPY . .
 # Generate docs
 RUN npm run docs
 
-# Run Krist
+# Run Mist
 EXPOSE 8080
 ENV NODE_ENV=production
 CMD ["npm", "start"]

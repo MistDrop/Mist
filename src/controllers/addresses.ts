@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -23,14 +23,14 @@ import { Address, Limit, Offset, PaginatedResult } from "../database";
 
 import {
   getAddress, getAddresses, getRichAddresses
-} from "../krist/addresses";
+} from "../mist/addresses";
 
 import {
   ErrorAddressNotFound, ErrorInvalidParameter, ErrorMissingParameter
 } from "../errors";
 
 import {
-  isValidKristAddress, makeV2Address, validateLimitOffset
+  isValidMistAddress, makeV2Address, validateLimitOffset
 } from "../utils";
 
 export async function ctrlGetAddresses(
@@ -54,7 +54,7 @@ export async function ctrlGetAddress(
   fetchNames?: boolean
 ): Promise<Address> {
   if (!address) throw new ErrorMissingParameter("address");
-  if (!isValidKristAddress(address)) throw new ErrorInvalidParameter("address");
+  if (!isValidMistAddress(address)) throw new ErrorInvalidParameter("address");
 
   const result = await getAddress(address, !!fetchNames);
   if (!result) throw new ErrorAddressNotFound(address);

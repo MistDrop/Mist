@@ -14,11 +14,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
 
 export function getBaseBlockValue(blockId: number): number {
-  return blockId >= 222222 ? 1 : (blockId >= 100000 ? 12 : 25);
+  //return blockId >= 222222 ? 1 : (blockId >= 100000 ? 12 : 25);
+  return 100000;
 }

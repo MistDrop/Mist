@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -83,8 +83,8 @@ describe("v2 routes: lookup api", () => {
       expect(res.body.matches.exactName).to.deep.include({ name: "test", owner: "k7oax47quv" });
     });
 
-    it("should search for a name with a .kst suffix", async () => {
-      const res = await api().get("/search").query({ q: "test.kst" });
+    it("should search for a name with a .mst suffix", async () => {
+      const res = await api().get("/search").query({ q: "test.mst" });
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true });
       expect(res.body.query).to.deep.include({ matchAddress: false, matchName: true, strippedName: "test" });
@@ -175,11 +175,11 @@ describe("v2 routes: lookup api", () => {
     it("should more test transactions", async () => {
       await Transaction.bulkCreate([
         { from: "k8juvewcui", to: "k7oax47quv", value: 1, op: "test", time: new Date() },
-        { from: "k8juvewcui", to: "k7oax47quv", value: 1, op: "test.kst", time: new Date() },
-        { from: "k8juvewcui", to: "k7oax47quv", value: 1, sent_name: "test", op: "test.kst", time: new Date() },
-        { from: "k8juvewcui", to: "k7oax47quv", value: 1, sent_name: "test", sent_metaname: "meta@test.kst", op: "meta@test.kst", time: new Date() },
-        { from: "k8juvewcui", to: "k7oax47quv", value: 1, sent_name: "test", op: "test.kst;Hello, world!", time: new Date() },
-        { from: "k8juvewcui", to: "k7oax47quv", value: 1, sent_name: "test", sent_metaname: "meta@test.kst", op: "meta@test.kst;Hello, world!", time: new Date() }
+        { from: "k8juvewcui", to: "k7oax47quv", value: 1, op: "test.mst", time: new Date() },
+        { from: "k8juvewcui", to: "k7oax47quv", value: 1, sent_name: "test", op: "test.mst", time: new Date() },
+        { from: "k8juvewcui", to: "k7oax47quv", value: 1, sent_name: "test", sent_metaname: "meta@test.mst", op: "meta@test.mst", time: new Date() },
+        { from: "k8juvewcui", to: "k7oax47quv", value: 1, sent_name: "test", op: "test.mst;Hello, world!", time: new Date() },
+        { from: "k8juvewcui", to: "k7oax47quv", value: 1, sent_name: "test", sent_metaname: "meta@test.mst", op: "meta@test.mst;Hello, world!", time: new Date() }
       ]);
     });
 
@@ -195,8 +195,8 @@ describe("v2 routes: lookup api", () => {
       });
     });
 
-    it("should search for transactions by name in metadata with a .kst suffix", async () => {
-      const res = await api().get("/search/extended").query({ q: "test.kst" });
+    it("should search for transactions by name in metadata with a .mst suffix", async () => {
+      const res = await api().get("/search/extended").query({ q: "test.mst" });
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true });
       expect(res.body.query).to.deep.include({ matchName: true });

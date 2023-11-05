@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -24,10 +24,10 @@ import rateLimit from "express-rate-limit";
 
 import { LookupQuery } from "../lookup";
 
-import { AddressJson } from "../../../krist/addresses";
-import { BlockJson } from "../../../krist/blocks";
-import { NameJson } from "../../../krist/names";
-import { TransactionJson } from "../../../krist/transactions";
+import { AddressJson } from "../../../mist/addresses";
+import { BlockJson } from "../../../mist/blocks";
+import { NameJson } from "../../../mist/names";
+import { TransactionJson } from "../../../mist/transactions";
 
 import { TEST } from "../../../utils/constants";
 
@@ -47,14 +47,14 @@ export type ReqSearchQuery = LookupQuery<{
  * @apiSuccess {String} query.originalQuery The original (sanitised) query
  *   text.
  * @apiSuccess {Boolean} query.matchAddress Whether or not the query exactly
- *   matches the format of a Krist address.
+ *   matches the format of a Mist address.
  * @apiSuccess {Boolean} query.matchName Whether or not the query exactly
- *   matches the format of a Krist name (with or without the `.kst`) suffix.
+ *   matches the format of a Mist name (with or without the `.mst`) suffix.
  * @apiSuccess {Boolean} query.matchBlock Currently unused.
  * @apiSuccess {Boolean} query.matchTransaction Whether or not the query
  *   exactly matches the format of a transaction ID (with all non-numbers
  *   removed).
- * @apiSuccess {String} query.strippedName The query with the `.kst` suffix
+ * @apiSuccess {String} query.strippedName The query with the `.mst` suffix
  *   stripped, if it was present.
  * @apiSuccess {Boolean} query.hasID Whether or not the query looks like an ID
  *   number (e.g. for transactions).

@@ -14,14 +14,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
 
 import { Router } from "express";
 
-import { getKristSupply } from "../../krist/supply";
+import { getMistSupply } from "../../mist/supply";
 
 export default (): Router => {
   const router = Router();
@@ -35,9 +35,9 @@ export default (): Router => {
 	 * @apiGroup MiscellaneousGroup
 	 * @apiVersion 2.0.0
 	 *
-	 * @apiDescription Returns the amount of Krist currently in circulation.
+	 * @apiDescription Returns the amount of Mist currently in circulation.
 	 *
-	 * @apiSuccess {Number} money_supply The amount of Krist in circulation.
+	 * @apiSuccess {Number} money_supply The amount of Mist in circulation.
 	 *
 	 * @apiSuccessExample {json} Success
 	 * {
@@ -46,7 +46,7 @@ export default (): Router => {
    * }
 	 */
   router.get("/supply", async (req, res) => {
-    const supply = await getKristSupply();
+    const supply = await getMistSupply();
 
     res.json({
       ok: true,
@@ -59,7 +59,7 @@ export default (): Router => {
   // ===========================================================================
   router.get("/", async (req, res, next) => {
     if (req.query.getmoneysupply !== undefined) {
-      res.send((await getKristSupply()).toString());
+      res.send((await getMistSupply()).toString());
       return;
     }
 

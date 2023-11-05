@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -26,16 +26,16 @@ import {
   ErrorInvalidParameter, ErrorMissingParameter, ErrorNameNotFound,
   ErrorNameTaken, ErrorNotNameOwner
 } from "../errors";
-import { getAddress } from "../krist/addresses";
-import { verifyAddress } from "../krist/addresses/verify";
+import { getAddress } from "../mist/addresses";
+import { verifyAddress } from "../mist/addresses/verify";
 
 import {
   createName, getName, getNames, getNamesByAddress, getUnpaidNames
-} from "../krist/names";
-import { createTransaction, pushTransaction } from "../krist/transactions/create";
+} from "../mist/names";
+import { createTransaction, pushTransaction } from "../mist/transactions/create";
 
 import {
-  isValidARecord, isValidKristAddress, isValidName, validateLimitOffset
+  isValidARecord, isValidMistAddress, isValidName, validateLimitOffset
 } from "../utils";
 import { NAME_COST } from "../utils/constants";
 
@@ -88,14 +88,14 @@ export async function ctrlGetNamesByAddress(
   offset: Offset
 ): Promise<PaginatedResult<Name>> {
   if (!address) throw new ErrorMissingParameter("address");
-  if (!isValidKristAddress(address)) throw new ErrorInvalidParameter("address");
+  if (!isValidMistAddress(address)) throw new ErrorInvalidParameter("address");
 
   await validateLimitOffset(limit, offset);
 
-  const kristAddress = await getAddress(address);
-  if (!kristAddress) throw new ErrorAddressNotFound(address);
+  const mistAddress = await getAddress(address);
+  if (!mistAddress) throw new ErrorAddressNotFound(address);
 
-  return getNamesByAddress(kristAddress.address, limit, offset);
+  return getNamesByAddress(mistAddress.address, limit, offset);
 }
 
 export async function ctrlRegisterName(
@@ -158,7 +158,7 @@ export async function ctrlTransferName(
   if (!address) throw new ErrorMissingParameter("address");
 
   if (!isValidName(name)) throw new ErrorInvalidParameter("name");
-  if (!isValidKristAddress(address, true))
+  if (!isValidMistAddress(address, true))
     throw new ErrorInvalidParameter("address");
 
   name = cleanNameInput(name);

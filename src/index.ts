@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -27,9 +27,9 @@ import packageJson from "../package.json";
 import { checkEnvVars } from "./utils";
 import { initDatabase } from "./database";
 import { initRedis } from "./database/redis";
-import { initKrist } from "./krist";
-import { initWorkOverTime } from "./krist/work";
-import { initAuthLogCleanup } from "./krist/authLog";
+import { initMist } from "./mist";
+import { initWorkOverTime } from "./mist/work";
+import { initAuthLogCleanup } from "./mist/authLog";
 import { initDebug } from "./debug";
 import { initWebserver } from "./webserver";
 import { initWebSocketIpc } from "./websockets/ipc";
@@ -40,7 +40,7 @@ async function main() {
   checkEnvVars();
   await initRedis();
   await initDatabase();
-  await initKrist();
+  await initMist();
   initWorkOverTime();
   initAuthLogCleanup();
   initDebug();

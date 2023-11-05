@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -24,10 +24,10 @@ import { Router } from "express";
 import { ReqSearchQuery } from ".";
 import { parseQuery, validateQuery } from "./utils";
 
-import { addressToJson, getAddress } from "../../../krist/addresses";
-import { blockToJson, getBlock } from "../../../krist/blocks";
-import { getTransaction, transactionToJson } from "../../../krist/transactions";
-import { getName, nameToJson } from "../../../krist/names";
+import { addressToJson, getAddress } from "../../../mist/addresses";
+import { blockToJson, getBlock } from "../../../mist/blocks";
+import { getTransaction, transactionToJson } from "../../../mist/transactions";
+import { getName, nameToJson } from "../../../mist/names";
 
 import { isObject } from "lodash";
 
@@ -68,16 +68,16 @@ export default (): Router => {
   const router = Router();
 
   /**
-   * @api {get} /search Search the Krist network
+   * @api {get} /search Search the Mist network
    * @apiName Search
    * @apiGroup LookupGroup
    * @apiVersion 2.8.0
    *
-   * @apiDescription Search the Krist network for objects that match the given
+   * @apiDescription Search the Mist network for objects that match the given
    * query, including addresses, names, and transactions.
    *
    * - Addresses are searched by exact address match only
-   * - Names are searched by their name with and without the `.kst` suffix
+   * - Names are searched by their name with and without the `.mst` suffix
    * - Transactions are searched by ID
    *
    * For more advanced transaction searches (by involved addresses and
@@ -92,16 +92,16 @@ export default (): Router => {
    *
    * @apiSuccess {Object} matches The results of the search query.
    * @apiSuccess {Object} matches.exactAddress An exact address match - this
-   *   will be an Address object if the query looked like a valid Krist address,
+   *   will be an Address object if the query looked like a valid Mist address,
    *   and that address exists in the database. Otherwise, if there is no
    *   result, it will be `false`.
    * @apiSuccess {Object} matches.exactName An exact name match - this will be a
-   *   Name object if the query looked like a valid Krist name (with or without
-   *   the `.kst` suffix), and that name exists in the database. Otherwise, if
+   *   Name object if the query looked like a valid Mist name (with or without
+   *   the `.mst` suffix), and that name exists in the database. Otherwise, if
    *   there is no result, it will be `false`.
    * @apiSuccess {Object} matches.exactBlock Currently unused.
    * @apiSuccess {Object} matches.exactTransaction An exact transaction match -
-   *   this will be a Transaction object if the query looked like a valid Krist
+   *   this will be a Transaction object if the query looked like a valid Mist
    *   transaction ID, and that transaction exists in the database. Otherwise,
    *   if there is no result, it will be `false`.
    *

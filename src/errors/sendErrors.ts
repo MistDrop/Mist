@@ -14,14 +14,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
 
 import chalk from "chalk";
 
-import { KristError } from "./KristError";
+import { MistError } from "./MistError";
 
 export interface ErrorResponse {
   ok: false;
@@ -30,7 +30,7 @@ export interface ErrorResponse {
 }
 
 export function errorToJson(err: unknown): ErrorResponse {
-  if (err instanceof KristError) {
+  if (err instanceof MistError) {
     return {
       ok: false,
       error: err.errorString,

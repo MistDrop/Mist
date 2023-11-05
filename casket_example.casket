@@ -1,8 +1,8 @@
-krist.dev {
-  root /var/www/krist.dev/static
+mist.dev {
+  root /var/www/mist.dev/static
 
-  log /var/log/casket/krist.dev.access.log
-  errors /var/log/casket/krist.dev.error.log {
+  log /var/log/casket/mist.dev.access.log
+  errors /var/log/casket/mist.dev.error.log {
     502 down.html
   }
 
@@ -15,11 +15,11 @@ krist.dev {
   gzip
 }
 
-ws.krist.dev {
-  root /var/www/krist.dev/static
+ws.mist.dev {
+  root /var/www/mist.dev/static
   
-  log /var/log/casket/ws.krist.dev.access.log
-  errors /var/log/casket/ws.krist.dev.error.log {
+  log /var/log/casket/ws.mist.dev.access.log
+  errors /var/log/casket/ws.mist.dev.error.log {
     502 down.html
   }
 

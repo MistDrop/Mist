@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -27,7 +27,7 @@ import { api } from "../api";
 import { Block, Address, Transaction, Name } from "../../src/database";
 import { redis, rKey } from "../../src/database/redis";
 
-import { getWork } from "../../src/krist/work";
+import { getWork } from "../../src/mist/work";
 
 describe("v1 routes: submission", () => {
   before(seed);
@@ -98,7 +98,7 @@ describe("v1 routes: submission", () => {
     it("should submit a block", async () => {
       const res = await api()
         .get("/?submitblock")
-        .set("User-Agent", "krist-test")
+        .set("User-Agent", "mist-test")
         .set("Origin", "https://example.com")
         .query({ address: "k8juvewcui", nonce: "%#DEQ'#+UX)" });
 
@@ -124,7 +124,7 @@ describe("v1 routes: submission", () => {
         id: 1,
         value: 25,
         to: "k8juvewcui",
-        useragent: "krist-test",
+        useragent: "mist-test",
         origin: "https://example.com"
       });
       expect(tx!.from).to.not.be.ok;
@@ -270,7 +270,7 @@ describe("v2 routes: submission", () => {
     it("should submit a block", async () => {
       const res = await api()
         .post("/submit")
-        .set("User-Agent", "krist-test")
+        .set("User-Agent", "mist-test")
         .set("Origin", "https://example.com")
         .send({ address: "k8juvewcui", nonce: "%#DEQ'#+UX)" });
 
@@ -301,7 +301,7 @@ describe("v2 routes: submission", () => {
         hash: "000000012697b461b9939933d5dec0cae546b7ec61b2d09a92226474711f0819",
         nonce: "252344455127232b555829",
         difficulty: 100000, // real work value
-        useragent: "krist-test",
+        useragent: "mist-test",
         origin: "https://example.com"
       });
     });
@@ -313,7 +313,7 @@ describe("v2 routes: submission", () => {
         id: 1,
         value: 25,
         to: "k8juvewcui",
-        useragent: "krist-test",
+        useragent: "mist-test",
         origin: "https://example.com"
       });
       expect(tx!.from).to.not.be.ok;

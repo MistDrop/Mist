@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -30,12 +30,12 @@ export default (): Router => {
   // API v2
   // ===========================================================================
   /**
-	 * @api {get} /walletversion Get latest KristWallet version
+	 * @api {get} /walletversion Get latest MistWallet version
 	 * @apiName GetWalletVersion
 	 * @apiGroup MiscellaneousGroup
 	 * @apiVersion 2.0.0
 	 *
-	 * @apiSuccess {Number} walletVersion The latest KristWallet version.
+	 * @apiSuccess {Number} walletVersion The latest MistWallet version.
 	 *
 	 * @apiSuccessExample {json} Success
 	 * {

@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -23,13 +23,13 @@ import { Router } from "express";
 
 import { ReqQuery } from "..";
 
-import { addressToJson } from "../../krist/addresses";
-import { blockToJson, getLastBlock } from "../../krist/blocks";
+import { addressToJson } from "../../mist/addresses";
+import { blockToJson, getLastBlock } from "../../mist/blocks";
 import { ctrlSubmitBlock } from "../../controllers/blocks";
 
 import {
   ErrorInvalidParameter, ErrorSolutionDuplicate, ErrorSolutionIncorrect,
-  KristError
+  MistError
 } from "../../errors";
 
 export default (): Router => {
@@ -38,10 +38,85 @@ export default (): Router => {
   // ===========================================================================
   // API v2
   // ===========================================================================
+    /**
+	 * @api {post} /submit Submit a block
+	 * @apiName SubmitBlock
+	 * @apiGroup BlockGroup
+	 * @apiVersion 2.0.0
+   * @apiDeprecated Block submission is currently disabled.
+	 *
+	 * @apiBody {String} address The address to send the reward
+	 *   to, if successful.
+	 * @apiBody {String|Number[]} nonce The nonce to submit with.
+   * @apiBody {Number} x The X coordinate to mine.
+   * @apiBody {Number} y The Y coordinate to mine.
+   * @apiBody {Number} z The Z coordinate to mine.
+	 *
+	 * @apiSuccess {Boolean} success Whether the submission was successful or not.
+	 * @apiSuccess {String} [error] The block submission error (if success was
+   *   `false`).
+	 * @apiSuccess {Number} [work] The new difficulty for block submission (if the
+	 *   solution was successful).
+	 * @apiUse Address
+	 * @apiUse Block
+	 * @apiSuccess {Object} [address] The address of the solver (if the solution
+	 *   was successful).
+	 * @apiSuccess {Object} [block] The block which was just submitted (if the
+	 *   solution was successful).
+	 *
+	 * @apiSuccessExample {json} Success
+	 * {
+   *     "ok": true,
+   *     "success": true,
+   *     "work": 18750,
+   *     "address": {
+   *         "address": "kre3w0i79j",
+   *         "balance": 925378,
+   *         "totalin": 925378,
+   *         "totalout": 0,
+   *         "firstseen": "2015-03-13T12:55:18.000Z"
+   *     },
+   *     "block": {
+   *         "height": 122226,
+   *         "address": "kre3w0i79j",
+   *         "hash": "000000007abc9f0cafaa8bf85d19817ee4f5c41ae758de3ad419d62672423ef",
+   *         "short_hash": "000000007ab",
+   *         "value": 14,
+   *         "time": "2016-02-06T19:22:41.746Z",
+   *         "x": 0,
+   *         "y": 0,
+   *         "z": 0
+   *     }
+   * }
+	 *
+	 * @apiSuccessExample {json} Solution Incorrect
+	 * {
+   *     "ok": true,
+   *     "success": false,
+   *     "error": "solution_incorrect"
+   * }
+	 *
+	 * @apiSuccessExample {json} Solution Duplicate
+	 * {
+   *     "ok": true,
+   *     "success": false,
+   *     "error": "solution_duplicate"
+   * }
+	 *
+	 * @apiErrorExample {json} Invalid Nonce
+	 * {
+   *     "ok": false,
+   *     "error": "invalid_parameter",
+   *     "parameter": "nonce"
+   * }
+	 */
   router.post("/submit", async (req, res) => {
     try {
+      const x = req.body.x;
+      const y = req.body.y;
+      const z = req.body.z;
       const result = await ctrlSubmitBlock(req,
-        req.body.address, req.body.nonce);
+        req.body.address, req.body.nonce, x ? parseInt(x) : undefined, y ? parseInt(y) : undefined, z ? parseInt(z) : undefined);
 
       res.json({
         ok: true,
@@ -73,15 +148,18 @@ export default (): Router => {
     submitblock?: string;
     address?: string;
     nonce?: string;
+    x?: string;
+    y?: string;
+    z?: string;
   }>, res, next) => {
     if (req.query.submitblock !== undefined) {
-      const { address, nonce } = req.query;
+      const { address, nonce, x, y, z } = req.query;
 
       try {
-        await ctrlSubmitBlock(req, address, nonce);
+        await ctrlSubmitBlock(req, address, nonce, x ? parseInt(x) : undefined, y ? parseInt(y) : undefined, z ? parseInt(z) : undefined);
         res.send("Block solved");
       } catch (err: unknown) {
-        if (err instanceof KristError) {
+        if (err instanceof MistError) {
           // Convert v2 errors to legacy API errors
           if (err.errorString === "mining_disabled")
             return res.send("Mining disabled");

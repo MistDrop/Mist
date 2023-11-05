@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -26,7 +26,7 @@ import { newConnection } from "../ws";
 
 import { redis, rKey } from "../../src/database/redis";
 import { Address, Block, Name } from "../../src/database";
-import { getWork } from "../../src/krist/work";
+import { getWork } from "../../src/mist/work";
 
 describe("websocket routes: submission", function() {
   before(seed);

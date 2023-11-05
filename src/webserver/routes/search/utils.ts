@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -23,11 +23,11 @@ import { ReqSearchQuery, SearchQueryMatch } from ".";
 import { ErrorInvalidParameter, ErrorMissingParameter } from "../../../errors";
 
 import {
-  isValidKristAddress, stripNameSuffix, isValidName
+  isValidMistAddress, stripNameSuffix, isValidName
 } from "../../../utils";
 
 export function parseQuery(query: string): SearchQueryMatch {
-  const matchAddress = isValidKristAddress(query);
+  const matchAddress = isValidMistAddress(query);
 
   const strippedName = stripNameSuffix(query);
   const matchName = !!strippedName && isValidName(strippedName, true);

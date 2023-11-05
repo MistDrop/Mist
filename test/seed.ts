@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -28,9 +28,9 @@ import { REDIS_PREFIX, TEST_DEBUG } from "../src/utils/constants";
 export async function seed(): Promise<void> {
   const debug = !!TEST_DEBUG;
 
-  // Cowardly refuse to wipe the databases if the database name is 'krist'
+  // Cowardly refuse to wipe the databases if the database name is 'mist'
   // (production username)
-  if (db.getDatabaseName() === "krist")
+  if (db.getDatabaseName() === "mist")
     throw new Error("Refusing to wipe production databases in test runner. Check environment variables!!");
 
   // Clear the databases

@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -22,8 +22,8 @@
 import dayjs from "dayjs";
 import { Router } from "express";
 import { ctrlGetTransaction, ctrlGetTransactions, ctrlMakeTransaction } from "../../controllers/transactions";
-import { ErrorInvalidParameter, KristError } from "../../errors";
-import { getRecentTransactions, transactionToJson } from "../../krist/transactions";
+import { ErrorInvalidParameter, MistError } from "../../errors";
+import { getRecentTransactions, transactionToJson } from "../../mist/transactions";
 import { padDigits } from "../../utils";
 import { PaginatedQuery, ReqQuery, returnPaginatedResult } from "../utils";
 
@@ -43,18 +43,18 @@ import { PaginatedQuery, ReqQuery, returnPaginatedResult } from "../utils";
  * @apiSuccess {String} transaction.to The recipient of this transaction. This
  *   may be `"name"` if the transaction was a name purchase, or `"a"` if it was
  *   a name's data change.
- * @apiSuccess {Number} transaction.value The amount of Krist transferred in
+ * @apiSuccess {Number} transaction.value The amount of Mist transferred in
  *   this transaction. Can be `0`, notably if the transaction was a name's data
  *   change.
  * @apiSuccess {Date} transaction.time The time this transaction this was made,
  *   as an ISO-8601 string.
  * @apiSuccess {String} [transaction.name] The name associated with this
- *   transaction, without the `.kst` suffix, or `null`.
+ *   transaction, without the `.mst` suffix, or `null`.
  * @apiSuccess {String} [transaction.metadata] Transaction metadata, or `null`.
  * @apiSuccess {String} [transaction.sent_metaname] The metaname (part before
  *   the `"@"`) of the recipient of this transaction, if it was sent to a name.
  * @apiSuccess {String} [transaction.sent_name] The name this transaction was
- *   sent to, without the `.kst` suffix, if it was sent to a name.
+ *   sent to, without the `.mst` suffix, if it was sent to a name.
  * @apiSuccess {String} transaction.type The type of this transaction. May be
  *   `mined`, `transfer`, `name_purchase`, `name_a_record`, or `name_transfer`.
  *   Note that `name_a_record` refers to a name's data changing.
@@ -70,18 +70,18 @@ import { PaginatedQuery, ReqQuery, returnPaginatedResult } from "../utils";
  * @apiSuccess {String} transactions.to The recipient of this transaction. This
  *   may be `"name"` if the transaction was a name purchase, or `"a"` if it was
  *   a name's data change.
- * @apiSuccess {Number} transactions.value The amount of Krist transferred in
+ * @apiSuccess {Number} transactions.value The amount of Mist transferred in
  *   this transaction. Can be `0`, notably if the transaction was a name's data
  *   change.
  * @apiSuccess {Date} transactions.time The time this transaction this was made,
  *   as an ISO-8601 string.
  * @apiSuccess {String} [transactions.name] The name associated with this
- *   transaction, without the `.kst` suffix, or `null`.
+ *   transaction, without the `.mst` suffix, or `null`.
  * @apiSuccess {String} [transactions.metadata] Transaction metadata, or `null`.
  * @apiSuccess {String} [transactions.sent_metaname] The metaname (part before
  *   the `"@"`) of the recipient of this transaction, if it was sent to a name.
  * @apiSuccess {String} [transactions.sent_name] The name this transaction was
- *   sent to, without the `.kst` suffix, if it was sent to a name.
+ *   sent to, without the `.mst` suffix, if it was sent to a name.
  * @apiSuccess {String} transactions.type The type of this transaction. May be
  *   `mined`, `transfer`, `name_purchase`, `name_a_record`, or `name_transfer`.
  *   Note that `name_a_record` refers to a name's data changing.
@@ -311,7 +311,7 @@ export default (): Router => {
     }
 
     if (req.query.pushtx !== undefined) {
-      return res.send("v1 transactions disabled. Contact Krist team");
+      return res.send("v1 transactions disabled. Contact Mist team");
     }
 
     if (req.query.pushtx2 !== undefined) {
@@ -324,7 +324,7 @@ export default (): Router => {
         await ctrlMakeTransaction(req, privatekey, to, amount, metadata);
         res.send("Success");
       } catch (err: unknown) {
-        if (err instanceof KristError) {
+        if (err instanceof MistError) {
           // Convert v2 errors to legacy API errors
           if (err.errorString === "auth_failed")
             return res.send("Access denied");
@@ -333,7 +333,7 @@ export default (): Router => {
 
           if (err instanceof ErrorInvalidParameter) {
             if (err.parameter === "amount")
-              return res.send("Error2"); // "Not enough KST in transaction"
+              return res.send("Error2"); // "Not enough MST in transaction"
             if (err.parameter === "to")
               return res.send("Error4"); // "Invalid recipient address"
             if (err.parameter === "privatekey")

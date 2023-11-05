@@ -14,16 +14,16 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
 
 import { WrappedWebSocket } from "./WrappedWebSocket";
 
-import { BlockJson } from "../krist/blocks";
-import { NameJson } from "../krist/names";
-import { TransactionJson } from "../krist/transactions";
+import { BlockJson } from "../mist/blocks";
+import { NameJson } from "../mist/names";
+import { TransactionJson } from "../mist/transactions";
 
 import { lut } from "../utils";
 

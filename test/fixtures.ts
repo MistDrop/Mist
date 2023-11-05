@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -30,9 +30,9 @@ import chalk from "chalk";
 import { initDatabase, db } from "../src/database";
 import { initRedis, redis, rKey } from "../src/database/redis";
 import { initWebserver, server } from "../src/webserver";
-import { initKrist } from "../src/krist";
+import { initMist } from "../src/mist";
 
-import { teardownWorkOverTime } from "../src/krist/work";
+import { teardownWorkOverTime } from "../src/mist/work";
 import { RootHookObject } from "mocha";
 
 exports.mochaGlobalSetup = async function() {
@@ -41,7 +41,7 @@ exports.mochaGlobalSetup = async function() {
   await initRedis();
   await initDatabase();
   await initWebserver();
-  await initKrist();
+  await initMist();
 };
 
 exports.mochaGlobalTeardown = async function() {
@@ -58,7 +58,7 @@ exports.mochaGlobalTeardown = async function() {
 let sandbox: SinonSandbox;
 export const mochaHooks = (): RootHookObject => ({
   beforeEach(done) {
-    // Suppress Krist's rather verbose logging during tests
+    // Suppress Mist's rather verbose logging during tests
     if (!process.env.TEST_DEBUG) {
       sandbox = sinon.createSandbox();
       sandbox.stub(console, "log");

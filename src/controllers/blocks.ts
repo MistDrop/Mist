@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -25,19 +25,19 @@ import { Block, Limit, Offset, PaginatedResult } from "../database";
 
 import {
   getBlock, getBlocks, getLastBlock, getLowestHashes
-} from "../krist/blocks";
+} from "../mist/blocks";
 import {
   submitBlock, SubmitBlockResponse
-} from "../krist/blocks/submit";
+} from "../mist/blocks/submit";
 
 import {
   ErrorBlockNotFound, ErrorInvalidParameter, ErrorMiningDisabled,
   ErrorMissingParameter
 } from "../errors";
 
-import { isValidKristAddress, validateLimitOffset } from "../utils";
+import { isValidMistAddress, validateLimitOffset } from "../utils";
 import { isNaN } from "lodash";
-import { isMiningEnabled } from "../krist/mining";
+import { isMiningEnabled } from "../mist/mining";
 import { NONCE_MAX_SIZE } from "../utils/constants";
 
 export async function ctrlGetBlocks(
@@ -82,17 +82,28 @@ export async function ctrlGetBlock(
 export async function ctrlSubmitBlock(
   req: Request,
   address?: string,
-  rawNonce?: number[] | string
+  rawNonce?: number[] | string,
+  x?: number,
+  y?: number,
+  z?: number
 ): Promise<SubmitBlockResponse> {
   if (!await isMiningEnabled()) throw new ErrorMiningDisabled();
 
   if (!address) throw new ErrorMissingParameter("address");
-  if (!isValidKristAddress(address, true))
+  if (!isValidMistAddress(address, true))
     throw new ErrorInvalidParameter("address");
 
   if (!rawNonce) throw new ErrorMissingParameter("nonce");
   if (rawNonce.length < 1 || rawNonce.length > NONCE_MAX_SIZE)
     throw new ErrorInvalidParameter("nonce");
 
-  return submitBlock(req, address, rawNonce);
+  if (!x) throw new ErrorMissingParameter("x");
+  if (!y) throw new ErrorMissingParameter("y");
+  if (!z) throw new ErrorMissingParameter("z");
+
+  if (!Number.isInteger(x)) throw new ErrorInvalidParameter("x");
+  if (!Number.isInteger(y)) throw new ErrorInvalidParameter("y");
+  if (!Number.isInteger(z)) throw new ErrorInvalidParameter("z");
+
+  return submitBlock(req, address, rawNonce, Math.floor(x), Math.floor(y), Math.floor(z));
 }

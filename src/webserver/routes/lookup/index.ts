@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -58,7 +58,7 @@ export type LookupQuery<T = unknown> = ReqQuery<{
 /**
  * @apiDefine LookupGroup Lookup API
  *
- * Advanced bulk lookup queries designed for KristWeb v2.
+ * Advanced bulk lookup queries designed for MistWeb v2.
  *
  * **NOTE:** The Lookup API is in Beta, and may be subject to future amendments.
  */

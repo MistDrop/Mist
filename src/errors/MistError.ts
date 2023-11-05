@@ -14,13 +14,18 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
 
-import { Address } from "../database";
-
-export async function getKristSupply(): Promise<number> {
-  return Address.sum("balance");
+export class MistError<InfoT = never> extends Error {
+  constructor(
+    message: string,
+    public errorString: string = message,
+    public statusCode: number = 400,
+    public info?: InfoT
+  ) {
+    super(message);
+  }
 }

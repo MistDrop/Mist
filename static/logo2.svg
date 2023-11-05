@@ -1,4 +1,86 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="512" height="512" version="1.1" viewBox="0 0 135.47 135.47" xmlns="http://www.w3.org/2000/svg">
- <path d="m19.316 0.74357v40.476h-15.911v16.729h15.911v23.911h-15.911v16.922h15.911v35.941h20.119v-56.893c18.913 18.96 37.826 37.929 56.739 56.893h26.501c-11.93-11.978-23.86-23.958-35.79-35.941h27.138v-16.922h-44.001c-3.9257-3.9406-7.8365-7.8664-11.762-11.792 4.2975-4.0447 8.5947-8.0745 12.907-12.119h42.856v-16.729h-25.056c14.365-13.487 28.729-26.989 43.093-40.476h-25.889c-22.246 20.952-44.491 41.904-66.737 62.841v-62.841z" fill="#fff"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="10mm"
+   height="7.75mm"
+   viewBox="0 0 10 7.75"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="mist_symbol.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="15.839192"
+     inkscape:cx="0.80503288"
+     inkscape:cy="-7.2375713"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:pagecheckerboard="true"
+     inkscape:window-width="2560"
+     inkscape:window-height="1369"
+     inkscape:window-x="2552"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="0.5"
+       y="7.7308469"
+       id="text4524"><tspan
+         sodipodi:role="line"
+         id="tspan4522"
+         x="0.5"
+         y="7.7308469"
+         style="stroke-width:0.26458332">M</tspan></text>
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke-width:0.26458332;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect4528"
+       width="10"
+       height="1"
+       x="0"
+       y="6.75" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke-width:0.26458332;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect4528-5"
+       width="10"
+       height="1"
+       x="0"
+       y="0" />
+  </g>
 </svg>

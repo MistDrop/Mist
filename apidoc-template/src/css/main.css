@@ -520,7 +520,7 @@ p.deprecated span{
 } /* /@media print */
 
 /* ------------------------------------------------------------------------------------------
- * Krist stuff
+ * Mist stuff
  * ------------------------------------------------------------------------------------------ */
 body.container-fluid {
   margin-top: 57.59px;
@@ -534,7 +534,7 @@ body.container-fluid {
   top: 107.59px;
 }
 
-.krist-navbar {
+.mist-navbar {
   position: fixed;
   top: 0;
   left: 0;
@@ -555,13 +555,13 @@ body.container-fluid {
   font-size: 16px;
 }
 
-.krist-navbar .site-name {
+.mist-navbar .site-name {
   font-size: 20.8px;
   font-weight: 600;
   color: #f3f3f3;
 }
 
-.krist-navbar .krist-links {
+.mist-navbar .mist-links {
   padding-left: 24px;
   box-sizing: border-box;
   background-color: #1a1a1a;
@@ -573,41 +573,41 @@ body.container-fluid {
   display: flex;
 }
 
-.krist-navbar .krist-links .nav-links {
+.mist-navbar .mist-links .nav-links {
   display: inline-block;
 }
 
-.krist-navbar .krist-links .nav-links .nav-item {
+.mist-navbar .mist-links .nav-links .nav-item {
   position: relative;
   display: inline-block;
   margin-left: 24px;
   line-height: 32px;
 }
 
-.krist-navbar .krist-links .nav-links .nav-item:first-child {
+.mist-navbar .mist-links .nav-links .nav-item:first-child {
   margin-left: 0;
 }
 
-.krist-navbar .krist-links .nav-links .nav-item a, .krist-navbar .krist-links .nav-links .repo-link {
+.mist-navbar .mist-links .nav-links .nav-item a, .mist-navbar .mist-links .nav-links .repo-link {
   color: #f3f3f3;
   line-height: 1.4rem;
   font-weight: 500;
   text-decoration: none;
 }
 
-.krist-navbar .krist-links .nav-links .nav-item a.router-link-active {
+.mist-navbar .mist-links .nav-links .nav-item a.router-link-active {
   color: #3eaf7c;
   margin-bottom: -2px;
   border-bottom: 2px solid #46bd87;
 }
 
-.krist-navbar .krist-links .nav-links .repo-link {
+.mist-navbar .mist-links .nav-links .repo-link {
   display: inline-block;
   margin-left: 24px;
   line-height: 22.4px;
 }
 
-.krist-navbar .icon.outbound {
+.mist-navbar .icon.outbound {
   color: #aaa;
   display: inline-block;
   vertical-align: middle;

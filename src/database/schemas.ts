@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -23,7 +23,7 @@ import { Table, Model, Column, Index } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
 
 import { NONCE_MAX_SIZE } from "../utils/constants";
-import { AuthLogType } from "../krist/authLog";
+import { AuthLogType } from "../mist/authLog";
 
 // =============================================================================
 // Address
@@ -82,6 +82,15 @@ export class Block extends Model {
     library_agent?: string | null;
   @Column({ type: DataTypes.STRING(255) })
     origin?: string | null;
+
+  @Column({ type: DataTypes.INTEGER, unique: "block_xyz" })
+    x!: number;
+
+  @Column({ type: DataTypes.INTEGER, unique: "block_xyz" })
+    y!: number;
+  
+  @Column({ type: DataTypes.INTEGER, unique: "block_xyz" })
+    z!: number;
 }
 
 // =============================================================================

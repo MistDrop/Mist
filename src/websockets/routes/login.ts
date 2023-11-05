@@ -14,15 +14,15 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
 
 import chalk from "chalk";
 
-import { addressToJson } from "../../krist/addresses";
-import { verifyAddress } from "../../krist/addresses/verify";
+import { addressToJson } from "../../mist/addresses";
+import { verifyAddress } from "../../mist/addresses/verify";
 
 import { WebSocketEventHandler } from "../types";
 

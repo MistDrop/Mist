@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -32,8 +32,8 @@ import promClient from "prom-client";
 import { criticalLog } from "../../utils/criticalLog";
 
 const promAddressesVerifiedCounter = new promClient.Counter({
-  name: "krist_addresses_verified_total",
-  help: "Total number of addresses verified since the Krist server started.",
+  name: "mist_addresses_verified_total",
+  help: "Total number of addresses verified since the Mist server started.",
   labelNames: ["type"]
 });
 
@@ -52,22 +52,22 @@ export async function verifyAddress(
 ): Promise<VerifyResponse> {
   const { path, logDetails } = getLogDetails(req);
 
-  const kristAddress = makeV2Address(privatekey);
+  const mistAddress = makeV2Address(privatekey);
 
-  console.log(chalk`{cyan [Auth]} ({bold ${path}}) Auth attempt on address {bold ${kristAddress}} ${logDetails}`);
+  console.log(chalk`{cyan [Auth]} ({bold ${path}}) Auth attempt on address {bold ${mistAddress}} ${logDetails}`);
   promAddressesVerifiedCounter.inc({ type: "attempt" });
 
-  const hash = sha256(kristAddress + privatekey);
-  const address = await getAddress(kristAddress);
+  const hash = sha256(mistAddress + privatekey);
+  const address = await getAddress(mistAddress);
   if (!address) { // Unseen address, create it
     const newAddress = await Address.create({
-      address: kristAddress,
+      address: mistAddress,
       firstseen: new Date(),
       balance: 0, totalin: 0, totalout: 0,
       privatekey: hash
     });
 
-    logAuth(req, kristAddress, "auth");
+    logAuth(req, mistAddress, "auth");
     promAddressesVerifiedCounter.inc({ type: "authed" });
     return { authed: true, address: newAddress };
   }
@@ -76,15 +76,15 @@ export async function verifyAddress(
     const authed = !address.locked && address.privatekey === hash;
 
     if (authed) {
-      logAuth(req, kristAddress, "auth");
+      logAuth(req, mistAddress, "auth");
     } else {
       const reason = address.locked
         ? `(locked, alert: ${address.alert ?? "none"})`
         : "(incorrect privatekey hash)";
       console.log(chalk`{red [Auth]} ({bold ${path}}) Auth failed on address `
-        + chalk`{bold ${kristAddress}} for reason {bold ${reason}} `
+        + chalk`{bold ${mistAddress}} for reason {bold ${reason}} `
         + chalk`${logDetails}`);
-      criticalLog(req, `Auth failed on address **${kristAddress}**. Reason: `
+      criticalLog(req, `Auth failed on address **${mistAddress}**. Reason: `
         + reason, false);
     }
 
@@ -93,7 +93,7 @@ export async function verifyAddress(
   } else { // Address doesn't yet have a privatekey, claim it as the first
     const updatedAddress = await address.update({ privatekey: hash });
 
-    logAuth(req, kristAddress, "auth");
+    logAuth(req, mistAddress, "auth");
     promAddressesVerifiedCounter.inc({ type: "authed" });
     return { authed: true, address: updatedAddress };
   }

@@ -14,16 +14,16 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
 
 import { Router } from "express";
 
-import { getLastBlock } from "../../krist/blocks";
-import { getDetailedUnpaid, getUnpaidNameCount } from "../../krist/names";
-import { getWork, getWorkOverTime } from "../../krist/work";
+import { getLastBlock } from "../../mist/blocks";
+import { getDetailedUnpaid, getUnpaidNameCount } from "../../mist/names";
+import { getWork, getWorkOverTime } from "../../mist/work";
 
 import { ErrorBlockNotFound } from "../../errors";
 import { getBaseBlockValue } from "../../utils";

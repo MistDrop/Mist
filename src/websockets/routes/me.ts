@@ -14,12 +14,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
 
-import { addressToJson, getAddress } from "../../krist/addresses";
+import { addressToJson, getAddress } from "../../mist/addresses";
 import { WebSocketEventHandler } from "../types";
 import { ErrorAddressNotFound } from "../../errors";
 

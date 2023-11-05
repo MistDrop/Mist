@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -24,7 +24,7 @@ import { expect } from "chai";
 import { seed } from "../seed";
 import { api } from "../api";
 import { Address, Name, Transaction } from "../../src/database";
-import { getBlockValue } from "../../src/krist/blocks";
+import { getBlockValue } from "../../src/mist/blocks";
 
 describe("v1 routes: names", () => {
   before(seed);
@@ -92,7 +92,7 @@ describe("v2 routes: names", () => {
     });
 
     it("should reject names with invalid characters", async () => {
-      const invalidNames = ["test.kst", " ", "te st", "_"];
+      const invalidNames = ["test.mst", " ", "te st", "_"];
       for (const name of invalidNames) {
         const res = await api()
           .post("/names/" + encodeURIComponent(name))
@@ -339,7 +339,7 @@ describe("v2 routes: names", () => {
     });
 
     it("should reject names with invalid characters", async () => {
-      const invalidNames = ["test.kst", " ", "te st", "_"];
+      const invalidNames = ["test.mst", " ", "te st", "_"];
       for (const name of invalidNames) {
         const res = await api()[method]("/names/" + encodeURIComponent(name) + route)
           .send({ privatekey: "a" });

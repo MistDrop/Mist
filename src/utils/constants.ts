@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -28,13 +28,13 @@ export const TEST_DEBUG = !!process.env.TEST_DEBUG;
 // =============================================================================
 // Database
 // =============================================================================
-export const MAIN_DB_NAME = process.env.DB_NAME as string | undefined || "krist";
-export const MAIN_DB_USER = process.env.DB_USER as string | undefined || "krist";
+export const MAIN_DB_NAME = process.env.DB_NAME as string | undefined || "mist";
+export const MAIN_DB_USER = process.env.DB_USER as string | undefined || "mist";
 export const MAIN_DB_PASS = process.env.DB_PASS as string;
 export const MAIN_DB_HOST = process.env.DB_HOST as string | undefined || "127.0.0.1";
 
-export const TEST_DB_NAME = process.env.TEST_DB_NAME as string | undefined || "test_krist";
-export const TEST_DB_USER = process.env.TEST_DB_USER as string | undefined || "test_krist";
+export const TEST_DB_NAME = process.env.TEST_DB_NAME as string | undefined || "test_mist";
+export const TEST_DB_USER = process.env.TEST_DB_USER as string | undefined || "test_mist";
 export const TEST_DB_PASS = process.env.TEST_DB_PASS as string;
 export const TEST_DB_HOST = process.env.TEST_DB_HOST as string | undefined || "127.0.0.1";
 
@@ -48,8 +48,8 @@ export const REDIS_HOST = process.env.REDIS_HOST as string | undefined || "127.0
 export const REDIS_PORT = parseInt(process.env.REDIS_PORT as string | undefined || "6379");
 export const REDIS_PASS = process.env.REDIS_PASS as string | undefined;
 export const REDIS_PREFIX = TEST
-  ? (process.env.TEST_REDIS_PREFIX || "test_krist:")
-  : (process.env.REDIS_PREFIX || "krist:");
+  ? (process.env.TEST_REDIS_PREFIX || "test_mist:")
+  : (process.env.REDIS_PREFIX || "mist:");
 
 // =============================================================================
 // Webserver
@@ -71,14 +71,25 @@ export const CRITICAL_LOG_URL = process.env.CRITICAL_LOG_URL as string | undefin
 export const IDEMPOTENCY_TTL_SECS = 86400;
 
 // =============================================================================
-// Krist
+// Mist
 // =============================================================================
 export const WALLET_VERSION = 16;
 export const NONCE_MAX_SIZE = 24;
-export const NAME_COST = 500;
+export const NAME_COST = 10000;
 export const MIN_WORK = 1;
 export const MAX_WORK = 100000;
 export const WORK_FACTOR = 0.025;
-export const SECONDS_PER_BLOCK = 300;
+export const SECONDS_PER_BLOCK = 60;
+export const ORE_TYPES = [
+  {
+    name: "Coal",
+    value: 1,
+    attempts: 16,
+    blobMin: 8,
+    blobMax: 16,
+    yMin: 0,
+    yMax: 128
+  }
+];
 
 export const LAST_BLOCK = "2022-12-31";

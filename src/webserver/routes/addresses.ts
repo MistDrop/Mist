@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -25,9 +25,9 @@ import { Router } from "express";
 import { ctrlGetAddress, ctrlGetAddressAlert, ctrlGetAddresses, ctrlGetRichAddresses } from "../../controllers/addresses";
 import { ctrlGetNamesByAddress } from "../../controllers/names";
 import { ctrlGetTransactionsByAddress } from "../../controllers/transactions";
-import { addressToJson, getAddress, getRichAddresses } from "../../krist/addresses";
-import { nameToJson } from "../../krist/names";
-import { getTransactionsByAddress, transactionToJson } from "../../krist/transactions";
+import { addressToJson, getAddress, getRichAddresses } from "../../mist/addresses";
+import { nameToJson } from "../../mist/names";
+import { getTransactionsByAddress, transactionToJson } from "../../mist/transactions";
 import { makeV2Address, padDigits } from "../../utils";
 
 import { PaginatedQuery, ReqQuery, returnPaginatedResult } from "../utils";
@@ -43,11 +43,11 @@ import { PaginatedQuery, ReqQuery, returnPaginatedResult } from "../utils";
  *
  * @apiSuccess {Object} address
  * @apiSuccess {String} address.address The address.
- * @apiSuccess {Number} address.balance The amount of Krist currently owned by
+ * @apiSuccess {Number} address.balance The amount of Mist currently owned by
  *   this address.
- * @apiSuccess {Number} address.totalin The total amount of Krist that has ever
+ * @apiSuccess {Number} address.totalin The total amount of Mist that has ever
  *   gone into this address.
- * @apiSuccess {Number} address.totalout The total amount of Krist that has ever
+ * @apiSuccess {Number} address.totalout The total amount of Mist that has ever
  *   gone out of this address.
  * @apiSuccess {Date} address.firstseen The date this address was first seen
  *   (when the first transaction to it was made), as an ISO-8601 string.
@@ -58,11 +58,11 @@ import { PaginatedQuery, ReqQuery, returnPaginatedResult } from "../utils";
  *
  * @apiSuccess {Object[]} addresses
  * @apiSuccess {String} addresses.address The address.
- * @apiSuccess {Number} addresses.balance The amount of Krist currently owned by
+ * @apiSuccess {Number} addresses.balance The amount of Mist currently owned by
  *   this address.
- * @apiSuccess {Number} addresses.totalin The total amount of Krist that has
+ * @apiSuccess {Number} addresses.totalin The total amount of Mist that has
  *   ever gone into this address.
- * @apiSuccess {Number} addresses.totalout The total amount of Krist that has
+ * @apiSuccess {Number} addresses.totalout The total amount of Mist that has
  *   ever gone out of this address.
  * @apiSuccess {Date} addresses.firstseen The date this address was first seen
  *   (when the first transaction to it was made), as an ISO-8601 string.

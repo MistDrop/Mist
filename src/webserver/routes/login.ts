@@ -14,14 +14,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
 
 import { Router } from "express";
 import { ErrorInvalidParameter, ErrorMissingParameter } from "../../errors";
-import { verifyAddress } from "../../krist/addresses/verify";
+import { verifyAddress } from "../../mist/addresses/verify";
 
 export default (): Router => {
   const router = Router();

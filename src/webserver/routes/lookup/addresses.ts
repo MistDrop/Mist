@@ -14,15 +14,15 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
 
 import { Router } from "express";
 
-import { AddressJson, addressToJson } from "../../../krist/addresses";
-import { lookupAddresses } from "../../../krist/addresses/lookup";
+import { AddressJson, addressToJson } from "../../../mist/addresses";
+import { lookupAddresses } from "../../../mist/addresses/lookup";
 
 import { ErrorMissingParameter } from "../../../errors";
 import { validateAddressList } from "./utils";
@@ -37,8 +37,8 @@ export default (): Router => {
    * @apiVersion 2.1.3
    *
    * @apiDescription Return an object containing the given address(es). Any
-   * addresses that do not exist on the Krist server (i.e. they have not been
-   * logged in to, or have not received Krist) will be assigned `null` in the
+   * addresses that do not exist on the Mist server (i.e. they have not been
+   * logged in to, or have not received Mist) will be assigned `null` in the
    * object.
    *
    * **WARNING:** The Lookup API is in Beta, and is subject to change at any

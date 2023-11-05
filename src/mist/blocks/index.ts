@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -35,7 +35,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -93,10 +93,10 @@ export async function getLowestHashes(
   });
 }
 
-export async function getBlockValue(dbTx?: SqTransaction): Promise<number> {
+export async function getBlockValue(dbTx?: SqTransaction, multiplier?: number): Promise<number> {
   const lastBlock = await getLastBlock(dbTx);
   const unpaidNames = await getUnpaidNameCount(dbTx);
-  return getBaseBlockValue(lastBlock?.id ?? 1) + unpaidNames;
+  return (getBaseBlockValue(lastBlock?.id ?? 1) * (multiplier ?? 1)) + unpaidNames;
 }
 
 export interface BlockJson {
@@ -107,6 +107,9 @@ export interface BlockJson {
   value: number;
   time: string;
   difficulty: number;
+  x: number;
+  y: number;
+  z: number;
 }
 
 export function blockToJson(block: Block): BlockJson {
@@ -117,6 +120,9 @@ export function blockToJson(block: Block): BlockJson {
     short_hash: block.hash ? block.hash.substring(0, 12) : null,
     value: block.value,
     time: block.time.toISOString(),
-    difficulty: getLegacyWork(block.id) ?? block.difficulty
+    difficulty: getLegacyWork(block.id) ?? block.difficulty,
+    x: block.x,
+    y: block.y,
+    z: block.z
   };
 }

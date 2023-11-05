@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -23,10 +23,10 @@ import { Router } from "express";
 
 import { LookupQuery, NAME_FIELDS, TRANSACTION_FIELDS } from ".";
 
-import { nameToJson } from "../../../krist/names";
-import { lookupNames } from "../../../krist/names/lookup";
-import { transactionToJson } from "../../../krist/transactions";
-import { lookupNameHistory, lookupTransactionsToName } from "../../../krist/transactions/lookup";
+import { nameToJson } from "../../../mist/names";
+import { lookupNames } from "../../../mist/names/lookup";
+import { transactionToJson } from "../../../mist/transactions";
+import { lookupNameHistory, lookupTransactionsToName } from "../../../mist/transactions/lookup";
 
 import {
   validateLimit, validateOffset, validateOrderBy, validateOrder,
@@ -155,7 +155,7 @@ export default (): Router => {
    *       "value": 7000,
    *       "time": "2018-12-29T13:02:05.000Z",
    *       "name": null,
-   *       "metadata": "lignum@switchcraft.kst",
+   *       "metadata": "lignum@switchcraft.mst",
    *       "type": "transfer"
    *     },
    *     {
@@ -233,7 +233,7 @@ export default (): Router => {
    *       "value": 7000,
    *       "time": "2018-12-29T13:02:05.000Z",
    *       "name": null,
-   *       "metadata": "lignum@switchcraft.kst",
+   *       "metadata": "lignum@switchcraft.mst",
    *       "type": "transfer"
    *     },
    *     {

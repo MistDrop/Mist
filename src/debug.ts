@@ -14,14 +14,14 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
 
 import chalk from "chalk";
-import { getAddress } from "./krist/addresses";
-import { setWork } from "./krist/work";
+import { getAddress } from "./mist/addresses";
+import { setWork } from "./mist/work";
 
 interface DebugCommand {
   (args: string[]): Promise<void>;

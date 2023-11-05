@@ -14,12 +14,12 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
 
-import { getWork } from "../../krist/work";
+import { getWork } from "../../mist/work";
 
 import { WebSocketEventHandler } from "../types";
 
@@ -32,7 +32,7 @@ import { WebSocketEventHandler } from "../types";
  * @apiBody {Number} id
  * @apiBody {String="work"} type
  *
- * @apiSuccess {Number} work The current Krist work (difficulty)
+ * @apiSuccess {Number} work The current Mist work (difficulty)
  *
  * @apiSuccessExample {json} Success
  * {

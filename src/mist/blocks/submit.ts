@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -33,7 +33,7 @@ import { logAuth } from "../authLog";
 
 import { wsManager } from "../../websockets";
 
-import { isMiningEnabled } from "../mining";
+import { getOreValue, isMiningEnabled } from "../mining";
 import { getWork, setWork } from "../work";
 
 import { getLogDetails, sha256 } from "../../utils";
@@ -45,8 +45,8 @@ import promClient from "prom-client";
 import { ErrorMiningDisabled, ErrorSolutionDuplicate, ErrorSolutionIncorrect } from "../../errors";
 
 const promBlockCounter = new promClient.Counter({
-  name: "krist_blocks_total",
-  help: "Total number of blocks since the Krist server started."
+  name: "mist_blocks_total",
+  help: "Total number of blocks since the Mist server started."
 });
 
 export interface SubmitBlockResponse {
@@ -58,7 +58,10 @@ export interface SubmitBlockResponse {
 export async function submitBlock(
   req: Request,
   address: string,
-  rawNonce: number[] | string
+  rawNonce: number[] | string,
+  x: number,
+  y: number,
+  z: number
 ): Promise<SubmitBlockResponse> {
   // If binary nonce is submitted as an array of numbers, convert it to a
   // Uint8Array here
@@ -69,13 +72,13 @@ export async function submitBlock(
   // Verify the provided nonce is a solution to the current block
   const last = lastBlock.hash.substring(0, 12);
   const work = await getWork();
-  const hash = sha256(address, last, nonce);
+  const hash = sha256(address, last, nonce, x.toString(), y.toString(), z.toString());
 
   if (parseInt(hash.substring(0, 12), 16) <= work) {
     // Correct solution
     try {
       // Correct and unique solution if this doesn't error
-      return await createBlock(req, hash, address, nonce);
+      return await createBlock(req, hash, address, nonce, x, y, z);
     } catch (err: unknown) {
       // Reject duplicate hashes - Sequelize throws a very helpful error here
       if (Array.isArray((err as any).errors)
@@ -97,7 +100,10 @@ export async function createBlock(
   req: Request,
   hash: string,
   address: string,
-  nonce: Uint8Array | string
+  nonce: Uint8Array | string,
+  x: number,
+  y: number,
+  z: number
 ): Promise<SubmitBlockResponse> {
   if (!await isMiningEnabled()) throw new ErrorMiningDisabled();
 
@@ -107,12 +113,13 @@ export async function createBlock(
   const {
     block: retBlock,
     newWork: retWork,
-    kristAddress: retAddress
+    mistAddress: retAddress
   } = await db.transaction(async dbTx => {
     const lastBlock = await getLastBlock(dbTx);
     if (!lastBlock) throw new Error("No last block!");
 
-    const value = await getBlockValue();
+    const oreValue = await getOreValue(x, y, z);
+    const value = await getBlockValue(undefined, oreValue);
     const time = new Date();
 
     const oldWork = await getWork();
@@ -126,7 +133,7 @@ export async function createBlock(
       MIN_WORK
     ));
 
-    console.log(chalk`{bold [Krist]} Submitting {bold ${value} KST} block by {bold ${address}} at {cyan ${dayjs().format("HH:mm:ss DD/MM/YYYY")}} ${logDetails}`);
+    console.log(chalk`{bold [Mist]} Submitting {bold ${value} MST} block by {bold ${address}} at {cyan ${dayjs().format("HH:mm:ss DD/MM/YYYY")}} ${logDetails}`);
     promBlockCounter.inc();
 
     // Create the new block
@@ -142,7 +149,10 @@ export async function createBlock(
       value,
       useragent: userAgent,
       library_agent: libraryAgent,
-      origin
+      origin,
+      x: x,
+      y: y,
+      z: z
     }, { transaction: dbTx });
 
     // Create the transaction
@@ -157,15 +167,15 @@ export async function createBlock(
       }
     );
 
-    // See if the address already exists before depositing Krist to it
-    let kristAddress = await getAddress(address);
-    if (kristAddress) { // Address exists, increment its balance
-      await kristAddress.increment(
+    // See if the address already exists before depositing Mist to it
+    let mistAddress = await getAddress(address);
+    if (mistAddress) { // Address exists, increment its balance
+      await mistAddress.increment(
         { balance: value, totalin: value },
         { transaction: dbTx }
       );
     } else { // Address doesn't exist, create it
-      kristAddress = await Address.create({
+      mistAddress = await Address.create({
         address,
         firstseen: time,
         balance: value,
@@ -177,7 +187,7 @@ export async function createBlock(
     return {
       block,
       newWork,
-      kristAddress
+      mistAddress
     };
   });
 

@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -49,7 +49,7 @@ describe("v1 routes: transactions", () => {
     it("should be disabled", async () => {
       const res = await api().get("/?pushtx");
       expect(res).to.be.text;
-      expect(res.text).to.equal("v1 transactions disabled. Contact Krist team");
+      expect(res.text).to.equal("v1 transactions disabled. Contact Mist team");
     });
   });
 
@@ -61,13 +61,13 @@ describe("v1 routes: transactions", () => {
   });
 
   /**
-   * The errors for /?pushtx2 are defined here in kristwallet:
+   * The errors for /?pushtx2 are defined here in mistwallet:
    *
    *  elseif string.sub(transaction,0,5) == "Error" then
    *   local problem = "An unknown error happened"
    *   local code = tonumber(string.sub(transaction,6,10))
    *   if code == 1 then problem = "Insufficient funds available" end
-   *   if code == 2 then problem = "Not enough KST in transaction" end
+   *   if code == 2 then problem = "Not enough MST in transaction" end
    *   if code == 3 then problem = "Can't comprehend amount to send" end
    *   if code == 4 then problem = "Invalid recipient address" end
    *
@@ -157,7 +157,7 @@ describe("v1 routes: transactions", () => {
     });
 
     it("should error when sending to a name that doesn't exist", async () => {
-      const res = await api().get("/?pushtx2").query({ amt: 1, pkey: "a", q: "test.kst" });
+      const res = await api().get("/?pushtx2").query({ amt: 1, pkey: "a", q: "test.mst" });
       expect(res).to.be.text;
       expect(res.text).to.equal("Name not found");
     });
@@ -169,7 +169,7 @@ describe("v1 routes: transactions", () => {
     });
 
     it("should error with insufficient funds when sending to a name", async () => {
-      const res = await api().get("/?pushtx2").query({ amt: 1, pkey: "b", q: "test.kst" });
+      const res = await api().get("/?pushtx2").query({ amt: 1, pkey: "b", q: "test.mst" });
       expect(res).to.be.text;
       expect(res.text).to.equal("Error1");
     });
@@ -201,32 +201,32 @@ describe("v1 routes: transactions", () => {
     it("should exist in the database", expectTransactionExist(2, undefined, "Hello, world!"));
 
     it("should transact to a name's owner", async () => {
-      const res = await api().get("/?pushtx2").query({ amt: 1, pkey: "a", q: "test.kst" });
+      const res = await api().get("/?pushtx2").query({ amt: 1, pkey: "a", q: "test.mst" });
       expect(res).to.be.text;
       expect(res.text).to.equal("Success");
     });
-    it("should exist in the database", expectTransactionExist(3, undefined, "test.kst"));
+    it("should exist in the database", expectTransactionExist(3, undefined, "test.mst"));
 
     it("should preserve existing metadata with a transaction to a name", async () => {
-      const res = await api().get("/?pushtx2").query({ amt: 1, pkey: "a", q: "test.kst", com: "Hello, world!" });
+      const res = await api().get("/?pushtx2").query({ amt: 1, pkey: "a", q: "test.mst", com: "Hello, world!" });
       expect(res).to.be.text;
       expect(res.text).to.equal("Success");
     });
-    it("should exist in the database", expectTransactionExist(4, undefined, "test.kst;Hello, world!"));
+    it("should exist in the database", expectTransactionExist(4, undefined, "test.mst;Hello, world!"));
 
     it("should support metanames", async () => {
-      const res = await api().get("/?pushtx2").query({ amt: 1, pkey: "a", q: "meta@test.kst" });
+      const res = await api().get("/?pushtx2").query({ amt: 1, pkey: "a", q: "meta@test.mst" });
       expect(res).to.be.text;
       expect(res.text).to.equal("Success");
     });
-    it("should exist in the database", expectTransactionExist(5, undefined, "meta@test.kst"));
+    it("should exist in the database", expectTransactionExist(5, undefined, "meta@test.mst"));
 
     it("should support metanames and preserve metadata", async () => {
-      const res = await api().get("/?pushtx2").query({ amt: 1, pkey: "a", q: "meta@test.kst", com: "Hello, world!" });
+      const res = await api().get("/?pushtx2").query({ amt: 1, pkey: "a", q: "meta@test.mst", com: "Hello, world!" });
       expect(res).to.be.text;
       expect(res.text).to.equal("Success");
     });
-    it("should exist in the database", expectTransactionExist(6, undefined, "meta@test.kst;Hello, world!"));
+    it("should exist in the database", expectTransactionExist(6, undefined, "meta@test.mst;Hello, world!"));
 
     it("should transact to a new address", async () => {
       const res = await api().get("/?pushtx2").query({ amt: 1, pkey: "a", q: "knotfound0" });
@@ -345,7 +345,7 @@ describe("v2 routes: transactions", () => {
     it("should error when paying to a name that doesn't exist", async () => {
       const res = await api()
         .post("/transactions")
-        .send({ amount: 1, to: "notfound.kst", privatekey: "a" });
+        .send({ amount: 1, to: "notfound.mst", privatekey: "a" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: false, error: "name_not_found" });
@@ -354,7 +354,7 @@ describe("v2 routes: transactions", () => {
     it("should error when paying to a name that doesn't exist via metadata", async () => {
       const res = await api()
         .post("/transactions")
-        .send({ amount: 1, to: "k7oax47quv", privatekey: "a", metadata: "notfound.kst" });
+        .send({ amount: 1, to: "k7oax47quv", privatekey: "a", metadata: "notfound.mst" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: false, error: "name_not_found" });
@@ -411,39 +411,39 @@ describe("v2 routes: transactions", () => {
     it("should transact to a name's owner", async () => {
       const res = await api()
         .post("/transactions")
-        .send({ amount: 1, to: "test.kst", privatekey: "a" });
+        .send({ amount: 1, to: "test.mst", privatekey: "a" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true });
       expect(res.body.transaction).to.be.an("object");
       expect(res.body.transaction).to.deep.include({ id: 3, from: "k8juvewcui", to: "k7oax47quv", value: 1, type: "transfer" });
-      expect(res.body.transaction.metadata).to.equal("test.kst");
+      expect(res.body.transaction.metadata).to.equal("test.mst");
       expect(res.body.transaction.sent_name).to.equal("test");
     });
 
     it("should preserve existing metadata with a transaction to a name", async () => {
       const res = await api()
         .post("/transactions")
-        .send({ amount: 1, to: "test.kst", privatekey: "a", metadata: "Hello, world!" });
+        .send({ amount: 1, to: "test.mst", privatekey: "a", metadata: "Hello, world!" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true });
       expect(res.body.transaction).to.be.an("object");
       expect(res.body.transaction).to.deep.include({ id: 4, from: "k8juvewcui", to: "k7oax47quv", value: 1, type: "transfer" });
-      expect(res.body.transaction.metadata).to.equal("test.kst;Hello, world!");
+      expect(res.body.transaction.metadata).to.equal("test.mst;Hello, world!");
       expect(res.body.transaction.sent_name).to.equal("test");
     });
 
     it("should support metanames", async () => {
       const res = await api()
         .post("/transactions")
-        .send({ amount: 1, to: "meta@test.kst", privatekey: "a" });
+        .send({ amount: 1, to: "meta@test.mst", privatekey: "a" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true });
       expect(res.body.transaction).to.be.an("object");
       expect(res.body.transaction).to.deep.include({ id: 5, from: "k8juvewcui", to: "k7oax47quv", value: 1, type: "transfer" });
-      expect(res.body.transaction.metadata).to.equal("meta@test.kst");
+      expect(res.body.transaction.metadata).to.equal("meta@test.mst");
       expect(res.body.transaction.sent_metaname).to.equal("meta");
       expect(res.body.transaction.sent_name).to.equal("test");
     });
@@ -451,13 +451,13 @@ describe("v2 routes: transactions", () => {
     it("should support metanames and preserve metadata", async () => {
       const res = await api()
         .post("/transactions")
-        .send({ amount: 1, to: "meta@test.kst", privatekey: "a", metadata: "Hello, world!" });
+        .send({ amount: 1, to: "meta@test.mst", privatekey: "a", metadata: "Hello, world!" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true });
       expect(res.body.transaction).to.be.an("object");
       expect(res.body.transaction).to.deep.include({ id: 6, from: "k8juvewcui", to: "k7oax47quv", value: 1, type: "transfer" });
-      expect(res.body.transaction.metadata).to.equal("meta@test.kst;Hello, world!");
+      expect(res.body.transaction.metadata).to.equal("meta@test.mst;Hello, world!");
       expect(res.body.transaction.sent_metaname).to.equal("meta");
       expect(res.body.transaction.sent_name).to.equal("test");
     });
@@ -482,7 +482,7 @@ describe("v2 routes: transactions", () => {
     it("should submit a transaction with a user-agent and origin", async () => {
       const res = await api()
         .post("/transactions")
-        .set("User-Agent", "krist-test")
+        .set("User-Agent", "mist-test")
         .set("Origin", "https://example.com")
         .send({ amount: 1, to: "k7oax47quv", privatekey: "a" });
 
@@ -493,31 +493,31 @@ describe("v2 routes: transactions", () => {
       expect(res.body.transaction.useragent).to.not.be.ok;
       expect(res.body.transaction.origin).to.not.be.ok;
     });
-    it("should exist in the database", expectTransactionExist(8, undefined, undefined, "krist-test", "https://example.com"));
+    it("should exist in the database", expectTransactionExist(8, undefined, undefined, "mist-test", "https://example.com"));
 
     it("should transact to a name's owner via metadata", async () => {
       const res = await api()
         .post("/transactions")
-        .send({ amount: 1, to: "k7oax47quv", privatekey: "a", metadata: "test.kst" });
+        .send({ amount: 1, to: "k7oax47quv", privatekey: "a", metadata: "test.mst" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true });
       expect(res.body.transaction).to.be.an("object");
       expect(res.body.transaction).to.deep.include({ id: 9, from: "k8juvewcui", to: "k7oax47quv", value: 1, type: "transfer" });
-      expect(res.body.transaction.metadata).to.equal("test.kst");
+      expect(res.body.transaction.metadata).to.equal("test.mst");
       expect(res.body.transaction.sent_name).to.equal("test");
     });
 
     it("should transact to a name's owner even when metadata is present", async () => {
       const res = await api()
         .post("/transactions")
-        .send({ amount: 1, to: "test.kst", privatekey: "a", metadata: "notfound.kst" });
+        .send({ amount: 1, to: "test.mst", privatekey: "a", metadata: "notfound.mst" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true });
       expect(res.body.transaction).to.be.an("object");
       expect(res.body.transaction).to.deep.include({ id: 10, from: "k8juvewcui", to: "k7oax47quv", value: 1, type: "transfer" });
-      expect(res.body.transaction.metadata).to.equal("test.kst;notfound.kst");
+      expect(res.body.transaction.metadata).to.equal("test.mst;notfound.mst");
       expect(res.body.transaction.sent_name).to.equal("test");
     });
   });

@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -34,9 +34,9 @@ import {
 } from "./prometheus";
 
 import {
-  ErrorInvalidParameter, ErrorMissingParameter, errorToJson, KristError
+  ErrorInvalidParameter, ErrorMissingParameter, errorToJson, MistError
 } from "../errors";
-import { getDetailedMotd } from "../krist/motd";
+import { getDetailedMotd } from "../mist/motd";
 
 export class WrappedWebSocket {
   private keepaliveTimer?: NodeJS.Timeout;
@@ -74,21 +74,21 @@ export class WrappedWebSocket {
       let id: string | number | undefined | null = undefined;
 
       // Outer error handler - if an error occurs, respond with an error
-      // message, converting a KristError where possible
+      // message, converting a MistError where possible
       try {
         // =====================================================================
         // VALIDATION
         // =====================================================================
         // Validate message length
         const strData = rawData.toString("utf-8");
-        if (strData.length > 512) throw new KristError("message_too_long");
+        if (strData.length > 512) throw new MistError("message_too_long");
 
         // Validate message is JSON
         let msg: IncomingWebSocketMessage;
         try {
           msg = JSON.parse(strData);
         } catch (parseErr) {
-          throw new KristError("syntax_error");
+          throw new MistError("syntax_error");
         }
 
         // Validate message contains an ID to reply to
@@ -111,7 +111,7 @@ export class WrappedWebSocket {
         this.sendResponse(id, type, res);
       } catch (err) {
         // Increment invalid message counter if an error occurs
-        if (err instanceof KristError && (
+        if (err instanceof MistError && (
           err.errorString === "message_too_long"
           || err.errorString === "syntax_error"
           || err.errorString === "missing_parameter"

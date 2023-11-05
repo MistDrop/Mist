@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -23,7 +23,7 @@ import { ADDRESS_LIST_LIMIT } from ".";
 import { Limit, Offset } from "../../../database";
 
 import { ErrorInvalidParameter } from "../../../errors";
-import { isValidKristAddressList } from "../../../utils";
+import { isValidMistAddressList } from "../../../utils";
 
 /** Validate a comma-separated list of addresses, returning an array of them
  * if it is valid, or throwing an error if it is not. */
@@ -31,7 +31,7 @@ export function validateAddressList(
   addressList: string
 ): string[] {
   // If it doesn't match the address list regex, error
-  if (!isValidKristAddressList(addressList))
+  if (!isValidMistAddressList(addressList))
     throw new ErrorInvalidParameter("addresses");
 
   // Deserialize, clean up, and deduplicate address list

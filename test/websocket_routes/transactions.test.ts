@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -120,7 +120,7 @@ describe("websocket routes: transactions", function() {
     });
 
     it("should error when paying to a name that doesn't exist", async () => {
-      const [res, ws] = await send({ amount: 1, to: "notfound.kst", privatekey: "a" });
+      const [res, ws] = await send({ amount: 1, to: "notfound.mst", privatekey: "a" });
       expect(res).to.deep.include({ ok: false, error: "name_not_found" });
       ws.close();
     });
@@ -166,38 +166,38 @@ describe("websocket routes: transactions", function() {
     });
 
     it("should transact to a name's owner", async () => {
-      const [res, ws] = await send({ amount: 1, to: "test.kst", privatekey: "a" });
+      const [res, ws] = await send({ amount: 1, to: "test.mst", privatekey: "a" });
       expect(res).to.deep.include({ ok: true });
       expect(res.transaction).to.be.an("object");
       expect(res.transaction).to.deep.include({ id: 3, from: "k8juvewcui", to: "k7oax47quv", value: 1, type: "transfer" });
-      expect(res.transaction.metadata).to.equal("test.kst");
+      expect(res.transaction.metadata).to.equal("test.mst");
       ws.close();
     });
 
     it("should preserve existing metadata with a transaction to a name", async () => {
-      const [res, ws] = await send({ amount: 1, to: "test.kst", privatekey: "a", metadata: "Hello, world!" });
+      const [res, ws] = await send({ amount: 1, to: "test.mst", privatekey: "a", metadata: "Hello, world!" });
       expect(res).to.deep.include({ ok: true });
       expect(res.transaction).to.be.an("object");
       expect(res.transaction).to.deep.include({ id: 4, from: "k8juvewcui", to: "k7oax47quv", value: 1, type: "transfer" });
-      expect(res.transaction.metadata).to.equal("test.kst;Hello, world!");
+      expect(res.transaction.metadata).to.equal("test.mst;Hello, world!");
       ws.close();
     });
 
     it("should support metanames", async () => {
-      const [res, ws] = await send({ amount: 1, to: "meta@test.kst", privatekey: "a" });
+      const [res, ws] = await send({ amount: 1, to: "meta@test.mst", privatekey: "a" });
       expect(res).to.deep.include({ ok: true });
       expect(res.transaction).to.be.an("object");
       expect(res.transaction).to.deep.include({ id: 5, from: "k8juvewcui", to: "k7oax47quv", value: 1, type: "transfer" });
-      expect(res.transaction.metadata).to.equal("meta@test.kst");
+      expect(res.transaction.metadata).to.equal("meta@test.mst");
       ws.close();
     });
 
     it("should support metanames and preserve metadata", async () => {
-      const [res, ws] = await send({ amount: 1, to: "meta@test.kst", privatekey: "a", metadata: "Hello, world!" });
+      const [res, ws] = await send({ amount: 1, to: "meta@test.mst", privatekey: "a", metadata: "Hello, world!" });
       expect(res).to.deep.include({ ok: true });
       expect(res.transaction).to.be.an("object");
       expect(res.transaction).to.deep.include({ id: 6, from: "k8juvewcui", to: "k7oax47quv", value: 1, type: "transfer" });
-      expect(res.transaction.metadata).to.equal("meta@test.kst;Hello, world!");
+      expect(res.transaction.metadata).to.equal("meta@test.mst;Hello, world!");
       ws.close();
     });
 

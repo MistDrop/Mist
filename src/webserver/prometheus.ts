@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -31,14 +31,14 @@ import { USE_PROMETHEUS, PROMETHEUS_PASSWORD } from "./../utils/constants";
 client.collectDefaultMetrics();
 
 const up = new client.Gauge({
-  name: "krist_up",
-  help: "Whether or not the Krist server is running."
+  name: "mist_up",
+  help: "Whether or not the Mist server is running."
 });
 up.set(1);
 
 const debug = new client.Gauge({
-  name: "krist_debug",
-  help: "Whether or not the Krist server is in debug mode."
+  name: "mist_debug",
+  help: "Whether or not the Mist server is in debug mode."
 });
 debug.set(process.env.NODE_ENV !== "production" ? 1 : 0);
 

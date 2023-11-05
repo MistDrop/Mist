@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -22,23 +22,23 @@
 import { expect } from "chai";
 
 import {
-  isValidKristAddress, isValidName, stripNameSuffix
+  isValidMistAddress, isValidName, stripNameSuffix
 } from "../../src/utils";
 
-describe("krist functions", () => {
-  describe("isValidKristAddress", () => {
+describe("mist functions", () => {
+  describe("isValidMistAddress", () => {
     it("should work for a valid v1 address", async () =>
-      expect(isValidKristAddress("a5dfb396d3")).to.be.true);
+      expect(isValidMistAddress("a5dfb396d3")).to.be.true);
     it("should work for a valid v2 address", async () =>
-      expect(isValidKristAddress("k8juvewcui")).to.be.true);
+      expect(isValidMistAddress("k8juvewcui")).to.be.true);
     it("should fail for an invalid address", async () =>
-      expect(isValidKristAddress("kfartoolong")).to.be.false);
+      expect(isValidMistAddress("kfartoolong")).to.be.false);
     it("should fail for a valid v1 address when v2Only", async () =>
-      expect(isValidKristAddress("a5dfb396d3", true)).to.be.false);
+      expect(isValidMistAddress("a5dfb396d3", true)).to.be.false);
     it("should work for a valid v2 address when v2Only", async () =>
-      expect(isValidKristAddress("k8juvewcui", true)).to.be.true);
+      expect(isValidMistAddress("k8juvewcui", true)).to.be.true);
     it("should fail for an invalid address when v2Only", async () =>
-      expect(isValidKristAddress("kfartoolong", true)).to.be.false);
+      expect(isValidMistAddress("kfartoolong", true)).to.be.false);
   });
 
   describe("isValidName", () => {
@@ -63,12 +63,12 @@ describe("krist functions", () => {
   });
 
   describe("stripNameSuffix", () => {
-    it("should strip a .kst suffix", async () =>
-      expect(stripNameSuffix("test.kst")).to.equal("test"));
+    it("should strip a .mst suffix", async () =>
+      expect(stripNameSuffix("test.mst")).to.equal("test"));
     it("not alter a name without a suffix", async () =>
       expect(stripNameSuffix("test")).to.equal("test"));
     it("should only strip the last suffix", async () =>
-      expect(stripNameSuffix("test.kst.kst")).to.equal("test.kst"));
+      expect(stripNameSuffix("test.mst.mst")).to.equal("test.mst"));
     it("should not error with an undefined input", async () =>
       expect((stripNameSuffix as any)()).to.equal(""));
   });

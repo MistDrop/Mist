@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -24,7 +24,7 @@ import { expect } from "chai";
 import { seed } from "../seed";
 
 import { Transaction } from "../../src/database";
-import { transactionToJson } from "../../src/krist/transactions";
+import { transactionToJson } from "../../src/mist/transactions";
 
 describe("schema to json", () => {
   before(seed);

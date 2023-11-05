@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with Krist. If not, see <http://www.gnu.org/licenses/>.
+ * along with Mist. If not, see <http://www.gnu.org/licenses/>.
  *
  * For more project information, see <https://github.com/tmpim/krist>.
  */
@@ -26,12 +26,12 @@ import {
   ctrlRegisterName, ctrlTransferName, ctrlUpdateName
 } from "../../controllers/names";
 
-import { getAddress } from "../../krist/addresses";
+import { getAddress } from "../../mist/addresses";
 
 import {
   getName, getNameCountByAddress, getNames, getNamesByAddress,
   getUnpaidNameCount, getUnpaidNames, nameToJson
-} from "../../krist/names";
+} from "../../mist/names";
 
 import { isValidName } from "../../utils";
 import { NAME_COST } from "../../utils/constants";
@@ -47,7 +47,7 @@ import { PaginatedQuery, ReqQuery, returnPaginatedResult } from "../utils";
  * @apiDefine Name
  *
  * @apiSuccess {Object} name
- * @apiSuccess {String} name.name The name, without the `.kst` suffix.
+ * @apiSuccess {String} name.name The name, without the `.mst` suffix.
  * @apiSuccess {String} name.owner The address that currently owns this name.
  * @apiSuccess {String} name.original_owner The address that originally
  *   purchased this name.
@@ -59,14 +59,15 @@ import { PaginatedQuery, ReqQuery, returnPaginatedResult } from "../utils";
  * @apiSuccess {Date} [name.transferred] The time this name was last transferred
  *   to a new owner, as an ISO-8601 string.
  * @apiSuccess {String} [name.a] The name's data.
- * @apiSuccess {Number} name.unpaid Currently unused.
+ * @apiSuccess {Number} name.unpaid The number of blocks until this name has
+ *  been paid off.
  */
 
 /**
  * @apiDefine Names
  *
  * @apiSuccess {Object[]} names
- * @apiSuccess {String} names.name The name, without the `.kst` suffix.
+ * @apiSuccess {String} names.name The name, without the `.mst` suffix.
  * @apiSuccess {String} names.owner The address that currently owns this name.
  * @apiSuccess {String} [names.original_owner] The address that originally
  *   purchased this name.
@@ -78,7 +79,8 @@ import { PaginatedQuery, ReqQuery, returnPaginatedResult } from "../utils";
  * @apiSuccess {Date} [names.transferred] The time this name was last
  *   transferred to a new owner, as an ISO-8601 string.
  * @apiSuccess {String} names.a The name's data.
- * @apiSuccess {Number} names.unpaid Currently unused.
+ * @apiSuccess {Number} names.unpaid The number of blocks until this name has
+ *  been paid off.
  */
 
 export default (): Router => {
@@ -90,7 +92,7 @@ export default (): Router => {
 	 * @apiGroup NameGroup
 	 * @apiVersion 3.0.0
    *
-	 * @apiParam name The name to check the availability of, without the `.kst`
+	 * @apiParam name The name to check the availability of, without the `.mst`
    *   suffix.
 	 *
 	 * @apiSuccess {Boolean} available Whether or not the name is available
@@ -129,6 +131,24 @@ export default (): Router => {
     });
   });
 
+  /**
+	 * @api {get} /names/bonus Get the name bonus
+	 * @apiName GetNameBonus
+	 * @apiGroup NameGroup
+	 * @apiVersion 2.0.1
+	 *
+	 * @apiDescription Returns the amount of KST that is currently added to the
+	 *   base block reward. Essentially, this is the count of names registered in
+	 *   the last 500 blocks.
+	 *
+	 * @apiSuccess {Number} name_bonus The name bonus.
+	 *
+	 * @apiSuccessExample {json} Success
+	 * {
+	 *     "ok": true,
+	 *     "name_bonus": 12
+   * }
+	 */
   router.get("/names/bonus", async (req, res) => {
     res.json({
       ok: true,
@@ -264,7 +284,7 @@ export default (): Router => {
 	 * @apiGroup NameGroup
 	 * @apiVersion 2.0.0
 	 *
-	 * @apiParam {String} name The name you want to register, without the `.kst`
+	 * @apiParam {String} name The name you want to register, without the `.mst`
    *   suffix.
 	 * @apiBody {String} privatekey The private key to your address.
 	 *
@@ -310,7 +330,7 @@ export default (): Router => {
 	 *
 	 * @apiDescription Transfers the name to another owner.
 	 *
-	 * @apiParam {String} name The name you want to transfer, without the `.kst`
+	 * @apiParam {String} name The name you want to transfer, without the `.mst`
    *   suffix.
 	 * @apiBody {String} address The address you want to transfer
 	 *   the name to.
@@ -374,7 +394,7 @@ export default (): Router => {
 	 *
 	 * @apiDescription Updates the data of a name.
 	 *
-	 * @apiParam {String} name The name you want to update, without the `.kst`
+	 * @apiParam {String} name The name you want to update, without the `.mst`
    *   suffix.
 	 * @apiBody {String} [a] The data you want to set for the
    *   name. You may pass an empty string (`""`), `null` (in JSON requests), or
@@ -394,7 +414,7 @@ export default (): Router => {
    *         "registered": "2016-02-06T14:01:19.000Z",
    *         "updated": "2016-02-07T15:30:10.000Z",
    *         "transferred": "2016-02-06T14:08:36.000Z",
-   *         "a": "krist.dev",
+   *         "a": "mist.dev",
    *         "unpaid": 0
    *     }
    * }
@@ -421,7 +441,7 @@ export default (): Router => {
 	 *
 	 * @apiDescription Updates the data of a name.
 	 *
-	 * @apiParam {String} name The name you want to update, without the `.kst`
+	 * @apiParam {String} name The name you want to update, without the `.mst`
    *   suffix.
 	 * @apiBody {String} [a] The data you want to set for the
    *   name. You may pass an empty string (`""`), `null` (in JSON requests), or
@@ -441,7 +461,7 @@ export default (): Router => {
    *         "registered": "2016-02-06T14:01:19.000Z",
    *         "updated": "2016-02-07T15:30:10.000Z",
    *         "transferred": "2016-02-06T14:08:36.000Z",
-   *         "a": "krist.dev",
+   *         "a": "mist.dev",
    *         "unpaid": 0
    *     }
    * }
