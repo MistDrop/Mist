@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
-import { KristError } from "./KristError.js";
+import { MistError } from "./MistError.js";
 
-export class ErrorNameNotFound extends KristError<{ name?: string | null }> {
+export class ErrorNameNotFound extends MistError<{ name?: string | null }> {
   constructor(name: string) {
     super(
       `Name ${name ?? "[null]"} not found`,
@@ -32,7 +32,7 @@ export class ErrorNameNotFound extends KristError<{ name?: string | null }> {
   }
 }
 
-export class ErrorNameTaken extends KristError<{ name?: string | null }> {
+export class ErrorNameTaken extends MistError<{ name?: string | null }> {
   constructor(name: string) {
     super(
       `Name ${name ?? "[null]"} is already taken`,
@@ -43,7 +43,7 @@ export class ErrorNameTaken extends KristError<{ name?: string | null }> {
   }
 }
 
-export class ErrorNotNameOwner extends KristError<{ name?: string | null }> {
+export class ErrorNotNameOwner extends MistError<{ name?: string | null }> {
   constructor(name: string) {
     super(
       `You are not the owner of name ${name ?? "[null]"}`,

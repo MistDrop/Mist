@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { expect } from "chai";
@@ -65,7 +65,7 @@ describe("v2 routes: lookup api", () => {
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true, found: 1, notFound: 0 });
       expect(res.body.addresses).to.be.an("object");
-      expect(res.body.addresses).to.have.all.keys("k8juvewcui");
+      expect(res.body.addresses).to.have.all.keys("m8juvewcui");
       expect(res.body.addresses.k8juvewcui).to.be.an("object");
       expect(res.body.addresses.k8juvewcui).to.have.all.keys("address", "balance", "totalin", "totalout", "firstseen");
       expect(res.body.addresses.k8juvewcui).to.not.have.key("names");
@@ -76,7 +76,7 @@ describe("v2 routes: lookup api", () => {
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true, found: 2, notFound: 1 });
       expect(res.body.addresses).to.be.an("object");
-      expect(res.body.addresses).to.have.all.keys("k8juvewcui", "k7oax47quv", "knotfound0");
+      expect(res.body.addresses).to.have.all.keys("m8juvewcui", "m7oax47quv", "mnotfound0");
       expect(res.body.addresses.k8juvewcui).to.be.an("object");
       expect(res.body.addresses.k7oax47quv).to.be.an("object");
       expect(res.body.addresses.knotfound0).to.be.null;
@@ -87,7 +87,7 @@ describe("v2 routes: lookup api", () => {
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true, found: 1, notFound: 0 });
       expect(res.body.addresses).to.be.an("object");
-      expect(res.body.addresses).to.have.all.keys("k8juvewcui");
+      expect(res.body.addresses).to.have.all.keys("m8juvewcui");
       expect(res.body.addresses.k8juvewcui).to.be.an("object");
       expect(res.body.addresses.k8juvewcui).to.have.all.keys("address", "balance", "totalin", "totalout", "firstseen", "names");
       expect(res.body.addresses.k8juvewcui.names).to.be.a("number");
@@ -108,7 +108,7 @@ describe("v2 routes: lookup api", () => {
     });
 
     it("should search for an address", async () => {
-      const res = await api().get("/search").query({ q: "k8juvewcui" });
+      const res = await api().get("/search").query({ q: "m8juvewcui" });
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true });
       expect(res.body.query).to.be.an("object");
@@ -116,21 +116,21 @@ describe("v2 routes: lookup api", () => {
       expect(res.body.matches).to.be.an("object");
       expect(res.body.matches).to.deep.include({ exactName: false, exactBlock: false, exactTransaction: false });
       expect(res.body.matches.exactAddress).to.be.an("object");
-      expect(res.body.matches.exactAddress).to.deep.include({ address: "k8juvewcui", balance: 10 });
+      expect(res.body.matches.exactAddress).to.deep.include({ address: "m8juvewcui", balance: 10 });
     });
 
     it("should strip spaces", async () => {
       const res = await api().get("/search").query({ q: "k8juvewcui " });
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true });
-      expect(res.body.query).to.deep.include({ originalQuery: "k8juvewcui", matchAddress: true });
-      expect(res.body.matches.exactAddress).to.deep.include({ address: "k8juvewcui", balance: 10 });
+      expect(res.body.query).to.deep.include({ originalQuery: "m8juvewcui", matchAddress: true });
+      expect(res.body.matches.exactAddress).to.deep.include({ address: "m8juvewcui", balance: 10 });
     });
 
     it("should create a temporary name to test", async () => {
-      const name = await Name.create({ name: "test", owner: "k7oax47quv", registered: new Date(), unpaid: 0 });
+      const name = await Name.create({ name: "test", owner: "m7oax47quv", registered: new Date(), unpaid: 0 });
       expect(name).to.exist;
-      expect(name).to.deep.include({ name: "test", owner: "k7oax47quv" });
+      expect(name).to.deep.include({ name: "test", owner: "m7oax47quv" });
     });
 
     it("should search for a name", async () => {
@@ -140,16 +140,16 @@ describe("v2 routes: lookup api", () => {
       expect(res.body.query).to.deep.include({ matchAddress: false, matchName: true, strippedName: "test" });
       expect(res.body.matches).to.deep.include({ exactAddress: false, exactBlock: false, exactTransaction: false });
       expect(res.body.matches.exactName).to.be.an("object");
-      expect(res.body.matches.exactName).to.deep.include({ name: "test", owner: "k7oax47quv" });
+      expect(res.body.matches.exactName).to.deep.include({ name: "test", owner: "m7oax47quv" });
     });
 
-    it("should search for a name with a .kst suffix", async () => {
-      const res = await api().get("/search").query({ q: "test.kst" });
+    it("should search for a name with a .mst suffix", async () => {
+      const res = await api().get("/search").query({ q: "test.mst" });
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true });
       expect(res.body.query).to.deep.include({ matchAddress: false, matchName: true, strippedName: "test" });
       expect(res.body.matches.exactName).to.be.an("object");
-      expect(res.body.matches.exactName).to.deep.include({ name: "test", owner: "k7oax47quv" });
+      expect(res.body.matches.exactName).to.deep.include({ name: "test", owner: "m7oax47quv" });
     });
 
     it("should search for a block", async () => {
@@ -163,9 +163,9 @@ describe("v2 routes: lookup api", () => {
     });
 
     it("should create a transaction to test", async () => {
-      const tx = await Transaction.create({ from: "k8juvewcui", to: "k7oax47quv", value: 1, time: new Date() });
+      const tx = await Transaction.create({ from: "m8juvewcui", to: "m7oax47quv", value: 1, time: new Date() });
       expect(tx).to.exist;
-      expect(tx).to.deep.include({ from: "k8juvewcui", to: "k7oax47quv", value: 1 });
+      expect(tx).to.deep.include({ from: "m8juvewcui", to: "m7oax47quv", value: 1 });
     });
 
     it("should search for a transaction", async () => {
@@ -176,7 +176,7 @@ describe("v2 routes: lookup api", () => {
       expect(res.body.matches).to.deep.include({ exactAddress: false, exactName: false });
       expect(res.body.matches.exactBlock).to.be.an("object");
       expect(res.body.matches.exactTransaction).to.be.an("object");
-      expect(res.body.matches.exactTransaction).to.deep.include({ from: "k8juvewcui", to: "k7oax47quv", value: 1 });
+      expect(res.body.matches.exactTransaction).to.deep.include({ from: "m8juvewcui", to: "m7oax47quv", value: 1 });
     });
   });
 
@@ -200,7 +200,7 @@ describe("v2 routes: lookup api", () => {
     });
 
     it("should search for a transaction by address", async () => {
-      const res = await api().get("/search/extended").query({ q: "k8juvewcui" });
+      const res = await api().get("/search/extended").query({ q: "m8juvewcui" });
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true });
       expect(res.body.query).to.be.an("object");
@@ -215,9 +215,9 @@ describe("v2 routes: lookup api", () => {
     });
 
     it("should create a transaction to test", async () => {
-      const tx = await Transaction.create({ from: "k7oax47quv", to: "a", value: 0, name: "test", op: "Hello, world!", time: new Date() });
+      const tx = await Transaction.create({ from: "m7oax47quv", to: "a", value: 0, name: "test", op: "Hello, world!", time: new Date() });
       expect(tx).to.exist;
-      expect(tx).to.deep.include({ from: "k7oax47quv", to: "a", value: 0, name: "test", op: "Hello, world!" });
+      expect(tx).to.deep.include({ from: "m7oax47quv", to: "a", value: 0, name: "test", op: "Hello, world!" });
     });
 
     it("should search for a transaction by name", async () => {
@@ -234,12 +234,12 @@ describe("v2 routes: lookup api", () => {
 
     it("should more test transactions", async () => {
       await Transaction.bulkCreate([
-        { from: "k8juvewcui", to: "k7oax47quv", value: 1, op: "test", time: new Date() },
-        { from: "k8juvewcui", to: "k7oax47quv", value: 1, op: "test.kst", time: new Date() },
-        { from: "k8juvewcui", to: "k7oax47quv", value: 1, sent_name: "test", op: "test.kst", time: new Date() },
-        { from: "k8juvewcui", to: "k7oax47quv", value: 1, sent_name: "test", sent_metaname: "meta@test.kst", op: "meta@test.kst", time: new Date() },
-        { from: "k8juvewcui", to: "k7oax47quv", value: 1, sent_name: "test", op: "test.kst;Hello, world!", time: new Date() },
-        { from: "k8juvewcui", to: "k7oax47quv", value: 1, sent_name: "test", sent_metaname: "meta@test.kst", op: "meta@test.kst;Hello, world!", time: new Date() }
+        { from: "m8juvewcui", to: "m7oax47quv", value: 1, op: "test", time: new Date() },
+        { from: "m8juvewcui", to: "m7oax47quv", value: 1, op: "test.mst", time: new Date() },
+        { from: "m8juvewcui", to: "m7oax47quv", value: 1, sent_name: "test", op: "test.mst", time: new Date() },
+        { from: "m8juvewcui", to: "m7oax47quv", value: 1, sent_name: "test", sent_metaname: "meta@test.mst", op: "meta@test.mst", time: new Date() },
+        { from: "m8juvewcui", to: "m7oax47quv", value: 1, sent_name: "test", op: "test.mst;Hello, world!", time: new Date() },
+        { from: "m8juvewcui", to: "m7oax47quv", value: 1, sent_name: "test", sent_metaname: "meta@test.mst", op: "meta@test.mst;Hello, world!", time: new Date() }
       ]);
     });
 
@@ -255,8 +255,8 @@ describe("v2 routes: lookup api", () => {
       });
     });
 
-    it("should search for transactions by name in metadata with a .kst suffix", async () => {
-      const res = await api().get("/search/extended").query({ q: "test.kst" });
+    it("should search for transactions by name in metadata with a .mst suffix", async () => {
+      const res = await api().get("/search/extended").query({ q: "test.mst" });
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true });
       expect(res.body.query).to.deep.include({ matchName: true });

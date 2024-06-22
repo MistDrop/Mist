@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import chalkT from "chalk-template";
 import { Router } from "express";
 import { ErrorAuthFailed, errorToJson } from "../../errors/index.js";
-import { verifyAddress } from "../../krist/addresses/verify.js";
+import { verifyAddress } from "../../mist/addresses/verify.js";
 import { getLogDetails } from "../../utils/index.js";
 import { FORCE_INSECURE, PUBLIC_WS_URL } from "../../utils/vars.js";
 import { wsManager } from "../../websockets/index.js";
@@ -80,7 +80,7 @@ export default (): Router => {
    *
    * To initiate a websocket connection, you must first make a POST request to
    * `/ws/start`. The response will contain a `url` parameter (of the form
-   * `wss://ws.krist.dev/ws/gateway/ba90ad70-cdfa-11e5-8cca-e1d2a26eabaf`) that
+   * `wss://mist.anti.money/ws/gateway/ba90ad70-cdfa-11e5-8cca-e1d2a26eabaf`) that
    * can be used to connect to the websocket. This URL will expire after 30
    * seconds. You will have to connect to the supplied URL within that time
    * frame.
@@ -159,7 +159,7 @@ export default (): Router => {
    * @apiSuccessExample {json} Success
    * {
    *     "ok": true,
-   *     "url": "wss://ws.krist.dev/ws/gateway/ba90ad70-cdfa-11e5-8cca-e1d2a26eabaf",
+   *     "url": "wss://mist.anti.money/ws/gateway/ba90ad70-cdfa-11e5-8cca-e1d2a26eabaf",
    *     "expires": 30
    * }
    */

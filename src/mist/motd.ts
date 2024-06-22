@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import packageJson from "../../package.json" with { type: "json" };
@@ -88,7 +88,7 @@ export interface DetailedMotd {
 }
 
 export async function getMotd(): Promise<Motd> {
-  const motd = await redis.get(rKey("motd")) || "Welcome to Krist!";
+  const motd = await redis.get(rKey("motd")) || "Welcome to Mist!";
   const rawDate = await redis.get(rKey("motd:date"));
   const date = typeof rawDate === "string" ? new Date(rawDate) : new Date(0);
 
@@ -138,11 +138,11 @@ export async function getDetailedMotd(): Promise<DetailedMotd> {
     },
 
     currency: {
-      address_prefix: "k",
-      name_suffix: "kst",
+      address_prefix: "m",
+      name_suffix: "mst",
 
-      currency_name: "Krist",
-      currency_symbol: "KST"
+      currency_name: "Mist",
+      currency_symbol: "MST"
     },
 
     // NOTE: It is against the license to modify this string on a fork node

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import "dotenv/config";
@@ -27,8 +27,8 @@ import chalkT from "chalk-template";
 import { initDatabase, db } from "../src/database/index.js";
 import { initRedis, redis, rKey } from "../src/database/redis.js";
 import { initWebserver, server } from "../src/webserver/index.js";
-import { initKrist } from "../src/krist/index.js";
-import { shutdownWorkOverTime } from "../src/krist/work.js";
+import { initMist } from "../src/mist/index.js";
+import { shutdownWorkOverTime } from "../src/mist/work.js";
 import { RootHookObject } from "mocha";
 
 export async function mochaGlobalSetup() {
@@ -37,7 +37,7 @@ export async function mochaGlobalSetup() {
   await initRedis();
   await initDatabase();
   await initWebserver();
-  await initKrist();
+  await initMist();
 }
 
 export async function mochaGlobalTeardown() {
@@ -55,7 +55,7 @@ let sandbox: SinonSandbox;
 export function mochaHooks(): RootHookObject {
   return {
     beforeEach(done) {
-      // Suppress Krist's rather verbose logging during tests
+      // Suppress Mist's rather verbose logging during tests
       if (!process.env.TEST_DEBUG) {
         sandbox = sinon.createSandbox();
         sandbox.stub(console, "log");

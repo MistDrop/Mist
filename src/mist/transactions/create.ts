@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import chalkT from "chalk-template";
@@ -33,8 +33,8 @@ import { wsManager } from "../../websockets/index.js";
 import { identifyTransactionType, transactionToJson } from "./index.js";
 
 const promTransactionCounter = new promClient.Counter({
-  name: "krist_transactions_total",
-  help: "Total number of transactions since the Krist server started.",
+  name: "mist_transactions_total",
+  help: "Total number of transactions since the Mist server started.",
   labelNames: ["type"]
 });
 
@@ -47,8 +47,8 @@ promTransactionCounter.inc({ type: "name_transfer" }, 0);
 promTransactionCounter.inc({ type: "transfer" }, 0);
 
 const promTransactionRollbackCounter = new promClient.Counter({
-  name: "krist_transactions_rollback_total",
-  help: "Total number of transactions that were rolled back since the Krist server started."
+  name: "mist_transactions_rollback_total",
+  help: "Total number of transactions that were rolled back since the Mist server started."
 });
 
 // Queue for handling transactions, to prevent deadlocks when too many come in simultaneously
@@ -86,7 +86,7 @@ async function pushTransactionInternal(
 ): Promise<Transaction> {
   // Fetch the sender from the database. This should also be checked by the caller anyway (name purchase/transfer,
   // transaction sending, etc.), but it is important to re-fetch here so that the balance can be checked as part of the
-  // database transaction, otherwise a race may occur and Krist may be duplicated, leaving the sender with a negative
+  // database transaction, otherwise a race may occur and Mist may be duplicated, leaving the sender with a negative
   // balance. Therefore, we fetch as part of the transaction, and lock the row in the process.
   const sender = await Address.findOne({
     where: { address: senderAddress },
@@ -100,7 +100,7 @@ async function pushTransactionInternal(
     const { logDetails } = getLogDetails(req);
 
     console.log(chalkT`{red.bold [URGENT]} Race condition attempted in `
-      + chalkT`{bold ${amount} KST} transaction `
+      + chalkT`{bold ${amount} MST} transaction `
       + chalkT`from {bold ${senderAddress || "(null)"}} `
       + chalkT`to {bold ${recipientAddress || "(null)"}} at `
       + chalkT`{cyan ${dayjs().format("HH:mm:ss DD/MM/YYYY")}} ${logDetails}`);
@@ -108,7 +108,7 @@ async function pushTransactionInternal(
     criticalLog(
       `raceCondition-${senderAddress}-${recipientAddress}-${amount}`,
       req,
-      `Race condition attempted in **${amount} KST** `
+      `Race condition attempted in **${amount} MST** `
       + `transaction from **${senderAddress}** to **${recipientAddress}**`,
       true
     );
@@ -173,7 +173,7 @@ export async function createTransaction(
 ): Promise<Transaction> {
   const { logDetails, userAgent, libraryAgent, origin } = getLogDetails(req);
 
-  console.log(chalkT`{bold [Transactions]} Creating {bold ${value} KST} transaction `
+  console.log(chalkT`{bold [Transactions]} Creating {bold ${value} MST} transaction `
     + chalkT`from {bold ${from || "(null)"}} to {bold ${to || "(null)"}} at `
     + chalkT`{cyan ${dayjs().format("HH:mm:ss DD/MM/YYYY")}} ${logDetails}`);
 

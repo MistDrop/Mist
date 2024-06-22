@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { expect } from "chai";
@@ -24,7 +24,7 @@ import { expect } from "chai";
 import { seed } from "../seed.js";
 
 import { Transaction } from "../../src/database/index.js";
-import { transactionToJson } from "../../src/krist/transactions/index.js";
+import { transactionToJson } from "../../src/mist/transactions/index.js";
 
 describe("schema to json", () => {
   before(seed);
@@ -33,7 +33,7 @@ describe("schema to json", () => {
     it("should convert a database transaction to json", async () => {
       const time = new Date();
       const tx = await Transaction.create({
-        id: 1, from: "k8juvewcui", to: "k7oax47quv", value: 1,
+        id: 1, from: "m8juvewcui", to: "m7oax47quv", value: 1,
         time, name: null, op: null
       });
 
@@ -41,7 +41,7 @@ describe("schema to json", () => {
 
       expect(out).to.be.an("object");
       expect(out).to.deep.include({
-        id: 1, from: "k8juvewcui", to: "k7oax47quv", value: 1,
+        id: 1, from: "m8juvewcui", to: "m7oax47quv", value: 1,
         time: time.toISOString(), type: "transfer"
       });
     });

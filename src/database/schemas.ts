@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import type { CreationOptional, InferAttributes, InferCreationAttributes } from "@sequelize/core";
 import { DataTypes, Model } from "@sequelize/core";
 import { Attribute, AutoIncrement, Default, Index, PrimaryKey, Table, Unique } from "@sequelize/core/decorators-legacy";
-import type { AuthLogType } from "../krist/authLog.js";
+import type { AuthLogType } from "../mist/authLog.js";
 
 import { NONCE_MAX_SIZE } from "../utils/vars.js";
 

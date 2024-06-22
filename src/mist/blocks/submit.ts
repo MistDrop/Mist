@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { Op } from "@sequelize/core";
@@ -37,8 +37,8 @@ import { getWork, setWork } from "../work.js";
 import { blockToJson, getBlockValue, getLastBlock } from "./index.js";
 
 const promBlockCounter = new promClient.Counter({
-  name: "krist_blocks_total",
-  help: "Total number of blocks since the Krist server started."
+  name: "mist_blocks_total",
+  help: "Total number of blocks since the Mist server started."
 });
 
 export interface SubmitBlockResponse {
@@ -99,7 +99,7 @@ export async function createBlock(
   const {
     block: retBlock,
     newWork: retWork,
-    kristAddress: retAddress
+    mistAddress: retAddress
   } = await db.transaction(async dbTx => {
     const lastBlock = await getLastBlock(dbTx);
     if (!lastBlock) throw new Error("No last block!");
@@ -118,7 +118,7 @@ export async function createBlock(
       MIN_WORK
     ));
 
-    console.log(chalkT`{bold [Krist]} Submitting {bold ${value} KST} block by {bold ${address}} at {cyan ${dayjs().format("HH:mm:ss DD/MM/YYYY")}} ${logDetails}`);
+    console.log(chalkT`{bold [Mist]} Submitting {bold ${value} MST} block by {bold ${address}} at {cyan ${dayjs().format("HH:mm:ss DD/MM/YYYY")}} ${logDetails}`);
     promBlockCounter.inc();
 
     // Create the new block
@@ -149,15 +149,15 @@ export async function createBlock(
       }
     );
 
-    // See if the address already exists before depositing Krist to it
-    let kristAddress = await getAddress(address);
-    if (kristAddress) { // Address exists, increment its balance
-      await kristAddress.increment(
+    // See if the address already exists before depositing Mist to it
+    let mistAddress = await getAddress(address);
+    if (mistAddress) { // Address exists, increment its balance
+      await mistAddress.increment(
         { balance: value, totalin: value },
         { transaction: dbTx }
       );
     } else { // Address doesn't exist, create it
-      kristAddress = await Address.create({
+      mistAddress = await Address.create({
         address,
         firstseen: time,
         balance: value,
@@ -169,7 +169,7 @@ export async function createBlock(
     return {
       block,
       newWork,
-      kristAddress
+      mistAddress
     };
   });
 

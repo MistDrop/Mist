@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { Router } from "express";
@@ -57,7 +57,7 @@ export type LookupQuery<T = unknown> = ReqQuery<{
 /**
  * @apiDefine LookupGroup Lookup API
  *
- * Advanced bulk lookup queries designed for KristWeb v2.
+ * Advanced bulk lookup queries designed for MistWeb v2.
  */
 export default (): Router => {
   const router = Router();

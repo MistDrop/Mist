@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { Router } from "express";
@@ -25,10 +25,10 @@ import {
   ErrorInvalidParameter,
   ErrorSolutionDuplicate,
   ErrorSolutionIncorrect,
-  KristError
+  MistError
 } from "../../errors/index.js";
-import { addressToJson } from "../../krist/addresses/index.js";
-import { blockToJson, getLastBlock } from "../../krist/blocks/index.js";
+import { addressToJson } from "../../mist/addresses/index.js";
+import { blockToJson, getLastBlock } from "../../mist/blocks/index.js";
 import { ReqQuery } from "../index.js";
 
 export default (): Router => {
@@ -80,7 +80,7 @@ export default (): Router => {
         await ctrlSubmitBlock(req, address, nonce);
         res.send("Block solved");
       } catch (err: unknown) {
-        if (err instanceof KristError) {
+        if (err instanceof MistError) {
           // Convert v2 errors to legacy API errors
           if (err.errorString === "mining_disabled")
             return res.send("Mining disabled");

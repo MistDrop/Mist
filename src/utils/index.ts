@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 export * from "./baseBlockValue.js";
@@ -28,4 +28,4 @@ export * from "./legacyWork.js";
 export * from "./log.js";
 export * from "./lut.js";
 export * from "./validation.js";
-export * from "./validationKrist.js";
+export * from "./validationMist.js";

@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { ctrlSubmitBlock } from "../../controllers/blocks.js";
 import { ErrorMissingParameter, ErrorSolutionDuplicate, ErrorSolutionIncorrect } from "../../errors/index.js";
-import { addressToJson } from "../../krist/addresses/index.js";
-import { blockToJson } from "../../krist/blocks/index.js";
+import { addressToJson } from "../../mist/addresses/index.js";
+import { blockToJson } from "../../mist/blocks/index.js";
 import { WebSocketEventHandler } from "../types.js";
 
 export const wsSubmitBlock: WebSocketEventHandler<{

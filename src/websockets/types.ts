@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
-import { BlockJson } from "../krist/blocks/index.js";
-import { NameJson } from "../krist/names/index.js";
-import { TransactionJson } from "../krist/transactions/index.js";
+import { BlockJson } from "../mist/blocks/index.js";
+import { NameJson } from "../mist/names/index.js";
+import { TransactionJson } from "../mist/transactions/index.js";
 import { lut } from "../utils/index.js";
 import { WrappedWebSocket } from "./WrappedWebSocket.js";
 

@@ -16,18 +16,18 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
-import { KristError } from "./KristError.js";
+import { MistError } from "./MistError.js";
 
-export class ErrorRouteNotFound extends KristError {
+export class ErrorRouteNotFound extends MistError {
   constructor() {
     super("Route not found", "route_not_found", 404);
   }
 }
 
-export class ErrorRateLimitHit extends KristError {
+export class ErrorRateLimitHit extends MistError {
   constructor() {
     super("Rate limit hit", "rate_limit_hit", 429);
   }

@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { Router } from "express";
 import { ErrorInvalidParameter, ErrorMissingParameter } from "../../errors/index.js";
-import { verifyAddress } from "../../krist/addresses/verify.js";
+import { verifyAddress } from "../../mist/addresses/verify.js";
 
 export default (): Router => {
   const router = Router();
@@ -38,7 +38,7 @@ export default (): Router => {
 	 * {
 	 *     "ok": true,
 	 *     "authed": true,
-	 *     "address": "kre3w0i79j"
+	 *     "address": "mre3w0i79j"
    * }
 	 *
 	 * @apiSuccessExample {json} Success, Auth Failed

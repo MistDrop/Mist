@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { expect } from "chai";
@@ -32,12 +32,12 @@ describe("websocket routes: addresses", function() {
       const ws = await newConnection();
       expect(ws).to.nested.include({ "wsp.isOpened": true });
 
-      const data = await ws.sendAndWait({ type: "address", address: "k8juvewcui" });
+      const data = await ws.sendAndWait({ type: "address", address: "m8juvewcui" });
       expect(data).to.deep.include({ ok: true });
       expect(data.address).to.be.an("object");
       expect(data.address).to.include.all.keys("address", "balance", "totalin", "totalout", "firstseen");
       expect(data.address).to.not.include.any.keys("id", "privatekey", "alert", "locked");
-      expect(data.address).to.deep.include({ address: "k8juvewcui", balance: 10 });
+      expect(data.address).to.deep.include({ address: "m8juvewcui", balance: 10 });
 
       ws.close();
     });
@@ -46,7 +46,7 @@ describe("websocket routes: addresses", function() {
       const ws = await newConnection();
       expect(ws).to.nested.include({ "wsp.isOpened": true });
 
-      const data = await ws.sendAndWait({ type: "address", address: "k8juvewcui", fetchNames: true });
+      const data = await ws.sendAndWait({ type: "address", address: "m8juvewcui", fetchNames: true });
       expect(data).to.deep.include({ ok: true });
       expect(data.address).to.be.an("object");
       expect(data.address.names).to.equal(0);
@@ -58,7 +58,7 @@ describe("websocket routes: addresses", function() {
       const ws = await newConnection();
       expect(ws).to.nested.include({ "wsp.isOpened": true });
 
-      const data = await ws.sendAndWait({ type: "address", address: "knotfound0" });
+      const data = await ws.sendAndWait({ type: "address", address: "mnotfound0" });
       expect(data).to.deep.include({ ok: false, error: "address_not_found" });
 
       ws.close();

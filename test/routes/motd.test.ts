@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { expect } from "chai";
@@ -33,7 +33,7 @@ describe("v2 routes: motd", () => {
 
     expect(res.body.ok).to.be.true;
 
-    expect(res.body.motd).to.equal("Welcome to Krist!");
+    expect(res.body.motd).to.equal("Welcome to Mist!");
     expect(res.body.set).to.be.ok;
     expect(res.body.motd_set).to.be.ok;
 
@@ -47,7 +47,7 @@ describe("v2 routes: motd", () => {
     expect(res.body.last_block.height).to.equal(1);
 
     expect(res.body.package).to.be.an("object");
-    expect(res.body.package).to.deep.include({ name: "krist", author: "Lemmmy", licence: "GPL-3.0" });
+    expect(res.body.package).to.deep.include({ name: "mist", author: "Lemmmy", licence: "GPL-3.0" });
     expect(res.body.package.version).to.be.ok;
     expect(res.body.package.repository).to.be.ok;
 
@@ -60,10 +60,10 @@ describe("v2 routes: motd", () => {
 
     expect(res.body.currency).to.be.an("object");
     expect(res.body.currency).to.deep.equal({
-      address_prefix: "k", name_suffix: "kst",
-      currency_name: "Krist", currency_symbol: "KST"
+      address_prefix: "m", name_suffix: "mst",
+      currency_name: "Mist", currency_symbol: "MST"
     });
 
-    expect(res.body.notice).to.equal("Krist was originally created by 3d6 and Lemmmy. It is now owned and operated by tmpim, and licensed under GPL-3.0.");
+    expect(res.body.notice).to.equal("Mist was originally created by 3d6 and Lemmmy. It is now owned and operated by tmpim, and licensed under GPL-3.0.");
   });
 });

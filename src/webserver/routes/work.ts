@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { Router } from "express";
 import { ErrorBlockNotFound } from "../../errors/index.js";
-import { getLastBlock } from "../../krist/blocks/index.js";
-import { getDetailedUnpaid, getUnpaidNameCount } from "../../krist/names/index.js";
-import { getWork, getWorkOverTime } from "../../krist/work.js";
+import { getLastBlock } from "../../mist/blocks/index.js";
+import { getDetailedUnpaid, getUnpaidNameCount } from "../../mist/names/index.js";
+import { getWork, getWorkOverTime } from "../../mist/work.js";
 import { getBaseBlockValue } from "../../utils/index.js";
 
 export default (): Router => {

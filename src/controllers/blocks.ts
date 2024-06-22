@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { Request } from "express";
@@ -28,10 +28,10 @@ import {
   ErrorMiningDisabled,
   ErrorMissingParameter
 } from "../errors/index.js";
-import { getBlock, getBlocks, getLastBlock, getLowestHashes } from "../krist/blocks/index.js";
-import { submitBlock, SubmitBlockResponse } from "../krist/blocks/submit.js";
-import { isMiningEnabled } from "../krist/switches.js";
-import { isValidKristAddress, validateLimitOffset } from "../utils/index.js";
+import { getBlock, getBlocks, getLastBlock, getLowestHashes } from "../mist/blocks/index.js";
+import { submitBlock, SubmitBlockResponse } from "../mist/blocks/submit.js";
+import { isMiningEnabled } from "../mist/switches.js";
+import { isValidMistAddress, validateLimitOffset } from "../utils/index.js";
 import { NONCE_MAX_SIZE } from "../utils/vars.js";
 
 export async function ctrlGetBlocks(
@@ -81,7 +81,7 @@ export async function ctrlSubmitBlock(
   if (!await isMiningEnabled()) throw new ErrorMiningDisabled();
 
   if (!address) throw new ErrorMissingParameter("address");
-  if (!isValidKristAddress(address, true))
+  if (!isValidMistAddress(address, true))
     throw new ErrorInvalidParameter("address");
 
   if (!rawNonce) throw new ErrorMissingParameter("nonce");

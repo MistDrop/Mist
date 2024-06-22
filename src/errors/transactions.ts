@@ -16,24 +16,24 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
-import { KristError } from "./KristError.js";
+import { MistError } from "./MistError.js";
 
-export class ErrorInsufficientFunds extends KristError {
+export class ErrorInsufficientFunds extends MistError {
   constructor() {
     super("Insufficient funds", "insufficient_funds", 403);
   }
 }
 
-export class ErrorTransactionNotFound extends KristError {
+export class ErrorTransactionNotFound extends MistError {
   constructor() {
     super("Transaction not found", "transaction_not_found", 404);
   }
 }
 
-export class ErrorTransactionsDisabled extends KristError {
+export class ErrorTransactionsDisabled extends MistError {
   constructor() {
     super("Transactions disabled", "transactions_disabled", 423);
   }

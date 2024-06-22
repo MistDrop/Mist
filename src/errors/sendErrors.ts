@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import chalkT from "chalk-template";
 
-import { KristError } from "./KristError.js";
+import { MistError } from "./MistError.js";
 
 export interface ErrorResponse {
   ok: false;
@@ -30,7 +30,7 @@ export interface ErrorResponse {
 }
 
 export function errorToJson(err: unknown): ErrorResponse {
-  if (err instanceof KristError) {
+  if (err instanceof MistError) {
     return {
       ok: false,
       error: err.errorString,

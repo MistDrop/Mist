@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import crypto from "crypto";
@@ -41,7 +41,7 @@ export function hexToBase36(input: number): string {
   return String.fromCharCode(byte + 39 > 122 ? 101 : byte > 57 ? byte + 39 : byte);
 }
 
-export function makeV2Address(key: string, addressPrefix = "k"): string {
+export function makeV2Address(key: string, addressPrefix = "m"): string {
   const chars = ["", "", "", "", "", "", "", "", ""];
   let chain = addressPrefix;
   let hash = doubleSha256(key);

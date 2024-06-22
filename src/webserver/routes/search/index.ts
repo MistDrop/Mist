@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { Router } from "express";
 import rateLimit from "express-rate-limit";
-import { AddressJson } from "../../../krist/addresses/index.js";
-import { BlockJson } from "../../../krist/blocks/index.js";
-import { NameJson } from "../../../krist/names/index.js";
-import { TransactionJson } from "../../../krist/transactions/index.js";
+import { AddressJson } from "../../../mist/addresses/index.js";
+import { BlockJson } from "../../../mist/blocks/index.js";
+import { NameJson } from "../../../mist/names/index.js";
+import { TransactionJson } from "../../../mist/transactions/index.js";
 import { TEST } from "../../../utils/vars.js";
 import { LookupQuery } from "../lookup/index.js";
 import routerSearchBasic from "./search.js";
@@ -40,13 +40,13 @@ export type ReqSearchQuery = LookupQuery<{
  *
  * @apiSuccess {Object} query Information about the way the search query was interpreted.
  * @apiSuccess {String} query.originalQuery The original (sanitised) query text.
- * @apiSuccess {Boolean} query.matchAddress Whether the query exactly matches the format of a Krist address.
- * @apiSuccess {Boolean} query.matchName Whether the query exactly matches the format of a Krist name (with or without
- *   the `.kst`) suffix.
+ * @apiSuccess {Boolean} query.matchAddress Whether the query exactly matches the format of a Mist address.
+ * @apiSuccess {Boolean} query.matchName Whether the query exactly matches the format of a Mist name (with or without
+ *   the `.mst`) suffix.
  * @apiSuccess {Boolean} query.matchBlock Currently unused.
  * @apiSuccess {Boolean} query.matchTransaction Whether the query exactly matches the format of a transaction ID (with
  *   all non-numbers removed).
- * @apiSuccess {String} query.strippedName The query with the `.kst` suffix stripped, if it was present.
+ * @apiSuccess {String} query.strippedName The query with the `.mst` suffix stripped, if it was present.
  * @apiSuccess {Boolean} query.hasID Whether the query looks like an ID number (e.g. for transactions).
  * @apiSuccess {Number} [query.cleanID] If hasID is true, this is the query, sanitised and converted to a number.
  */

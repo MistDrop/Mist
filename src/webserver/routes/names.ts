@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { Request, Response, Router } from "express";
@@ -29,7 +29,7 @@ import {
   ctrlTransferName,
   ctrlUpdateName
 } from "../../controllers/names.js";
-import { getAddress } from "../../krist/addresses/index.js";
+import { getAddress } from "../../mist/addresses/index.js";
 import {
   getName,
   getNameCountByAddress,
@@ -38,7 +38,7 @@ import {
   getUnpaidNameCount,
   getUnpaidNames,
   nameToJson
-} from "../../krist/names/index.js";
+} from "../../mist/names/index.js";
 import { isValidName } from "../../utils/index.js";
 import { NAME_COST } from "../../utils/vars.js";
 import { PaginatedQuery, ReqQuery, returnPaginatedResult } from "../utils.js";
@@ -53,7 +53,7 @@ import { PaginatedQuery, ReqQuery, returnPaginatedResult } from "../utils.js";
  * @apiDefine Name
  *
  * @apiSuccess {Object} name
- * @apiSuccess {String} name.name The name, without the `.kst` suffix.
+ * @apiSuccess {String} name.name The name, without the `.mst` suffix.
  * @apiSuccess {String} name.owner The address that currently owns this name.
  * @apiSuccess {String} name.original_owner The address that originally purchased this name.
  * @apiSuccess {Date} name.registered The time this name was registered, as an ISO-8601 string.
@@ -68,7 +68,7 @@ import { PaginatedQuery, ReqQuery, returnPaginatedResult } from "../utils.js";
  * @apiDefine Names
  *
  * @apiSuccess {Object[]} names
- * @apiSuccess {String} names.name The name, without the `.kst` suffix.
+ * @apiSuccess {String} names.name The name, without the `.mst` suffix.
  * @apiSuccess {String} names.owner The address that currently owns this name.
  * @apiSuccess {String} [names.original_owner] The address that originally purchased this name.
  * @apiSuccess {Date} names.registered The time this name was registered, as an ISO-8601 string.
@@ -88,7 +88,7 @@ export default (): Router => {
 	 * @apiGroup NameGroup
 	 * @apiVersion 3.0.0
    *
-	 * @apiParam name The name to check the availability of, without the `.kst` suffix.
+	 * @apiParam name The name to check the availability of, without the `.mst` suffix.
 	 *
 	 * @apiSuccess {Boolean} available Whether the name is available
 	 *
@@ -153,8 +153,8 @@ export default (): Router => {
    *     "names": [
    *         {
    *             "name": "0",
-   *             "owner": "kxxxxxxxxx",
-   *             "original_owner": "kmr20h6bvb",
+   *             "owner": "mxxxxxxxxx",
+   *             "original_owner": "mmr20h6bvb",
    *             "registered": "2015-05-10T20:56:37.000Z",
    *             "updated": "2020-01-04T05:07:45.000Z",
 	 *             "transferred": "2020-01-04T05:07:45.000Z",
@@ -163,7 +163,7 @@ export default (): Router => {
    *         },
    *         {
    *             "name": "00",
-   *             "owner": "k9qyx784k7",
+   *             "owner": "m9qyx784k7",
    *             "registered": "2015-05-14T14:35:40.000Z",
    *             "updated": "2015-05-24T22:47:56.000Z",
 	 *             "transferred": "2015-05-24T22:36:54.000Z",
@@ -197,8 +197,8 @@ export default (): Router => {
    *     "names": [
    *         {
    *             "name": "0",
-   *             "owner": "kxxxxxxxxx",
-   *             "original_owner": "kmr20h6bvb",
+   *             "owner": "mxxxxxxxxx",
+   *             "original_owner": "mmr20h6bvb",
    *             "registered": "2015-05-10T20:56:37.000Z",
    *             "updated": "2020-01-04T05:07:45.000Z",
 	 *             "transferred": "2020-01-04T05:07:45.000Z",
@@ -207,8 +207,8 @@ export default (): Router => {
    *         },
    *         {
    *             "name": "00",
-   *             "owner": "k9qyx784k7",
-   *             "original_owner": "k9qyx784k7",
+   *             "owner": "m9qyx784k7",
+   *             "original_owner": "m9qyx784k7",
    *             "registered": "2015-05-14T14:35:40.000Z",
    *             "updated": "2015-05-24T22:47:56.000Z",
 	 *             "transferred": "2015-05-24T22:36:54.000Z",
@@ -237,8 +237,8 @@ export default (): Router => {
    *     "ok": true,
    *     "name": {
    *         "name": "00",
-   *         "owner": "k9qyx784k7",
-   *         "original_owner": "k9qyx784k7",
+   *         "owner": "m9qyx784k7",
+   *         "original_owner": "m9qyx784k7",
    *         "registered": "2015-05-14T14:35:40.000Z",
    *         "updated": "2015-05-24T22:47:56.000Z",
    *         "transferred": "2015-05-24T22:36:54.000Z",
@@ -261,7 +261,7 @@ export default (): Router => {
 	 * @apiGroup NameGroup
 	 * @apiVersion 2.0.0
 	 *
-	 * @apiParam {String} name The name you want to register, without the `.kst`
+	 * @apiParam {String} name The name you want to register, without the `.mst`
    *   suffix.
 	 * @apiBody {String} privatekey The private key to your address.
 	 *
@@ -307,7 +307,7 @@ export default (): Router => {
 	 *
 	 * @apiDescription Transfers the name to another owner.
 	 *
-	 * @apiParam {String} name The name you want to transfer, without the `.kst`
+	 * @apiParam {String} name The name you want to transfer, without the `.mst`
    *   suffix.
 	 * @apiBody {String} address The address you want to transfer
 	 *   the name to.
@@ -321,8 +321,8 @@ export default (): Router => {
    *     "ok": true,
    *     "name": {
    *         "name": "example",
-   *         "owner": "kre3w0i79j",
-   *         "original_owner": "kre3w0i79j",
+   *         "owner": "mre3w0i79j",
+   *         "original_owner": "mre3w0i79j",
    *         "registered": "2016-02-06T14:01:19.000Z",
    *         "updated": "2016-02-06T14:08:36.000Z",
    *         "transferred": "2016-02-06T14:08:36.000Z",
@@ -371,7 +371,7 @@ export default (): Router => {
 	 *
 	 * @apiDescription Updates the data of a name.
 	 *
-	 * @apiParam {String} name The name you want to update, without the `.kst`
+	 * @apiParam {String} name The name you want to update, without the `.mst`
    *   suffix.
 	 * @apiBody {String} [a] The data you want to set for the
    *   name. You may pass an empty string (`""`), `null` (in JSON requests), or
@@ -386,12 +386,12 @@ export default (): Router => {
    *     "ok": true,
    *     "name": {
    *         "name": "example",
-   *         "owner": "kre3w0i79j",
-   *         "original_owner": "kre3w0i79j",
+   *         "owner": "mre3w0i79j",
+   *         "original_owner": "mre3w0i79j",
    *         "registered": "2016-02-06T14:01:19.000Z",
    *         "updated": "2016-02-07T15:30:10.000Z",
    *         "transferred": "2016-02-06T14:08:36.000Z",
-   *         "a": "krist.dev",
+   *         "a": "mist.anti.money",
    *         "unpaid": 0
    *     }
    * }
@@ -418,7 +418,7 @@ export default (): Router => {
 	 *
 	 * @apiDescription Updates the data of a name.
 	 *
-	 * @apiParam {String} name The name you want to update, without the `.kst`
+	 * @apiParam {String} name The name you want to update, without the `.mst`
    *   suffix.
 	 * @apiBody {String} [a] The data you want to set for the
    *   name. You may pass an empty string (`""`), `null` (in JSON requests), or
@@ -433,12 +433,12 @@ export default (): Router => {
    *     "ok": true,
    *     "name": {
    *         "name": "example",
-   *         "owner": "kre3w0i79j",
-   *         "original_owner": "kre3w0i79j",
+   *         "owner": "mre3w0i79j",
+   *         "original_owner": "mre3w0i79j",
    *         "registered": "2016-02-06T14:01:19.000Z",
    *         "updated": "2016-02-07T15:30:10.000Z",
    *         "transferred": "2016-02-06T14:08:36.000Z",
-   *         "a": "krist.dev",
+   *         "a": "mist.anti.money",
    *         "unpaid": 0
    *     }
    * }

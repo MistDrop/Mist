@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import bodyParser from "body-parser";
@@ -98,12 +98,12 @@ export async function initWebserver(): Promise<void> {
     }
   });
 
-  // Error handler - convert KristErrors to sendErrorToRes
+  // Error handler - convert MistErrors to sendErrorToRes
   app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
     // Don't do anything if a response has already been sent
     if (res.headersSent) return next(err);
 
-    // TODO: Due to a long-standing bug in the Krist server, status codes do not actually do anything, regardless of
+    // TODO: Due to a long-standing bug in the Mist server, status codes do not actually do anything, regardless of
     //       whether the `cc` parameter is set. Sending correct status codes will likely break many existing programs.
     //       Therefore, we always send 200 on error.
     res.status(200).json(errorToJson(err));

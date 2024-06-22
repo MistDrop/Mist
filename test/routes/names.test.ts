@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { expect } from "chai";
 import { seed } from "../seed.js";
 import { api } from "../api.js";
 import { Address, Name, Transaction } from "../../src/database/index.js";
-import { getBlockValue } from "../../src/krist/blocks/index.js";
+import { getBlockValue } from "../../src/mist/blocks/index.js";
 
 describe("v1 routes: names", () => {
   before(seed);
@@ -91,7 +91,7 @@ describe("v2 routes: names", () => {
     });
 
     it("should reject names with invalid characters", async () => {
-      const invalidNames = ["test.kst", " ", "te st", "_"];
+      const invalidNames = ["test.mst", " ", "te st", "_"];
       for (const name of invalidNames) {
         const res = await api()
           .post("/names/" + encodeURIComponent(name))
@@ -112,9 +112,9 @@ describe("v2 routes: names", () => {
     });
 
     it("should reject names that already exist", async () => {
-      const name = await Name.create({ name: "test2", owner: "k8juvewcui", registered: new Date(), unpaid: 0 });
+      const name = await Name.create({ name: "test2", owner: "m8juvewcui", registered: new Date(), unpaid: 0 });
       expect(name).to.exist;
-      expect(name).to.deep.include({ name: "test2", owner: "k8juvewcui" });
+      expect(name).to.deep.include({ name: "test2", owner: "m8juvewcui" });
 
       const res = await api()
         .post("/names/test2")
@@ -149,7 +149,7 @@ describe("v2 routes: names", () => {
     it("should exist in the database", async () => {
       const name = await Name.findOne();
       expect(name).to.exist;
-      expect(name).to.deep.include({ name: "test", owner: "k0duvsr4qn", unpaid: 500, original_owner: "k0duvsr4qn" });
+      expect(name).to.deep.include({ name: "test", owner: "m0duvsr4qn", unpaid: 500, original_owner: "m0duvsr4qn" });
       expect(name!.registered).to.be.ok;
       expect(name!.updated).to.be.ok;
       expect(name!.transferred).to.be.null;
@@ -158,11 +158,11 @@ describe("v2 routes: names", () => {
     it("should have created a transaction", async () => {
       const tx = await Transaction.findOne({ order: [["id", "DESC"]] });
       expect(tx).to.exist;
-      expect(tx).to.deep.include({ from: "k0duvsr4qn", to: "name", name: "test", value: 500 });
+      expect(tx).to.deep.include({ from: "m0duvsr4qn", to: "name", name: "test", value: 500 });
     });
 
     it("should have decreased the buyer's balance", async () => {
-      const address = await Address.findOne({ where: { address: "k0duvsr4qn" }});
+      const address = await Address.findOne({ where: { address: "m0duvsr4qn" }});
       expect(address).to.exist;
       expect(address).to.deep.include({ balance: 24500 });
     });
@@ -184,7 +184,7 @@ describe("v2 routes: names", () => {
 
       const tx = await Transaction.findOne({ order: [["id", "DESC"]] });
       expect(tx).to.exist;
-      expect(tx).to.deep.include({ from: "k0duvsr4qn", to: "name", name: "testuppercase", value: 500 });
+      expect(tx).to.deep.include({ from: "m0duvsr4qn", to: "name", name: "testuppercase", value: 500 });
     });
   });
 
@@ -207,7 +207,7 @@ describe("v2 routes: names", () => {
     it("should reject invalid names", async () => {
       const res = await api()
         .post("/names/" + ("a".repeat(65)) + "/transfer")
-        .send({ privatekey: "a", address: "k8juvewcui" });
+        .send({ privatekey: "a", address: "m8juvewcui" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: false, error: "invalid_parameter", parameter: "name" });
@@ -234,7 +234,7 @@ describe("v2 routes: names", () => {
     it("should not transfer a name when auth fails", async () => {
       const res = await api()
         .post("/names/test/transfer")
-        .send({ privatekey: "c", address: "k8juvewcui" });
+        .send({ privatekey: "c", address: "m8juvewcui" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: false, error: "auth_failed" });
@@ -243,7 +243,7 @@ describe("v2 routes: names", () => {
     it("should reject when the name does not exist", async () => {
       const res = await api()
         .post("/names/notfound/transfer")
-        .send({ privatekey: "d", address: "k8juvewcui" });
+        .send({ privatekey: "d", address: "m8juvewcui" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: false, error: "name_not_found" });
@@ -252,7 +252,7 @@ describe("v2 routes: names", () => {
     it("should reject when not the owner of the name", async () => {
       const res = await api()
         .post("/names/test/transfer")
-        .send({ privatekey: "a", address: "k8juvewcui" });
+        .send({ privatekey: "a", address: "m8juvewcui" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: false, error: "not_name_owner" });
@@ -263,11 +263,11 @@ describe("v2 routes: names", () => {
     it("should transfer a name", async () => {
       const res = await api()
         .post("/names/test/transfer")
-        .send({ privatekey: "d", address: "k8juvewcui" });
+        .send({ privatekey: "d", address: "m8juvewcui" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true });
-      expect(res.body.name).to.deep.include({ name: "test", owner: "k8juvewcui", original_owner: "k0duvsr4qn" });
+      expect(res.body.name).to.deep.include({ name: "test", owner: "m8juvewcui", original_owner: "m0duvsr4qn" });
       expect(res.body.name.updated).to.be.ok;
       expect(res.body.name.transferred).to.be.ok;
     });
@@ -275,24 +275,24 @@ describe("v2 routes: names", () => {
     it("should have updated the database", async () => {
       const name = await Name.findOne({ where: { name: "test" }});
       expect(name).to.exist;
-      expect(name).to.deep.include({ name: "test", owner: "k8juvewcui", original_owner: "k0duvsr4qn" });
+      expect(name).to.deep.include({ name: "test", owner: "m8juvewcui", original_owner: "m0duvsr4qn" });
       expect(name!.updated).to.be.ok;
     });
 
     it("should have created a transaction", async () => {
       const tx = await Transaction.findOne({ order: [["id", "DESC"]] });
       expect(tx).to.exist;
-      expect(tx).to.deep.include({ from: "k0duvsr4qn", to: "k8juvewcui", name: "test", value: 0 });
+      expect(tx).to.deep.include({ from: "m0duvsr4qn", to: "m8juvewcui", name: "test", value: 0 });
     });
 
     it("should not have changed the old owner's balance", async () => {
-      const address = await Address.findOne({ where: { address: "k0duvsr4qn" }});
+      const address = await Address.findOne({ where: { address: "m0duvsr4qn" }});
       expect(address).to.exist;
       expect(address).to.deep.include({ balance: 24000 });
     });
 
     it("should not have changed the new owner's balance", async () => {
-      const address = await Address.findOne({ where: { address: "k8juvewcui" }});
+      const address = await Address.findOne({ where: { address: "m8juvewcui" }});
       expect(address).to.exist;
       expect(address).to.deep.include({ balance: 10 });
     });
@@ -306,11 +306,11 @@ describe("v2 routes: names", () => {
 
       const res = await api()
         .post("/names/test/transfer")
-        .send({ privatekey: "a", address: "k8juvewcui" });
+        .send({ privatekey: "a", address: "m8juvewcui" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true });
-      expect(res.body.name).to.deep.include({ name: "test", owner: "k8juvewcui", original_owner: "k0duvsr4qn" });
+      expect(res.body.name).to.deep.include({ name: "test", owner: "m8juvewcui", original_owner: "m0duvsr4qn" });
       expect(res.body.name.updated).to.equal(oldUpdated!.toISOString());
       expect(res.body.name.transferred).to.equal(oldTransferred!.toISOString());
     });
@@ -318,7 +318,7 @@ describe("v2 routes: names", () => {
     it("should not have created a transaction", async () => {
       const tx = await Transaction.findOne({ order: [["id", "DESC"]] });
       expect(tx).to.exist;
-      expect(tx).to.deep.include({ from: "k0duvsr4qn", to: "k8juvewcui", name: "test", value: 0 });
+      expect(tx).to.deep.include({ from: "m0duvsr4qn", to: "m8juvewcui", name: "test", value: 0 });
     });
   });
 
@@ -338,7 +338,7 @@ describe("v2 routes: names", () => {
     });
 
     it("should reject names with invalid characters", async () => {
-      const invalidNames = ["test.kst", " ", "te st", "_"];
+      const invalidNames = ["test.mst", " ", "te st", "_"];
       for (const name of invalidNames) {
         const res = await api()[method]("/names/" + encodeURIComponent(name) + route)
           .send({ privatekey: "a" });
@@ -369,7 +369,7 @@ describe("v2 routes: names", () => {
 
     it("should reject when the name does not exist", async () => {
       const res = await api()[method]("/names/notfound" + route)
-        .send({ privatekey: "d", address: "k8juvewcui" });
+        .send({ privatekey: "d", address: "m8juvewcui" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: false, error: "name_not_found" });
@@ -377,7 +377,7 @@ describe("v2 routes: names", () => {
 
     it("should reject when not the owner of the name", async () => {
       const res = await api()[method]("/names/test" + route)
-        .send({ privatekey: "b", address: "k8juvewcui" });
+        .send({ privatekey: "b", address: "m8juvewcui" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: false, error: "not_name_owner" });
@@ -391,26 +391,26 @@ describe("v2 routes: names", () => {
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true });
-      expect(res.body.name).to.deep.include({ name: "test", owner: "k8juvewcui", a: "example.com", original_owner: "k0duvsr4qn" });
+      expect(res.body.name).to.deep.include({ name: "test", owner: "m8juvewcui", a: "example.com", original_owner: "m0duvsr4qn" });
       expect(res.body.name.updated).to.be.ok;
     });
 
     it("should exist in the database", async () => {
       const name = await Name.findOne();
       expect(name).to.exist;
-      expect(name).to.deep.include({ name: "test", owner: "k8juvewcui", a: "example.com", original_owner: "k0duvsr4qn" });
+      expect(name).to.deep.include({ name: "test", owner: "m8juvewcui", a: "example.com", original_owner: "m0duvsr4qn" });
     });
 
     let tId = -1;
     it("should have created a transaction", async () => {
       const tx = await Transaction.findOne({ order: [["id", "DESC"]] });
       expect(tx).to.exist;
-      expect(tx).to.deep.include({ from: "k8juvewcui", to: "a", name: "test", op: "example.com", value: 0 });
+      expect(tx).to.deep.include({ from: "m8juvewcui", to: "a", name: "test", op: "example.com", value: 0 });
       tId = tx!.id;
     });
 
     it("should not have changed the owner's balance", async () => {
-      const address = await Address.findOne({ where: { address: "k8juvewcui" }});
+      const address = await Address.findOne({ where: { address: "m8juvewcui" }});
       expect(address).to.exist;
       expect(address).to.deep.include({ balance: 10 });
     });
@@ -425,7 +425,7 @@ describe("v2 routes: names", () => {
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true });
-      expect(res.body.name).to.deep.include({ name: "test", owner: "k8juvewcui", a: "example.com", original_owner: "k0duvsr4qn" });
+      expect(res.body.name).to.deep.include({ name: "test", owner: "m8juvewcui", a: "example.com", original_owner: "m0duvsr4qn" });
       expect(res.body.name.updated).to.equal(oldUpdated!.toISOString());
     });
 
@@ -441,24 +441,24 @@ describe("v2 routes: names", () => {
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true });
-      expect(res.body.name).to.deep.include({ name: "test", owner: "k8juvewcui", a: null });
+      expect(res.body.name).to.deep.include({ name: "test", owner: "m8juvewcui", a: null });
       expect(res.body.name.updated).to.be.ok;
     });
 
     it("should exist in the database", async () => {
       const name = await Name.findOne();
       expect(name).to.exist;
-      expect(name).to.deep.include({ name: "test", owner: "k8juvewcui", a: null });
+      expect(name).to.deep.include({ name: "test", owner: "m8juvewcui", a: null });
     });
 
     it("should have created a transaction", async () => {
       const tx = await Transaction.findOne({ order: [["id", "DESC"]] });
       expect(tx).to.exist;
-      expect(tx).to.deep.include({ from: "k8juvewcui", to: "a", name: "test", op: null, value: 0 });
+      expect(tx).to.deep.include({ from: "m8juvewcui", to: "a", name: "test", op: null, value: 0 });
     });
 
     it("should not have changed the owner's balance", async () => {
-      const address = await Address.findOne({ where: { address: "k8juvewcui" }});
+      const address = await Address.findOne({ where: { address: "m8juvewcui" }});
       expect(address).to.exist;
       expect(address).to.deep.include({ balance: 10 });
     });
@@ -469,7 +469,7 @@ describe("v2 routes: names", () => {
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true });
-      expect(res.body.name).to.deep.include({ name: "test", owner: "k8juvewcui", a: null });
+      expect(res.body.name).to.deep.include({ name: "test", owner: "m8juvewcui", a: null });
       expect(res.body.name.updated).to.be.ok;
     });
 
@@ -481,7 +481,7 @@ describe("v2 routes: names", () => {
 
         expect(res).to.be.json;
         expect(res.body).to.deep.include({ ok: true });
-        expect(res.body.name).to.deep.include({ name: "test", owner: "k8juvewcui", a: "foo" });
+        expect(res.body.name).to.deep.include({ name: "test", owner: "m8juvewcui", a: "foo" });
       });
     }
   };

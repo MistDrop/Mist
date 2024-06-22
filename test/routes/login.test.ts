@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { expect } from "chai";
@@ -54,7 +54,7 @@ describe("v2 routes: login", () => {
     it("should auth v2 addresses successfully", async () => {
       const res = await api().post("/login").send({ privatekey: "a" });
       expect(res).to.be.json;
-      expect(res.body).to.deep.include({ ok: true, authed: true, address: "k8juvewcui" });
+      expect(res.body).to.deep.include({ ok: true, authed: true, address: "m8juvewcui" });
     });
   });
 });

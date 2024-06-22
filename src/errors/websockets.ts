@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
-import { KristError } from "./KristError.js";
+import { MistError } from "./MistError.js";
 
-export class ErrorInvalidWebsocketToken extends KristError {
+export class ErrorInvalidWebsocketToken extends MistError {
   constructor() {
     super("Invalid websocket token", "invalid_websocket_token", 403);
   }

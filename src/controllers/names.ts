@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { Request } from "express";
@@ -33,12 +33,12 @@ import {
   ErrorRateLimitHit,
   ErrorTransactionsDisabled
 } from "../errors/index.js";
-import { getAddress } from "../krist/addresses/index.js";
-import { verifyAddress } from "../krist/addresses/verify.js";
-import { createName, getName, getNames, getNamesByAddress, getUnpaidNames } from "../krist/names/index.js";
-import { areTransactionsEnabled } from "../krist/switches.js";
-import { createTransaction, pushTransaction } from "../krist/transactions/create.js";
-import { isValidARecord, isValidKristAddress, isValidName, validateLimitOffset } from "../utils/index.js";
+import { getAddress } from "../mist/addresses/index.js";
+import { verifyAddress } from "../mist/addresses/verify.js";
+import { createName, getName, getNames, getNamesByAddress, getUnpaidNames } from "../mist/names/index.js";
+import { areTransactionsEnabled } from "../mist/switches.js";
+import { createTransaction, pushTransaction } from "../mist/transactions/create.js";
+import { isValidARecord, isValidMistAddress, isValidName, validateLimitOffset } from "../utils/index.js";
 import { checkTxRateLimits } from "../utils/rateLimit.js";
 import { NAME_COST } from "../utils/vars.js";
 
@@ -91,14 +91,14 @@ export async function ctrlGetNamesByAddress(
   offset: Offset
 ): Promise<PaginatedResult<Name>> {
   if (!address) throw new ErrorMissingParameter("address");
-  if (!isValidKristAddress(address)) throw new ErrorInvalidParameter("address");
+  if (!isValidMistAddress(address)) throw new ErrorInvalidParameter("address");
 
   await validateLimitOffset(limit, offset);
 
-  const kristAddress = await getAddress(address);
-  if (!kristAddress) throw new ErrorAddressNotFound(address);
+  const mistAddress = await getAddress(address);
+  if (!mistAddress) throw new ErrorAddressNotFound(address);
 
-  return getNamesByAddress(kristAddress.address, limit, offset);
+  return getNamesByAddress(mistAddress.address, limit, offset);
 }
 
 export async function ctrlRegisterName(
@@ -166,7 +166,7 @@ export async function ctrlTransferName(
   if (!address) throw new ErrorMissingParameter("address");
 
   if (!isValidName(name)) throw new ErrorInvalidParameter("name");
-  if (!isValidKristAddress(address, true))
+  if (!isValidMistAddress(address, true))
     throw new ErrorInvalidParameter("address");
 
   name = cleanNameInput(name);

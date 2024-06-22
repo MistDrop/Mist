@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { Router } from "express";
 import { isObject } from "lodash-es";
-import { addressToJson, getAddress } from "../../../krist/addresses/index.js";
-import { blockToJson, getBlock } from "../../../krist/blocks/index.js";
-import { getName, nameToJson } from "../../../krist/names/index.js";
-import { getTransaction, transactionToJson } from "../../../krist/transactions/index.js";
+import { addressToJson, getAddress } from "../../../mist/addresses/index.js";
+import { blockToJson, getBlock } from "../../../mist/blocks/index.js";
+import { getName, nameToJson } from "../../../mist/names/index.js";
+import { getTransaction, transactionToJson } from "../../../mist/transactions/index.js";
 import { ReqSearchQuery } from "./index.js";
 import { parseQuery, validateQuery } from "./utils.js";
 
@@ -65,16 +65,16 @@ export default (): Router => {
   const router = Router();
 
   /**
-   * @api {get} /search Search the Krist network
+   * @api {get} /search Search the Mist network
    * @apiName Search
    * @apiGroup LookupGroup
    * @apiVersion 2.8.0
    *
-   * @apiDescription Search the Krist network for objects that match the given query, including addresses, names, and
+   * @apiDescription Search the Mist network for objects that match the given query, including addresses, names, and
    * transactions.
    *
    * - Addresses are searched by exact address match only
-   * - Names are searched by their name with and without the `.kst` suffix
+   * - Names are searched by their name with and without the `.mst` suffix
    * - Transactions are searched by ID
    *
    * For more advanced transaction searches (by involved addresses and metadata), see the `/search/extended` endpoint.
@@ -85,14 +85,14 @@ export default (): Router => {
    *
    * @apiSuccess {Object} matches The results of the search query.
    * @apiSuccess {Object} matches.exactAddress An exact address match - this will be an Address object if the query
-   *   looked like a valid Krist address, and that address exists in the database. Otherwise, if there is no result, it
+   *   looked like a valid Mist address, and that address exists in the database. Otherwise, if there is no result, it
    *   will be `false`.
    * @apiSuccess {Object} matches.exactName An exact name match - this will be a Name object if the query looked like a
-   *   valid Krist name (with or without the `.kst` suffix), and that name exists in the database. Otherwise, if there
+   *   valid Mist name (with or without the `.mst` suffix), and that name exists in the database. Otherwise, if there
    *   is no result, it will be `false`.
    * @apiSuccess {Object} matches.exactBlock Currently unused.
    * @apiSuccess {Object} matches.exactTransaction An exact transaction match - this will be a Transaction object if the
-   *   query looked like a valid Krist transaction ID, and that transaction exists in the database. Otherwise, if there
+   *   query looked like a valid Mist transaction ID, and that transaction exists in the database. Otherwise, if there
    *   is no result, it will be `false`.
    *
    * @apiSuccessExample {json} Success - Name result
@@ -111,7 +111,7 @@ export default (): Router => {
    *     "exactAddress": false,
    *     "exactName": {
    *       "name": "example",
-   *       "owner": "kxxxxxxxxx",
+   *       "owner": "mxxxxxxxxx",
    *       "registered": "2015-05-24T00:49:04.000Z",
    *       "updated": "2020-01-04T05:09:11.000Z",
    *       "a": null
@@ -138,7 +138,7 @@ export default (): Router => {
    *     "exactAddress": false,
    *     "exactName": {
    *       "name": "1234",
-   *       "owner": "krazedrugz",
+   *       "owner": "mrazedrugz",
    *       "registered": "2016-10-07T15:55:48.000Z",
    *       "updated": "2016-10-07T15:55:48.000Z",
    *       "a": null

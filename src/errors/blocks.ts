@@ -16,30 +16,30 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
-import { KristError } from "./KristError.js";
+import { MistError } from "./MistError.js";
 
-export class ErrorBlockNotFound extends KristError {
+export class ErrorBlockNotFound extends MistError {
   constructor() {
     super("Block not found", "block_not_found", 404);
   }
 }
 
-export class ErrorSolutionIncorrect extends KristError {
+export class ErrorSolutionIncorrect extends MistError {
   constructor() {
     super("Solution incorrect", "solution_incorrect", 403);
   }
 }
 
-export class ErrorSolutionDuplicate extends KristError {
+export class ErrorSolutionDuplicate extends MistError {
   constructor() {
     super("Solution duplicate", "solution_duplicate", 409);
   }
 }
 
-export class ErrorMiningDisabled extends KristError {
+export class ErrorMiningDisabled extends MistError {
   constructor() {
     super("Mining disabled", "mining_disabled", 423);
   }

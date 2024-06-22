@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { RequestHandler } from "express";
@@ -84,7 +84,7 @@ export function idempotency(): RequestHandler {
 
 interface CachedRequest {
   pending    : boolean;
-  statusCode?: number; // Not actually used in Krist but provided anyway
+  statusCode?: number; // Not actually used in Mist but provided anyway
   headers?   : OutgoingHttpHeaders;
   body?      : string;
 }

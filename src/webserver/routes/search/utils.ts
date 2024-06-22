@@ -16,15 +16,15 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { ErrorInvalidParameter, ErrorMissingParameter } from "../../../errors/index.js";
-import { isValidKristAddress, isValidName, stripNameSuffix } from "../../../utils/index.js";
+import { isValidMistAddress, isValidName, stripNameSuffix } from "../../../utils/index.js";
 import { ReqSearchQuery, SearchQueryMatch } from "./index.js";
 
 export function parseQuery(query: string): SearchQueryMatch {
-  const matchAddress = isValidKristAddress(query);
+  const matchAddress = isValidMistAddress(query);
 
   const strippedName = stripNameSuffix(query);
   const matchName = !!strippedName && isValidName(strippedName, true);

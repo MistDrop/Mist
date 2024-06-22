@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { Request } from "express";
@@ -33,13 +33,13 @@ import {
   ErrorTransactionNotFound,
   ErrorTransactionsDisabled
 } from "../errors/index.js";
-import { getAddress } from "../krist/addresses/index.js";
-import { verifyAddress } from "../krist/addresses/verify.js";
-import { getName } from "../krist/names/index.js";
-import { areTransactionsEnabled } from "../krist/switches.js";
-import { pushTransaction } from "../krist/transactions/create.js";
-import { getTransaction, getTransactions, getTransactionsByAddress } from "../krist/transactions/index.js";
-import { isValidKristAddress, METANAME_METADATA_RE, NAME_META_RE, validateLimitOffset } from "../utils/index.js";
+import { getAddress } from "../mist/addresses/index.js";
+import { verifyAddress } from "../mist/addresses/verify.js";
+import { getName } from "../mist/names/index.js";
+import { areTransactionsEnabled } from "../mist/switches.js";
+import { pushTransaction } from "../mist/transactions/create.js";
+import { getTransaction, getTransactions, getTransactionsByAddress } from "../mist/transactions/index.js";
+import { isValidMistAddress, METANAME_METADATA_RE, NAME_META_RE, validateLimitOffset } from "../utils/index.js";
 import { checkTxRateLimits } from "../utils/rateLimit.js";
 
 export async function ctrlGetTransactions(
@@ -59,15 +59,15 @@ export async function ctrlGetTransactionsByAddress(
   includeMined?: boolean
 ): Promise<PaginatedResult<Transaction>> {
   if (!address) throw new ErrorMissingParameter("address");
-  if (!isValidKristAddress(address)) throw new ErrorInvalidParameter("address");
+  if (!isValidMistAddress(address)) throw new ErrorInvalidParameter("address");
 
   await validateLimitOffset(limit, offset);
 
-  const kristAddress = await getAddress(address);
-  if (!kristAddress) throw new ErrorAddressNotFound(address);
+  const mistAddress = await getAddress(address);
+  if (!mistAddress) throw new ErrorAddressNotFound(address);
 
   return getTransactionsByAddress(
-    kristAddress.address, limit, offset, includeMined
+    mistAddress.address, limit, offset, includeMined
   );
 }
 
@@ -113,7 +113,7 @@ export async function ctrlMakeTransaction(
     ? METANAME_METADATA_RE.exec(metadata) : undefined;
 
   // Verify this is a valid v2 address
-  if (!isName && !isValidKristAddress(recipient, true))
+  if (!isName && !isValidMistAddress(recipient, true))
     throw new ErrorInvalidParameter("to");
 
   const amount = typeof rawAmount === "string"

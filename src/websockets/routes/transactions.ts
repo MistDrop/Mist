@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { ctrlMakeTransaction } from "../../controllers/transactions.js";
 import { ErrorMissingParameter } from "../../errors/index.js";
-import { transactionToJson } from "../../krist/transactions/index.js";
+import { transactionToJson } from "../../mist/transactions/index.js";
 import { WebSocketEventHandler } from "../types.js";
 
 /**

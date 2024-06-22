@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import dayjs from "dayjs";
@@ -29,7 +29,7 @@ import {
   getBlockValue,
   getLastBlock,
   getLowestHashes
-} from "../../krist/blocks/index.js";
+} from "../../mist/blocks/index.js";
 import { getBaseBlockValue, padDigits } from "../../utils/index.js";
 import { PaginatedQuery, ReqQuery, returnPaginatedResult } from "../index.js";
 

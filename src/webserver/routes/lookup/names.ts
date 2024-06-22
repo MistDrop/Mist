@@ -16,14 +16,14 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { Router } from "express";
-import { nameToJson } from "../../../krist/names/index.js";
-import { lookupNames } from "../../../krist/names/lookup.js";
-import { transactionToJson } from "../../../krist/transactions/index.js";
-import { lookupNameHistory, lookupTransactionsToName } from "../../../krist/transactions/lookup.js";
+import { nameToJson } from "../../../mist/names/index.js";
+import { lookupNames } from "../../../mist/names/lookup.js";
+import { transactionToJson } from "../../../mist/transactions/index.js";
+import { lookupNameHistory, lookupTransactionsToName } from "../../../mist/transactions/lookup.js";
 import { LookupQuery, NAME_FIELDS, TRANSACTION_FIELDS } from "./index.js";
 import { validateAddressList, validateLimit, validateOffset, validateOrder, validateOrderBy } from "./utils.js";
 
@@ -59,7 +59,7 @@ export default (): Router => {
    *   "names": [
    *     {
    *       "name": "ahh11",
-   *       "owner": "khugepoopy",
+   *       "owner": "m123456789",
    *       "registered": "2016-06-12T13:21:41.000Z",
    *       "updated": "2018-04-06T16:54:53.000Z",
    *       "transferred": "2018-04-06T16:54:53.000Z",
@@ -68,7 +68,7 @@ export default (): Router => {
    *     },
    *     {
    *       "name": "antiblock",
-   *       "owner": "kreichdyes",
+   *       "owner": "m987654321",
    *       "registered": "2020-01-25T12:18:14.000Z",
    *       "updated": "2020-01-25T12:18:14.000Z",
    *       "transferred": null,
@@ -131,18 +131,18 @@ export default (): Router => {
    *   "transactions": [
    *     {
    *       "id": 892595,
-   *       "from": "khugepoopy",
-   *       "to": "kqxhx5yn9v",
+   *       "from": "m123456789",
+   *       "to": "mqxhx5yn9v",
    *       "value": 7000,
    *       "time": "2018-12-29T13:02:05.000Z",
    *       "name": null,
-   *       "metadata": "lignum@switchcraft.kst",
+   *       "metadata": "lignum@switchcraft.mst",
    *       "type": "transfer"
    *     },
    *     {
    *       "id": 1454706,
-   *       "from": "k5cfswitch",
-   *       "to": "khugepoopy",
+   *       "from": "m5cfswitch",
+   *       "to": "m123456789",
    *       "value": 5050,
    *       "time": "2020-01-20T00:01:47.000Z",
    *       "name": null,
@@ -204,18 +204,18 @@ export default (): Router => {
    *   "transactions": [
    *     {
    *       "id": 892595,
-   *       "from": "khugepoopy",
-   *       "to": "kqxhx5yn9v",
+   *       "from": "m123456789",
+   *       "to": "mqxhx5yn9v",
    *       "value": 7000,
    *       "time": "2018-12-29T13:02:05.000Z",
    *       "name": null,
-   *       "metadata": "lignum@switchcraft.kst",
+   *       "metadata": "lignum@switchcraft.mst",
    *       "type": "transfer"
    *     },
    *     {
    *       "id": 1454706,
-   *       "from": "k5cfswitch",
-   *       "to": "khugepoopy",
+   *       "from": "m5cfswitch",
+   *       "to": "m123456789",
    *       "value": 5050,
    *       "time": "2020-01-20T00:01:47.000Z",
    *       "name": null,

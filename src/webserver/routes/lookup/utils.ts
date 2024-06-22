@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { Limit, Offset } from "../../../database/index.js";
 import { ErrorInvalidParameter } from "../../../errors/index.js";
-import { isValidKristAddressList } from "../../../utils/index.js";
+import { isValidMistAddressList } from "../../../utils/index.js";
 import { ADDRESS_LIST_LIMIT } from "./index.js";
 
 /** Validate a comma-separated list of addresses, returning an array of them
@@ -30,7 +30,7 @@ export function validateAddressList(
   addressList: string
 ): string[] {
   // If it doesn't match the address list regex, error
-  if (!isValidKristAddressList(addressList))
+  if (!isValidMistAddressList(addressList))
     throw new ErrorInvalidParameter("addresses");
 
   // Deserialize, clean up, and deduplicate address list

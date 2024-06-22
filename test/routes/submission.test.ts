@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { expect } from "chai";
@@ -69,19 +69,19 @@ describe("v1 routes: submission", () => {
     });
 
     it("should require a nonce", async () => {
-      const res = await api().get("/?submitblock").query({ address: "k8juvewcui" });
+      const res = await api().get("/?submitblock").query({ address: "m8juvewcui" });
       expect(res).to.be.text;
       expect(res.text).to.equal("Nonce is too large"); // wtf??
     });
 
     it("should reject long nonces", async () => {
-      const res = await api().get("/?submitblock").query({ address: "k8juvewcui", nonce: "a".repeat(25) });
+      const res = await api().get("/?submitblock").query({ address: "m8juvewcui", nonce: "a".repeat(25) });
       expect(res).to.be.text;
       expect(res.text).to.equal("Nonce is too large");
     });
 
     it("should reject an invalid block", async () => {
-      const res = await api().get("/?submitblock").query({ address: "k8juvewcui", nonce: "invalid" });
+      const res = await api().get("/?submitblock").query({ address: "m8juvewcui", nonce: "invalid" });
       expect(res).to.be.text;
       expect(res.text).to.equal("k8juvewcui000000000000invalid");
     });
@@ -93,9 +93,9 @@ describe("v1 routes: submission", () => {
     it("should submit a block", async () => {
       const res = await api()
         .get("/?submitblock")
-        .set("User-Agent", "krist-test")
+        .set("User-Agent", "mist-test")
         .set("Origin", "https://example.com")
-        .query({ address: "k8juvewcui", nonce: "%#DEQ'#+UX)" });
+        .query({ address: "m8juvewcui", nonce: "%#DEQ'#+UX)" });
 
       expect(res).to.be.text;
       expect(res.text).to.equal("Block solved");
@@ -118,15 +118,15 @@ describe("v1 routes: submission", () => {
       expect(tx).to.deep.include({
         id: 1,
         value: 25,
-        to: "k8juvewcui",
-        useragent: "krist-test",
+        to: "m8juvewcui",
+        useragent: "mist-test",
         origin: "https://example.com"
       });
       expect(tx!.from).to.not.be.ok;
     });
 
     it("should have updated the miner's balance", async () => {
-      const address = await Address.findOne({ where: { address: "k8juvewcui" } });
+      const address = await Address.findOne({ where: { address: "m8juvewcui" } });
       expect(address).to.exist;
       expect(address!.balance).to.equal(35);
     });
@@ -155,7 +155,7 @@ describe("v1 routes: submission", () => {
       expect(block.hash).to.equal("0000000000000000000000000000000000000000000000000000000000000000");
 
       // Submit the duplicate block hash
-      const res = await api().get("/?submitblock").query({ address: "k8juvewcui", nonce: "%#DEQ'#+UX)" });
+      const res = await api().get("/?submitblock").query({ address: "m8juvewcui", nonce: "%#DEQ'#+UX)" });
       expect(res).to.be.text;
       expect(res.text).to.equal("Solution rejected");
     });
@@ -163,11 +163,11 @@ describe("v1 routes: submission", () => {
     it("should reset the database", seed);
 
     it("should decrease unpaid names", async () => {
-      const name = await Name.create({ name: "test", owner: "k0duvsr4qn", registered: new Date(), unpaid: 500 });
+      const name = await Name.create({ name: "test", owner: "m0duvsr4qn", registered: new Date(), unpaid: 500 });
       expect(name).to.exist;
-      expect(name).to.deep.include({ name: "test", owner: "k0duvsr4qn", unpaid: 500 });
+      expect(name).to.deep.include({ name: "test", owner: "m0duvsr4qn", unpaid: 500 });
 
-      const res = await api().get("/?submitblock").query({ address: "k8juvewcui", nonce: "%#DEQ'#+UX)" });
+      const res = await api().get("/?submitblock").query({ address: "m8juvewcui", nonce: "%#DEQ'#+UX)" });
       expect(res).to.be.text;
       expect(res.text).to.equal("Block solved");
 
@@ -225,7 +225,7 @@ describe("v2 routes: submission", () => {
     it("should require a nonce", async () => {
       const res = await api()
         .post("/submit")
-        .send({ address: "k8juvewcui" });
+        .send({ address: "m8juvewcui" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: false, error: "missing_parameter", parameter: "nonce" });
@@ -234,7 +234,7 @@ describe("v2 routes: submission", () => {
     it("should reject long nonces", async () => {
       const res = await api()
         .post("/submit")
-        .send({ address: "k8juvewcui", nonce: "a".repeat(25) });
+        .send({ address: "m8juvewcui", nonce: "a".repeat(25) });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: false, error: "invalid_parameter", parameter: "nonce" });
@@ -243,7 +243,7 @@ describe("v2 routes: submission", () => {
     it("should support binary nonces", async () => {
       const res = await api()
         .post("/submit")
-        .send({ address: "k8juvewcui", nonce: [1, 2, 3] });
+        .send({ address: "m8juvewcui", nonce: [1, 2, 3] });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true, success: false });
@@ -252,7 +252,7 @@ describe("v2 routes: submission", () => {
     it("should reject an invalid block", async () => {
       const res = await api()
         .post("/submit")
-        .send({ address: "k8juvewcui", nonce: "invalid" });
+        .send({ address: "m8juvewcui", nonce: "invalid" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true, success: false });
@@ -265,16 +265,16 @@ describe("v2 routes: submission", () => {
     it("should submit a block", async () => {
       const res = await api()
         .post("/submit")
-        .set("User-Agent", "krist-test")
+        .set("User-Agent", "mist-test")
         .set("Origin", "https://example.com")
-        .send({ address: "k8juvewcui", nonce: "%#DEQ'#+UX)" });
+        .send({ address: "m8juvewcui", nonce: "%#DEQ'#+UX)" });
 
       expect(res).to.have.status(200);
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true, success: true });
 
       expect(res.body.address).to.be.an("object");
-      expect(res.body.address).to.deep.include({ address: "k8juvewcui", balance: 35 });
+      expect(res.body.address).to.deep.include({ address: "m8juvewcui", balance: 35 });
 
       expect(res.body.block).to.be.an("object");
       expect(res.body.block).to.deep.include({
@@ -296,7 +296,7 @@ describe("v2 routes: submission", () => {
         hash: "000000012697b461b9939933d5dec0cae546b7ec61b2d09a92226474711f0819",
         nonce: "252344455127232b555829",
         difficulty: 100000, // real work value
-        useragent: "krist-test",
+        useragent: "mist-test",
         origin: "https://example.com"
       });
     });
@@ -307,15 +307,15 @@ describe("v2 routes: submission", () => {
       expect(tx).to.deep.include({
         id: 1,
         value: 25,
-        to: "k8juvewcui",
-        useragent: "krist-test",
+        to: "m8juvewcui",
+        useragent: "mist-test",
         origin: "https://example.com"
       });
       expect(tx!.from).to.not.be.ok;
     });
 
     it("should have updated the miner's balance", async () => {
-      const address = await Address.findOne({ where: { address: "k8juvewcui" } });
+      const address = await Address.findOne({ where: { address: "m8juvewcui" } });
       expect(address).to.exist;
       expect(address!.balance).to.equal(35);
     });
@@ -346,7 +346,7 @@ describe("v2 routes: submission", () => {
       // Submit the duplicate block hash
       const res = await api()
         .post("/submit")
-        .send({ address: "k8juvewcui", nonce: "%#DEQ'#+UX)" });
+        .send({ address: "m8juvewcui", nonce: "%#DEQ'#+UX)" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true, success: false, error: "solution_duplicate" });
@@ -357,7 +357,7 @@ describe("v2 routes: submission", () => {
     it("should submit a block with a binary nonce", async () => {
       const res = await api()
         .post("/submit")
-        .send({ address: "k8juvewcui", nonce: [37,35,68,69,81,39,35,43,85,88,41] });
+        .send({ address: "m8juvewcui", nonce: [37,35,68,69,81,39,35,43,85,88,41] });
 
       expect(res).to.have.status(200);
       expect(res).to.be.json;
@@ -373,13 +373,13 @@ describe("v2 routes: submission", () => {
     it("should reset the database", seed);
 
     it("should decrease unpaid names", async () => {
-      const name = await Name.create({ name: "test", owner: "k0duvsr4qn", registered: new Date(), unpaid: 500 });
+      const name = await Name.create({ name: "test", owner: "m0duvsr4qn", registered: new Date(), unpaid: 500 });
       expect(name).to.exist;
-      expect(name).to.deep.include({ name: "test", owner: "k0duvsr4qn", unpaid: 500 });
+      expect(name).to.deep.include({ name: "test", owner: "m0duvsr4qn", unpaid: 500 });
 
       const res = await api()
         .post("/submit")
-        .send({ address: "k8juvewcui", nonce: "%#DEQ'#+UX)" });
+        .send({ address: "m8juvewcui", nonce: "%#DEQ'#+UX)" });
 
       expect(res).to.have.status(200);
       expect(res).to.be.json;

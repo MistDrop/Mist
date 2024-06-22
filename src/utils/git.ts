@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { Octokit } from "@octokit/rest";
@@ -30,7 +30,7 @@ const EXCLUDE_COMMITS_RE = /block|submi/gi;
 
 const octokit = GITHUB_TOKEN ? new Octokit({
   auth: GITHUB_TOKEN,
-  userAgent: "https://github.com/tmpim/Krist"
+  userAgent: "https://github.com/MistDrop/Mist"
 }) : null;
 
 export type CommitBase = Record<"hash" | "subject" | "authorName"

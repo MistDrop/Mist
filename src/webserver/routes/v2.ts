@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { Router } from "express";
@@ -44,7 +44,7 @@ export default (): Router => {
 	 * @apiSuccessExample {json} Success
 	 * {
 	 *     "ok": true,
-	 *     "address": "kre3w0i79j"
+	 *     "address": "mre3w0i79j"
      * }
 	 */
   router.post("/v2", (req, res) => {

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { expect } from "chai";
@@ -47,7 +47,7 @@ describe("websocket routes: me", function() {
       expect(data.address).to.be.an("object");
       expect(data.address).to.include.all.keys("address", "balance", "totalin", "totalout", "firstseen");
       expect(data.address).to.not.include.any.keys("id", "privatekey", "alert", "locked");
-      expect(data.address).to.deep.include({ address: "k8juvewcui", balance: 10 });
+      expect(data.address).to.deep.include({ address: "m8juvewcui", balance: 10 });
 
       ws.close();
     });

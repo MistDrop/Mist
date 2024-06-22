@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 export * from "./addresses.js";
 export * from "./blocks.js";
 export * from "./generic.js";
-export * from "./KristError.js";
+export * from "./MistError.js";
 export * from "./names.js";
 export * from "./sendErrors.js";
 export * from "./transactions.js";

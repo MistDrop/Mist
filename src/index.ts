@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import "dotenv/config";
@@ -26,9 +26,9 @@ import whyIsNodeRunning from "why-is-node-running";
 import packageJson from "../package.json" with { type: "json" };
 import { initDatabase, shutdownDb } from "./database/index.js";
 import { initRedis, shutdownRedis } from "./database/redis.js";
-import { initAuthLogCleanup, shutdownAuthLogCleanup } from "./krist/authLog.js";
-import { initKrist } from "./krist/index.js";
-import { initWorkOverTime, shutdownWorkOverTime } from "./krist/work.js";
+import { initAuthLogCleanup, shutdownAuthLogCleanup } from "./mist/authLog.js";
+import { initMist } from "./mist/index.js";
+import { initWorkOverTime, shutdownWorkOverTime } from "./mist/work.js";
 import { initCriticalLogUpdater } from "./utils/criticalLog.js";
 
 import { checkEnvVars } from "./utils/index.js";
@@ -41,7 +41,7 @@ async function main() {
   checkEnvVars();
   await initRedis();
   await initDatabase();
-  await initKrist();
+  await initMist();
   initWorkOverTime();
   initAuthLogCleanup();
   initCriticalLogUpdater();

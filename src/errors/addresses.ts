@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
-import { KristError } from "./KristError.js";
+import { MistError } from "./MistError.js";
 
-export class ErrorAddressNotFound extends KristError<{ address?: string | null }> {
+export class ErrorAddressNotFound extends MistError<{ address?: string | null }> {
   constructor(address: string) {
     super(
       `Address ${address ?? "[null]"} not found`,
@@ -32,7 +32,7 @@ export class ErrorAddressNotFound extends KristError<{ address?: string | null }
   }
 }
 
-export class ErrorAuthFailed extends KristError {
+export class ErrorAuthFailed extends MistError {
   constructor() {
     super("Authentication failed", "auth_failed", 401);
   }

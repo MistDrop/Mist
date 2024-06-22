@@ -16,16 +16,20 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
-export class KristError<InfoT = never> extends Error {
-  constructor(
-    message: string,
-    public errorString: string = message,
-    public statusCode: number = 400,
-    public info?: InfoT
-  ) {
-    super(message);
-  }
+import dayjs from "dayjs";
+import { redis, rKey } from "../database/redis.js";
+import { LAST_BLOCK } from "../utils/vars.js";
+
+const cutoff = dayjs(LAST_BLOCK);
+
+export async function isMiningEnabled(): Promise<boolean> {
+  if (dayjs().isAfter(cutoff)) return false;
+  return (await redis.get(rKey("mining-enabled"))) === "true";
+}
+
+export async function areTransactionsEnabled(): Promise<boolean> {
+  return (await redis.get(rKey("transactions-enabled"))) === "true";
 }

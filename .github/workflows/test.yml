@@ -1,4 +1,4 @@
-name: Test Krist
+name: Test Mist
 
 on: [push, pull_request]
 
@@ -11,9 +11,9 @@ jobs:
       mariadb:
         image: mariadb:10.4
         env:
-          MYSQL_USER: test_krist
-          MYSQL_DATABASE: test_krist
-          MYSQL_PASSWORD: test_krist
+          MYSQL_USER: test_mist
+          MYSQL_DATABASE: test_mist
+          MYSQL_PASSWORD: test_mist
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
         ports:
           - 3306:3306
@@ -44,7 +44,7 @@ jobs:
           DB_PORT: ${{ job.services.mariadb.ports[3306] }}
           TEST_DB_HOST: mariadb
           TEST_DB_PORT: ${{ job.services.mariadb.ports[3306] }}
-          TEST_DB_PASS: test_krist
+          TEST_DB_PASS: test_mist
           REDIS_HOST: redis
           REDIS_PORT: ${{ job.services.redis.ports[6379] }}
           PUBLIC_URL: localhost:8080

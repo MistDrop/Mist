@@ -16,20 +16,20 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { InferAttributes } from "@sequelize/core";
 import { Router } from "express";
 import { Limit, Offset, PaginatedResult, Transaction } from "../../../database/index.js";
 import { ErrorInvalidParameter, ErrorNameNotFound } from "../../../errors/index.js";
-import { getName } from "../../../krist/names/index.js";
+import { getName } from "../../../mist/names/index.js";
 import {
   countTransactionsByAddress,
   getTransactionsByAddress,
   transactionToJson
-} from "../../../krist/transactions/index.js";
-import { countByName, countMetadata, searchByName, searchMetadata } from "../../../krist/transactions/lookup.js";
+} from "../../../mist/transactions/index.js";
+import { countByName, countMetadata, searchByName, searchMetadata } from "../../../mist/transactions/lookup.js";
 import { TRANSACTION_FIELDS, validateLimit, validateOffset, validateOrder, validateOrderBy } from "../lookup/index.js";
 import { ReqSearchQuery, SearchExtendedResult } from "./index.js";
 import { parseQuery, validateQuery } from "./utils.js";
@@ -137,7 +137,7 @@ export default (): Router => {
    * @apiGroup LookupGroup
    * @apiVersion 2.8.0
    *
-   * @apiDescription Search the Krist network for transactions that match the given query. The search is more in-depth
+   * @apiDescription Search the Mist network for transactions that match the given query. The search is more in-depth
    * (and thus slower) than `/search`.
    *
    * - Transactions are searched by address involved (from, to)
@@ -151,10 +151,10 @@ export default (): Router => {
    * @apiSuccess {Object} matches The results of the search query.
    * @apiSuccess {Object} matches.transactions Information about transaction matches for the search query.
    * @apiSuccess {Number|Boolean} matches.transactions.addressInvolved The number of transactions that involve the query
-   *   address (either in the `from` field or the `to` field), or `false` if the query isn't a valid Krist address.
+   *   address (either in the `from` field or the `to` field), or `false` if the query isn't a valid Mist address.
    * @apiSuccess {Number|Boolean} matches.transactions.nameInvolved The number of transactions that involve the query
    *   name (either as a direct transfer/update, or as a transaction sent to a name; the `name` and `sent_name` fields
-   *   respectively), or `false` if the query isn't a valid Krist name.
+   *   respectively), or `false` if the query isn't a valid Mist name.
    * @apiSuccess {Number|Boolean} matches.transactions.metadata The number of transactions with metadata containing the
    *   query string.
    *
@@ -162,7 +162,7 @@ export default (): Router => {
    * {
    *   "ok": true,
    *   "query": {
-   *     "originalQuery": "sc.kst",
+   *     "originalQuery": "sc.mst",
    *     "matchAddress": false,
    *     "matchName": true,
    *     "matchBlock": false,
@@ -199,7 +199,7 @@ export default (): Router => {
    * @apiGroup LookupGroup
    * @apiVersion 2.8.11
    *
-   * @apiDescription Search the Krist network for transactions that match the given query and return the results. The
+   * @apiDescription Search the Mist network for transactions that match the given query and return the results. The
    * type can be either `address`, `name` or `metadata`.
    *
    * - `address` - Transactions are searched by address involved (from, to)

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import chalkT from "chalk-template";
@@ -28,14 +28,14 @@ import { PROMETHEUS_PASSWORD, USE_PROMETHEUS } from "../utils/vars.js";
 client.collectDefaultMetrics();
 
 const up = new client.Gauge({
-  name: "krist_up",
-  help: "Whether the Krist server is running."
+  name: "mist_up",
+  help: "Whether the Mist server is running."
 });
 up.set(1);
 
 const debug = new client.Gauge({
-  name: "krist_debug",
-  help: "Whether the Krist server is in debug mode."
+  name: "mist_debug",
+  help: "Whether the Mist server is in debug mode."
 });
 debug.set(process.env.NODE_ENV !== "production" ? 1 : 0);
 

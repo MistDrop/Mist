@@ -6,11 +6,11 @@ import { redis } from "../database/redis.js";
 import { REDIS_PREFIX, TEST } from "./vars.js";
 
 const promWebserverRateLimit = new promClient.Counter({
-  name: "krist_webserver_rate_limited",
+  name: "mist_webserver_rate_limited",
   help: "Total number of requests that were rate limited."
 });
 const promTransactionRateLimit = new promClient.Counter({
-  name: "krist_transactions_rate_limited",
+  name: "mist_transactions_rate_limited",
   help: "Total number of transactions that were rate limited."
 });
 

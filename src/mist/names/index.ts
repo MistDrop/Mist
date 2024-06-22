@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { Op, QueryTypes, sql } from "@sequelize/core";
@@ -30,8 +30,8 @@ import { NAME_COST } from "../../utils/vars.js";
 import { wsManager } from "../../websockets/index.js";
 
 const promNamesPurchasedCounter = new promClient.Counter({
-  name: "krist_names_purchased_total",
-  help: "Total number of purchased since the Krist server first started."
+  name: "mist_names_purchased_total",
+  help: "Total number of purchased since the Mist server first started."
 });
 
 export async function getNames(

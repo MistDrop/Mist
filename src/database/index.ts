@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { AcquireConnectionOptions, Sequelize, Transaction } from "@sequelize/core";
@@ -44,63 +44,63 @@ import { SCHEMAS } from "./schemas.js";
 export let db: Sequelize<MariaDbDialect>;
 
 new client.Gauge({
-  name: "krist_db_pool_read_size",
+  name: "mist_db_pool_read_size",
   help: "sequelize.pool.read.size",
   collect() { if (db.pool.read) this.set(db.pool.read.size); }
 });
 new client.Gauge({
-  name: "krist_db_pool_read_available",
+  name: "mist_db_pool_read_available",
   help: "sequelize.pool.read.available",
   collect() { if (db.pool.read) this.set(db.pool.read.available); }
 });
 new client.Gauge({
-  name: "krist_db_pool_read_using",
+  name: "mist_db_pool_read_using",
   help: "sequelize.pool.read.using",
   collect() { if (db.pool.read) this.set(db.pool.read.using); }
 });
 new client.Gauge({
-  name: "krist_db_pool_read_waiting",
+  name: "mist_db_pool_read_waiting",
   help: "sequelize.pool.read.waiting",
   collect() { if (db.pool.read) this.set(db.pool.read.waiting); }
 });
 new client.Gauge({
-  name: "krist_db_pool_read_min_size",
+  name: "mist_db_pool_read_min_size",
   help: "sequelize.pool.read.minSize",
   collect() { if (db.pool.read) this.set(db.pool.read.minSize); }
 });
 new client.Gauge({
-  name: "krist_db_pool_read_max_size",
+  name: "mist_db_pool_read_max_size",
   help: "sequelize.pool.read.maxSize",
   collect() { if (db.pool.read) this.set(db.pool.read.maxSize); }
 });
 
 new client.Gauge({
-  name: "krist_db_pool_write_size",
+  name: "mist_db_pool_write_size",
   help: "sequelize.pool.write.size",
   collect() { if (db.pool.write) this.set(db.pool.write.size); }
 });
 new client.Gauge({
-  name: "krist_db_pool_write_available",
+  name: "mist_db_pool_write_available",
   help: "sequelize.pool.write.available",
   collect() { if (db.pool.write) this.set(db.pool.write.available); }
 });
 new client.Gauge({
-  name: "krist_db_pool_write_using",
+  name: "mist_db_pool_write_using",
   help: "sequelize.pool.write.using",
   collect() { if (db.pool.write) this.set(db.pool.write.using); }
 });
 new client.Gauge({
-  name: "krist_db_pool_write_waiting",
+  name: "mist_db_pool_write_waiting",
   help: "sequelize.pool.write.waiting",
   collect() { if (db.pool.write) this.set(db.pool.write.waiting); }
 });
 new client.Gauge({
-  name: "krist_db_pool_write_min_size",
+  name: "mist_db_pool_write_min_size",
   help: "sequelize.pool.write.minSize",
   collect() { if (db.pool.write) this.set(db.pool.write.minSize); }
 });
 new client.Gauge({
-  name: "krist_db_pool_write_max_size",
+  name: "mist_db_pool_write_max_size",
   help: "sequelize.pool.write.maxSize",
   collect() { if (db.pool.write) this.set(db.pool.write.maxSize); }
 });
@@ -190,7 +190,7 @@ export type Limit = string | number | null | undefined;
 export type Offset = string | number | null | undefined;
 export interface PaginatedResult<M> { rows: M[]; count: number }
 
-// Alias for Sequelize.Transaction as it conflicts with the Krist Transaction
+// Alias for Sequelize.Transaction as it conflicts with the Mist Transaction
 export type SqTransaction = Transaction;
 
 export * from "./schemas.js";

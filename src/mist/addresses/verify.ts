@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import chalkT from "chalk-template";
@@ -29,8 +29,8 @@ import { logAuth } from "../authLog.js";
 import { getAddress } from "./index.js";
 
 const promAddressesVerifiedCounter = new promClient.Counter({
-  name: "krist_addresses_verified_total",
-  help: "Total number of addresses verified since the Krist server started.",
+  name: "mist_addresses_verified_total",
+  help: "Total number of addresses verified since the Mist server started.",
   labelNames: ["type"]
 });
 
@@ -49,22 +49,22 @@ export async function verifyAddress(
 ): Promise<VerifyResponse> {
   const { path, logDetails } = getLogDetails(req);
 
-  const kristAddress = makeV2Address(privatekey);
+  const mistAddress = makeV2Address(privatekey);
 
-  console.log(chalkT`{cyan [Auth]} ({bold ${path}}) Auth attempt on address {bold ${kristAddress}} ${logDetails}`);
+  console.log(chalkT`{cyan [Auth]} ({bold ${path}}) Auth attempt on address {bold ${mistAddress}} ${logDetails}`);
   promAddressesVerifiedCounter.inc({ type: "attempt" });
 
-  const hash = sha256(kristAddress + privatekey);
-  const address = await getAddress(kristAddress);
+  const hash = sha256(mistAddress + privatekey);
+  const address = await getAddress(mistAddress);
   if (!address) { // Unseen address, create it
     const newAddress = await Address.create({
-      address: kristAddress,
+      address: mistAddress,
       firstseen: new Date(),
       balance: 0, totalin: 0, totalout: 0,
       privatekey: hash
     });
 
-    logAuth(req, kristAddress, "auth").catch(console.error);
+    logAuth(req, mistAddress, "auth").catch(console.error);
     promAddressesVerifiedCounter.inc({ type: "authed" });
     return { authed: true, address: newAddress };
   }
@@ -73,15 +73,15 @@ export async function verifyAddress(
     const authed = !address.locked && address.privatekey === hash;
 
     if (authed) {
-      logAuth(req, kristAddress, "auth").catch(console.error);
+      logAuth(req, mistAddress, "auth").catch(console.error);
     } else {
       const reason = address.locked
         ? `(locked, alert: ${address.alert ?? "none"})`
         : "(incorrect privatekey hash)";
       console.log(chalkT`{red [Auth]} ({bold ${path}}) Auth failed on address `
-        + chalkT`{bold ${kristAddress}} for reason {bold ${reason}} `
+        + chalkT`{bold ${mistAddress}} for reason {bold ${reason}} `
         + chalkT`${logDetails}`);
-      criticalLog(`authFailed-${kristAddress}`, req, `Auth failed on address **${kristAddress}**. Reason: ${reason}`,
+      criticalLog(`authFailed-${mistAddress}`, req, `Auth failed on address **${mistAddress}**. Reason: ${reason}`,
         false);
     }
 
@@ -90,7 +90,7 @@ export async function verifyAddress(
   } else { // Address doesn't yet have a privatekey, claim it as the first
     const updatedAddress = await address.update({ privatekey: hash });
 
-    logAuth(req, kristAddress, "auth").catch(console.error);
+    logAuth(req, mistAddress, "auth").catch(console.error);
     promAddressesVerifiedCounter.inc({ type: "authed" });
     return { authed: true, address: updatedAddress };
   }

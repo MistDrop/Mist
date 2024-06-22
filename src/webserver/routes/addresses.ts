@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import dayjs from "dayjs";
@@ -29,9 +29,9 @@ import {
 } from "../../controllers/addresses.js";
 import { ctrlGetNamesByAddress } from "../../controllers/names.js";
 import { ctrlGetTransactionsByAddress } from "../../controllers/transactions.js";
-import { addressToJson, getAddress, getRichAddresses } from "../../krist/addresses/index.js";
-import { nameToJson } from "../../krist/names/index.js";
-import { getTransactionsByAddress, transactionToJson } from "../../krist/transactions/index.js";
+import { addressToJson, getAddress, getRichAddresses } from "../../mist/addresses/index.js";
+import { nameToJson } from "../../mist/names/index.js";
+import { getTransactionsByAddress, transactionToJson } from "../../mist/transactions/index.js";
 import { makeV2Address, padDigits } from "../../utils/index.js";
 import { PaginatedQuery, ReqQuery, returnPaginatedResult } from "../utils.js";
 
@@ -46,11 +46,11 @@ import { PaginatedQuery, ReqQuery, returnPaginatedResult } from "../utils.js";
  *
  * @apiSuccess {Object} address
  * @apiSuccess {String} address.address The address.
- * @apiSuccess {Number} address.balance The amount of Krist currently owned by
+ * @apiSuccess {Number} address.balance The amount of Mist currently owned by
  *   this address.
- * @apiSuccess {Number} address.totalin The total amount of Krist that has ever
+ * @apiSuccess {Number} address.totalin The total amount of Mist that has ever
  *   gone into this address.
- * @apiSuccess {Number} address.totalout The total amount of Krist that has ever
+ * @apiSuccess {Number} address.totalout The total amount of Mist that has ever
  *   gone out of this address.
  * @apiSuccess {Date} address.firstseen The date this address was first seen
  *   (when the first transaction to it was made), as an ISO-8601 string.
@@ -61,11 +61,11 @@ import { PaginatedQuery, ReqQuery, returnPaginatedResult } from "../utils.js";
  *
  * @apiSuccess {Object[]} addresses
  * @apiSuccess {String} addresses.address The address.
- * @apiSuccess {Number} addresses.balance The amount of Krist currently owned by
+ * @apiSuccess {Number} addresses.balance The amount of Mist currently owned by
  *   this address.
- * @apiSuccess {Number} addresses.totalin The total amount of Krist that has
+ * @apiSuccess {Number} addresses.totalin The total amount of Mist that has
  *   ever gone into this address.
- * @apiSuccess {Number} addresses.totalout The total amount of Krist that has
+ * @apiSuccess {Number} addresses.totalout The total amount of Mist that has
  *   ever gone out of this address.
  * @apiSuccess {Date} addresses.firstseen The date this address was first seen
  *   (when the first transaction to it was made), as an ISO-8601 string.
@@ -143,14 +143,14 @@ export default (): Router => {
 	 *          "total": 500,
 	 *          "addresses": [
 	 *              {
-	 *                  "address": "k2sdlnjo1m",
+	 *                  "address": "m2sdlnjo1m",
 	 *                  "balance": 762010,
 	 *                  "totalin": 11316,
 	 *                  "totalout": 783984,
 	 *                  "firstseen": "2016-01-24T05:08:14.000Z"
 	 *              },
 	 *              {
-	 *                  "address": "k7u9sa6vbf",
+	 *                  "address": "m7u9sa6vbf",
 	 *                  "balance": 505832,
 	 *                  "totalin": 547785,
 	 *                  "totalout": 41953,
@@ -179,7 +179,7 @@ export default (): Router => {
 	 * {
 	 *     "ok": true,
 	 *     "address": {
-	 *         "address": "kre3w0i79j",
+	 *         "address": "mre3w0i79j",
 	 *         "balance": 86945,
 	 *         "totalin": 123364,
 	 *         "totalout": 38292,
@@ -232,7 +232,7 @@ export default (): Router => {
    *     "names": [
    *         {
    *             "name": "supercoolname",
-   *             "owner": "kre3w0i79j",
+   *             "owner": "mre3w0i79j",
    *             "registered": "2016-01-30T15:45:55.000Z",
    *             "updated": "2016-01-30T15:45:55.000Z",
    *             "a": null
@@ -282,8 +282,8 @@ export default (): Router => {
    *     "transactions": [
    *         {
    *             "id": 153197,
-   *             "from": "kxxhsp1uzh",
-   *             "to": "kre3w0i79j",
+   *             "from": "mxxhsp1uzh",
+   *             "to": "mre3w0i79j",
    *             "value": 75,
    *             "time": "2016-02-02T23:30:51.000Z",
    *             "name": null,
@@ -292,8 +292,8 @@ export default (): Router => {
    *         },
    *         {
    *             "id": 153196,
-   *             "from": "kre3w0i79j",
-   *             "to": "kxxhsp1uzh",
+   *             "from": "mre3w0i79j",
+   *             "to": "mxxhsp1uzh",
    *             "value": 50,
    *             "time": "2016-02-02T23:30:39.000Z",
    *             "name": null,

@@ -16,17 +16,17 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { Router } from "express";
-import { getDetailedMotd } from "../../krist/motd.js";
+import { getDetailedMotd } from "../../mist/motd.js";
 
 export default (): Router => {
   const router = Router();
 
   /**
-	 * @api {get} /motd Get information about the Krist server (MOTD)
+	 * @api {get} /motd Get information about the Mist server (MOTD)
 	 * @apiName GetMOTD
 	 * @apiGroup MiscellaneousGroup
 	 * @apiVersion 2.6.4
@@ -39,27 +39,27 @@ export default (): Router => {
 	 * @apiSuccess {Date} server_time The current server time, as an ISO-8601
 	 *   string
    *
-	 * @apiSuccess {String} public_url The public URL of this Krist node.
+	 * @apiSuccess {String} public_url The public URL of this Mist node.
 	 * @apiSuccess {String} public_ws_url The public URL of the Websocket gateway.
 	 * @apiSuccess {Boolean} debug_mode If the server is running in debug mode,
    *    this will be set to `true`.
    *
-	 * @apiSuccess {Object} package Information related to this build of the Krist
+	 * @apiSuccess {Object} package Information related to this build of the Mist
    *    source code.
-	 * @apiSuccess {String} package.name The name of the package (always `krist`).
-	 * @apiSuccess {String} package.version The version of the Krist server.
-	 * @apiSuccess {String} package.author The author of the Krist server (always
+	 * @apiSuccess {String} package.name The name of the package (always `mist`).
+	 * @apiSuccess {String} package.version The version of the Mist server.
+	 * @apiSuccess {String} package.author The author of the Mist server (always
    *    `Lemmmy`)
-	 * @apiSuccess {String} package.license The license of the Krist server
+	 * @apiSuccess {String} package.license The license of the Mist server
    *    (always `GPL-3.0`)
-	 * @apiSuccess {String} package.repository The repository of the Krist server
+	 * @apiSuccess {String} package.repository The repository of the Mist server
    *    source code.
    *
-	 * @apiSuccess {Object} constants Constants related to the Krist server
+	 * @apiSuccess {Object} constants Constants related to the Mist server
    *    configuration.
    * @apiSuccess {Number} constants.wallet_version The latest version of
-   *    KristWallet.
-   * @apiSuccess {Number} constants.name_cost The cost, in KST, of purchasing a
+   *    MistWallet.
+   * @apiSuccess {Number} constants.name_cost The cost, in MST, of purchasing a
    *    new name.
    *
 	 * @apiSuccess {Object} currency Constants related to the currency that this
@@ -67,29 +67,29 @@ export default (): Router => {
    * @apiSuccess {String} currency.address_prefix The character that each
    *    address starts with (e.g. `k`).
    * @apiSuccess {String} currency.name_suffix The suffix that each name ends
-   *    with after the dot (e.g. `kst`)
+   *    with after the dot (e.g. `mst`)
    * @apiSuccess {String} currency.currency_name The full long name of this
-   *    currency (e.g. `Krist`).
+   *    currency (e.g. `Mist`).
    * @apiSuccess {String} currency.currency_symbol The shorthand symbol for this
-   *    currency (e.g. `KST`).
+   *    currency (e.g. `MST`).
    *
-   * @apiSuccess {String} notice Required copyright notice for the Krist server.
+   * @apiSuccess {String} notice Required copyright notice for the Mist server.
 	 *
 	 * @apiSuccessExample {json} Success
    * {
    *    "ok": true,
    *    "server_time": "2023-03-22T21:14:29.483Z",
-   *    "motd": "The API URL has changed to https://krist.dev\n\nBlock submission is disabled ([more info](https://discord.sc3.io))",
+   *    "motd": "The API URL has changed to https://mist.anti.money\n\nBlock submission is disabled ([more info](https://discord.sc3.io))",
    *    "set": "2023-03-22T21:14:06.000Z",
    *    "motd_set": "2023-03-22T21:14:06.000Z",
-   *    "public_url": "krist.dev",
-   *    "public_ws_url": "ws.krist.dev",
+   *    "public_url": "mist.anti.money",
+   *    "public_ws_url": "mist.anti.money",
    *    "mining_enabled": false,
    *    "debug_mode": false,
    *    "work": 100000,
    *    "last_block": {
    *       "height": 2121616,
-   *       "address": "kristdeath",
+   *       "address": "mistdeath",
    *       "hash": "00000000009f16ac5ded918793310016ea2d61a29d5a328e244cd8478da6924c",
    *       "short_hash": "00000000009f",
    *       "value": 1,
@@ -97,11 +97,11 @@ export default (): Router => {
    *       "difficulty": 551
    *    },
    *    "package": {
-   *       "name": "krist",
+   *       "name": "mist",
    *       "version": "3.3.0",
    *       "author": "Lemmmy",
    *       "licence": "GPL-3.0",
-   *       "repository": "https://github.com/tmpim/Krist"
+   *       "repository": "https://github.com/MistDrop/Mist"
    *    },
    *    "constants": {
    *       "wallet_version": 16,
@@ -113,12 +113,12 @@ export default (): Router => {
    *       "seconds_per_block": 60
    *    },
    *    "currency": {
-   *       "address_prefix": "k",
-   *       "name_suffix": "kst",
-   *       "currency_name": "Krist",
-   *       "currency_symbol": "KST"
+   *       "address_prefix": "m",
+   *       "name_suffix": "mst",
+   *       "currency_name": "Mist",
+   *       "currency_symbol": "MST"
    *    },
-   *    "notice": "Krist was originally created by 3d6 and Lemmmy. It is now owned and operated by tmpim, and licensed under GPL-3.0."
+   *    "notice": "Mist was originally created by 3d6 and Lemmmy. It is now owned and operated by tmpim, and licensed under GPL-3.0."
    * }
 	 */
   router.all("/motd", async (req, res) => {

@@ -16,11 +16,11 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { ErrorAddressNotFound } from "../../errors/index.js";
-import { addressToJson, getAddress } from "../../krist/addresses/index.js";
+import { addressToJson, getAddress } from "../../mist/addresses/index.js";
 import { WebSocketEventHandler } from "../types.js";
 
 /**
@@ -48,7 +48,7 @@ import { WebSocketEventHandler } from "../types.js";
  *     "id": 1,
  *     "isGuest": false,
  *     "address": {
- *         "address": "knggsn1d2e",
+ *         "address": "mnggsn1d2e",
  *         "balance": 0,
  *         "totalin": 0,
  *         "totalout": 0,

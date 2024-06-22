@@ -16,13 +16,13 @@
  * You should have received a copy of the GNU General Public License
  * along with Krist. If not, see <http://www.gnu.org/licenses/>.
  *
- * For more project information, see <https://github.com/tmpim/krist>.
+ * For more project information, see <https://github.com/tmpim/Krist/>.
  */
 
 import { Router } from "express";
 import { ErrorMissingParameter } from "../../../errors/index.js";
-import { AddressJson, addressToJson } from "../../../krist/addresses/index.js";
-import { lookupAddresses } from "../../../krist/addresses/lookup.js";
+import { AddressJson, addressToJson } from "../../../mist/addresses/index.js";
+import { lookupAddresses } from "../../../mist/addresses/lookup.js";
 import { validateAddressList } from "./utils.js";
 
 export default (): Router => {
@@ -34,8 +34,8 @@ export default (): Router => {
    * @apiGroup LookupGroup
    * @apiVersion 2.1.3
    *
-   * @apiDescription Return an object containing the given address(es). Any addresses that do not exist on the Krist
-   * server (i.e. they have not been logged in to, or have not received Krist) will be assigned `null` in the object.
+   * @apiDescription Return an object containing the given address(es). Any addresses that do not exist on the Mist
+   * server (i.e. they have not been logged in to, or have not received Mist) will be assigned `null` in the object.
    *
    * @apiParam {String[]} [addresses] A comma-separated list of addresses to filter transactions to/from.
    *
@@ -52,23 +52,23 @@ export default (): Router => {
    *   "found": 3,
    *   "notFound": 1,
    *   "addresses": {
-   *     "kfakeaddy0": null,
-   *     "khugepoopy": {
-   *       "address": "khugepoopy",
+   *     "mfakeaddy0": null,
+   *     "m123456789": {
+   *       "address": "m123456789",
    *       "balance": 433,
    *       "totalin": 467572,
    *       "totalout": 242505,
    *       "firstseen": "2017-04-12T20:23:02.000Z"
    *     },
-   *     "kreichdyes": {
-   *       "address": "kreichdyes",
+   *     "m987654321": {
+   *       "address": "m987654321",
    *       "balance": 210,
    *       "totalin": 65518,
    *       "totalout": 69767,
    *       "firstseen": "2018-06-28T17:30:50.000Z"
    *     },
-   *     "kre3w0i79j": {
-   *       "address": "kre3w0i79j",
+   *     "mre3w0i79j": {
+   *       "address": "mre3w0i79j",
    *       "balance": 0,
    *       "totalin": 227329,
    *       "totalout": 227277,
