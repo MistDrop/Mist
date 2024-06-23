@@ -174,7 +174,7 @@ describe("v2 routes: transactions", () => {
     it("should error when paying to an invalid address", async () => {
       const res = await api()
         .post("/transactions")
-        .send({ amount: 1, to: "kfartoolong", privatekey: "a" });
+        .send({ amount: 1, to: "mfartoolong", privatekey: "a" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: false, error: "invalid_parameter", parameter: "to" });

@@ -57,7 +57,7 @@ describe("v1 routes: submission", () => {
     });
 
     it("should require a valid address", async () => {
-      const res = await api().get("/?submitblock").query({ address: "kfartoolong" });
+      const res = await api().get("/?submitblock").query({ address: "mfartoolong" });
       expect(res).to.be.text;
       expect(res.text).to.equal("Invalid address");
     });
@@ -207,7 +207,7 @@ describe("v2 routes: submission", () => {
     it("should require a valid address", async () => {
       const res = await api()
         .post("/submit")
-        .send({ address: "kfartoolong" });
+        .send({ address: "mfartoolong" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: false, error: "invalid_parameter", parameter: "address" });

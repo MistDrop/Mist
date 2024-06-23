@@ -216,7 +216,7 @@ describe("v2 routes: names", () => {
     it("should reject invalid addresses", async () => {
       const res = await api()
         .post("/names/test/transfer")
-        .send({ privatekey: "a", address: "kfartoolong" });
+        .send({ privatekey: "a", address: "mfartoolong" });
 
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: false, error: "invalid_parameter", parameter: "address" });

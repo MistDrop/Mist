@@ -29,13 +29,13 @@ describe("mist functions", () => {
     it("should work for a valid v2 address", async () =>
       expect(isValidMistAddress("m8juvewcui")).to.be.true);
     it("should fail for an invalid address", async () =>
-      expect(isValidMistAddress("kfartoolong")).to.be.false);
+      expect(isValidMistAddress("mfartoolong")).to.be.false);
     it("should fail for a valid v1 address when v2Only", async () =>
       expect(isValidMistAddress("a5dfb396d3", true)).to.be.false);
     it("should work for a valid v2 address when v2Only", async () =>
       expect(isValidMistAddress("m8juvewcui", true)).to.be.true);
     it("should fail for an invalid address when v2Only", async () =>
-      expect(isValidMistAddress("kfartoolong", true)).to.be.false);
+      expect(isValidMistAddress("mfartoolong", true)).to.be.false);
   });
 
   describe("isValidName", () => {

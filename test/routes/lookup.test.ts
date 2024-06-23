@@ -53,7 +53,7 @@ describe("v2 routes: lookup api", () => {
     });
 
     it("should return null for a nonexistent address", async () => {
-      const res = await api().get("/lookup/addresses/knotfound0");
+      const res = await api().get("/lookup/addresses/mnotfound0");
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true, found: 0, notFound: 1 });
       expect(res.body.addresses).to.be.an("object");
@@ -61,7 +61,7 @@ describe("v2 routes: lookup api", () => {
     });
 
     it("should lookup an address", async () => {
-      const res = await api().get("/lookup/addresses/k8juvewcui");
+      const res = await api().get("/lookup/addresses/m8juvewcui");
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true, found: 1, notFound: 0 });
       expect(res.body.addresses).to.be.an("object");
@@ -72,7 +72,7 @@ describe("v2 routes: lookup api", () => {
     });
 
     it("should lookup multiple addresses", async () => {
-      const res = await api().get("/lookup/addresses/k8juvewcui,k7oax47quv,knotfound0");
+      const res = await api().get("/lookup/addresses/k8juvewcui,k7oax47quv,mnotfound0");
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true, found: 2, notFound: 1 });
       expect(res.body.addresses).to.be.an("object");

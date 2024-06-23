@@ -69,7 +69,7 @@ describe("websocket routes: submission", function() {
 
     /*
     it("should require a valid address", async () => {
-      const [res, ws] = await send({ address: "kfartoolong" });
+      const [res, ws] = await send({ address: "mfartoolong" });
       expect(res).to.deep.include({ ok: false, error: "invalid_parameter", parameter: "address" });
       ws.close();
     });

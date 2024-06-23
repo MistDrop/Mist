@@ -28,21 +28,21 @@ describe("v1 routes: addresses", () => {
 
   describe("GET /?getbalance", () => {
     it("should return the balance", async () => {
-      const res = await api().get("/?getbalance=k8juvewcui");
+      const res = await api().get("/?getbalance=m8juvewcui");
       expect(res).to.have.status(200);
       expect(res).to.be.text;
       expect(res.text).to.equal("10");
     });
 
     it("should return the balance", async () => {
-      const res = await api().get("/?getbalance=k7oax47quv");
+      const res = await api().get("/?getbalance=m7oax47quv");
       expect(res).to.have.status(200);
       expect(res).to.be.text;
       expect(res.text).to.equal("0");
     });
 
     it("should return 0 for a non-existent address", async () => {
-      const res = await api().get("/?getbalance=knotfound0");
+      const res = await api().get("/?getbalance=mnotfound0");
       expect(res).to.have.status(200);
       expect(res).to.be.text;
       expect(res.text).to.equal("0");
@@ -107,7 +107,7 @@ describe("v2 routes: addresses", () => {
 
   describe("GET /addresses/:address", () => {
     it("should get an address", async () => {
-      const res = await api().get("/addresses/k8juvewcui");
+      const res = await api().get("/addresses/m8juvewcui");
       expect(res).to.have.status(200);
       expect(res).to.be.json;
       expect(res.body).to.include({ ok: true });
@@ -125,7 +125,7 @@ describe("v2 routes: addresses", () => {
     });
 
     it("should not contain private parts", async () => {
-      const res = await api().get("/addresses/kwsgj3x184");
+      const res = await api().get("/addresses/mwsgj3x184");
       expect(res).to.have.status(200);
       expect(res).to.be.json;
       expect(res.body.address).to.be.an("object");
@@ -133,7 +133,7 @@ describe("v2 routes: addresses", () => {
     });
 
     it("should return an error for addresses that doesn't exist", async () => {
-      const res = await api().get("/addresses/knotfound0");
+      const res = await api().get("/addresses/mnotfound0");
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: false, error: "address_not_found" });
     });

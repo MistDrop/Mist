@@ -107,7 +107,7 @@ describe("websocket routes: transactions", function() {
     });
 
     it("should error when paying to an invalid address", async () => {
-      const [res, ws] = await send({ amount: 1, to: "kfartoolong", privatekey: "a" });
+      const [res, ws] = await send({ amount: 1, to: "mfartoolong", privatekey: "a" });
       expect(res).to.deep.include({ ok: false, error: "invalid_parameter", parameter: "to" });
       ws.close();
     });
