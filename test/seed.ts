@@ -49,11 +49,12 @@ export async function seed(): Promise<void> {
     }),
 
     // Create some addresses to test with
+    // TODO: Don't hardcode private keys
     Address.bulkCreate([
-      { address: "m8juvewcui", balance: 10, totalin: 0, totalout: 0, firstseen: new Date(), privatekey: "a350fa569fc53804c4282afbebafeba973c33238704815ea41fa8eec1f13a791" },
-      { address: "m7oax47quv", balance: 0, totalin: 0, totalout: 0, firstseen: new Date(), privatekey: "1f71334443b70c5c384894bc6308e9fcfb5b3103abb82eba6cd26d7767b5740c" },
-      { address: "mwsgj3x184", balance: 0, totalin: 0, totalout: 0, firstseen: new Date(), privatekey: "75185375f6e1e0eecbbe875355de2e38b7e548efbc80985479f5870967dcd2df", alert: "Test alert", locked: true },
-      { address: "m0duvsr4qn", balance: 25000, totalin: 0, totalout: 0, firstseen: new Date(), privatekey: "4827fb69dbc85b39204595dc870029d2a390a67b5275bd4588ae6567c01397d5" },
+      { address: "m8juvewcui", balance: 10, totalin: 0, totalout: 0, firstseen: new Date(), privatekey: "7119a5f50dac903c3c52751abe441f748e86ffd15e50622ad1707518f569a11e" },
+      { address: "m7oax47quv", balance: 0, totalin: 0, totalout: 0, firstseen: new Date(), privatekey: "6db084a3fdc6336f4fc76d2d88f2950170c7c6820d7bfe68cc0b3abe9d345705" },
+      { address: "mwsgj3x184", balance: 0, totalin: 0, totalout: 0, firstseen: new Date(), privatekey: "74aa17eb08c411d5f794c08fc824b2e6447ba19bdd1c0af1e3f2769df70c1b26", alert: "Test alert", locked: true },
+      { address: "m0duvsr4qn", balance: 25000, totalin: 0, totalout: 0, firstseen: new Date(), privatekey: "49f63b09a79b222a827f8052f7734900c096edb4118c98beb3756fc747012c07" },
     ])
   ]);
 

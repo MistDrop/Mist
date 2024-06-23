@@ -83,7 +83,7 @@ describe("v1 routes: submission", () => {
     it("should reject an invalid block", async () => {
       const res = await api().get("/?submitblock").query({ address: "m8juvewcui", nonce: "invalid" });
       expect(res).to.be.text;
-      expect(res.text).to.equal("k8juvewcui000000000000invalid");
+      expect(res.text).to.equal("m8juvewcui000000000000invalid");
     });
     */
   });

@@ -40,7 +40,7 @@ describe("v2 routes: lookup api", () => {
     });
 
     it("should error with multiple addresses, where one is invalid", async () => {
-      const res = await api().get("/lookup/addresses/k8juvewcui,invalid");
+      const res = await api().get("/lookup/addresses/m8juvewcui,invalid");
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: false, error: "invalid_parameter", parameter: "addresses" });
     });
@@ -57,7 +57,7 @@ describe("v2 routes: lookup api", () => {
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true, found: 0, notFound: 1 });
       expect(res.body.addresses).to.be.an("object");
-      expect(res.body.addresses).to.deep.include({ knotfound0: null });
+      expect(res.body.addresses).to.deep.include({ mnotfound0: null });
     });
 
     it("should lookup an address", async () => {
@@ -66,31 +66,31 @@ describe("v2 routes: lookup api", () => {
       expect(res.body).to.deep.include({ ok: true, found: 1, notFound: 0 });
       expect(res.body.addresses).to.be.an("object");
       expect(res.body.addresses).to.have.all.keys("m8juvewcui");
-      expect(res.body.addresses.k8juvewcui).to.be.an("object");
-      expect(res.body.addresses.k8juvewcui).to.have.all.keys("address", "balance", "totalin", "totalout", "firstseen");
-      expect(res.body.addresses.k8juvewcui).to.not.have.key("names");
+      expect(res.body.addresses.m8juvewcui).to.be.an("object");
+      expect(res.body.addresses.m8juvewcui).to.have.all.keys("address", "balance", "totalin", "totalout", "firstseen");
+      expect(res.body.addresses.m8juvewcui).to.not.have.key("names");
     });
 
     it("should lookup multiple addresses", async () => {
-      const res = await api().get("/lookup/addresses/k8juvewcui,k7oax47quv,mnotfound0");
+      const res = await api().get("/lookup/addresses/m8juvewcui,m7oax47quv,mnotfound0");
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true, found: 2, notFound: 1 });
       expect(res.body.addresses).to.be.an("object");
       expect(res.body.addresses).to.have.all.keys("m8juvewcui", "m7oax47quv", "mnotfound0");
-      expect(res.body.addresses.k8juvewcui).to.be.an("object");
-      expect(res.body.addresses.k7oax47quv).to.be.an("object");
-      expect(res.body.addresses.knotfound0).to.be.null;
+      expect(res.body.addresses.m8juvewcui).to.be.an("object");
+      expect(res.body.addresses.m7oax47quv).to.be.an("object");
+      expect(res.body.addresses.mnotfound0).to.be.null;
     });
 
     it("should fetch names for an address", async () => {
-      const res = await api().get("/lookup/addresses/k8juvewcui?fetchNames");
+      const res = await api().get("/lookup/addresses/m8juvewcui?fetchNames");
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true, found: 1, notFound: 0 });
       expect(res.body.addresses).to.be.an("object");
       expect(res.body.addresses).to.have.all.keys("m8juvewcui");
-      expect(res.body.addresses.k8juvewcui).to.be.an("object");
-      expect(res.body.addresses.k8juvewcui).to.have.all.keys("address", "balance", "totalin", "totalout", "firstseen", "names");
-      expect(res.body.addresses.k8juvewcui.names).to.be.a("number");
+      expect(res.body.addresses.m8juvewcui).to.be.an("object");
+      expect(res.body.addresses.m8juvewcui).to.have.all.keys("address", "balance", "totalin", "totalout", "firstseen", "names");
+      expect(res.body.addresses.m8juvewcui.names).to.be.a("number");
     });
   });
 
@@ -120,7 +120,7 @@ describe("v2 routes: lookup api", () => {
     });
 
     it("should strip spaces", async () => {
-      const res = await api().get("/search").query({ q: "k8juvewcui " });
+      const res = await api().get("/search").query({ q: "m8juvewcui " });
       expect(res).to.be.json;
       expect(res.body).to.deep.include({ ok: true });
       expect(res.body.query).to.deep.include({ originalQuery: "m8juvewcui", matchAddress: true });

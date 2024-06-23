@@ -64,6 +64,6 @@ describe("v2 routes: motd", () => {
       currency_name: "Mist", currency_symbol: "MST"
     });
 
-    expect(res.body.notice).to.equal("Mist was originally created by 3d6 and Lemmmy. It is now owned and operated by tmpim, and licensed under GPL-3.0.");
+    expect(res.body.notice).to.equal("Krist was originally created by 3d6 and Lemmmy. It is now owned and operated by tmpim, and licensed under GPL-3.0.");
   });
 });

@@ -120,7 +120,7 @@ describe("websocket connection", () => {
         currency_name: "Mist", currency_symbol: "MST"
       });
 
-      expect(helloData.notice).to.equal("Mist was originally created by 3d6 and Lemmmy. It is now owned and operated by tmpim, and licensed under GPL-3.0.");
+      expect(helloData.notice).to.equal("Krist was originally created by 3d6 and Lemmmy. It is now owned and operated by tmpim, and licensed under GPL-3.0.");
     });
   });
 });

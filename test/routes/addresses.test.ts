@@ -117,7 +117,7 @@ describe("v2 routes: addresses", () => {
     });
 
     it("should get an address with names", async () => {
-      const res = await api().get("/addresses/k8juvewcui?fetchNames");
+      const res = await api().get("/addresses/m8juvewcui?fetchNames");
       expect(res).to.be.json;
       expect(res.body).to.include({ ok: true });
       expect(res.body.address).to.be.an("object");
