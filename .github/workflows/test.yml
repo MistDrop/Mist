@@ -42,6 +42,7 @@ jobs:
         env: 
           DB_HOST: mariadb
           DB_PORT: ${{ job.services.mariadb.ports[3306] }}
+          GIT_PATH: ${{ github.repository }}
           TEST_DB_HOST: mariadb
           TEST_DB_PORT: ${{ job.services.mariadb.ports[3306] }}
           TEST_DB_PASS: test_mist
